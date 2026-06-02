@@ -526,31 +526,6 @@ export default function CrmLiveCreate() {
               </div>
             </div>
 
-            {/* 우측: 상품 상세 앱 화면 */}
-            <div className="shrink-0 w-44 overflow-hidden rounded-2xl border-2 border-gray-300 bg-white shadow-md">
-              {/* 네비 */}
-              <div className="flex items-center justify-between border-b border-gray-100 bg-white px-3 py-2">
-                <span className="text-sm font-bold text-gray-600">←</span>
-                <div className="h-2 w-16 rounded bg-gray-200" />
-                <div className="flex gap-2 text-sm">
-                  <span>⌂</span><span>🛒</span>
-                </div>
-              </div>
-              {/* 상품 이미지 */}
-              <div className="h-32 w-full bg-gray-300" />
-              {/* 상품 정보 */}
-              <div className="space-y-2 p-3">
-                <div className="h-2 w-full rounded bg-gray-200" />
-                <div className="h-2 w-3/4 rounded bg-gray-200" />
-                <div className="pt-2">
-                  <p className="text-[10px] text-gray-400 line-through">40,000원 50%</p>
-                  <p className="text-base font-black text-gray-900">20,000원</p>
-                </div>
-                <div className="h-2 w-full rounded bg-gray-200" />
-                <div className="h-2 w-5/6 rounded bg-gray-200" />
-              </div>
-              <div className="h-8 bg-gray-100" />
-            </div>
           </div>
         </div>
 
