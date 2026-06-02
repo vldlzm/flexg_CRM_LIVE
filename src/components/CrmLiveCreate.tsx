@@ -245,12 +245,18 @@ export default function CrmLiveCreate() {
 
           {/* 캠페인 내용 */}
           <FormRow label="캠페인 내용">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2">
               <DarkBtn onClick={() => setShowLivePopup(true)}>LIVE 불러오기</DarkBtn>
               {selectedLive && (
-                <span className="text-sm text-gray-700">
-                  <span className="font-semibold text-[#4DB87A]">{selectedLive.title}</span> 선택됨
-                </span>
+                <div className="flex items-center gap-1.5 rounded-full border border-[#4DB87A] bg-[#f0faf5] pl-3 pr-1.5 py-1">
+                  <span className="text-sm font-semibold text-[#1e6b3c]">{selectedLive.title}</span>
+                  <button
+                    onClick={() => setSelectedLive(null)}
+                    className="flex h-4 w-4 items-center justify-center rounded-full bg-gray-300 text-[10px] font-bold text-white hover:bg-gray-400 transition-colors"
+                  >
+                    ✕
+                  </button>
+                </div>
               )}
             </div>
           </FormRow>
@@ -477,35 +483,55 @@ export default function CrmLiveCreate() {
                     <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">라이브 방송 시작일시</th>
                     <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">좋아요 수</th>
                     <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600">메모</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600">선택</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {LIVE_LIST.map((item) => (
-                    <tr
-                      key={item.no}
-                      className="border-b border-gray-100 last:border-0 cursor-pointer hover:bg-[#f0faf5] transition-colors"
-                      onClick={() => { setSelectedLive(item); setShowLivePopup(false); }}
-                    >
-                      <td className="px-4 py-4 text-center text-sm text-gray-600">{item.no}</td>
-                      <td className="px-4 py-4">
-                        <p className="text-sm font-semibold text-gray-900 mb-0.5">{item.title}</p>
-                        <p className="text-xs text-gray-400 mb-1.5">{item.url}</p>
-                        <button
-                          onClick={(e) => { e.stopPropagation(); handleCopy(item.url); }}
-                          className="rounded border border-gray-300 px-2.5 py-1 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
-                        >
-                          라이브 링크 복사
-                        </button>
-                      </td>
-                      <td className="px-4 py-4 text-center text-sm text-gray-700">{item.productCount}</td>
-                      <td className="px-4 py-4 text-center text-sm font-semibold text-[#4DB87A]">{item.fee}</td>
-                      <td className="px-4 py-4 text-center text-sm text-gray-700">{item.visitors}</td>
-                      <td className="px-4 py-4 text-center text-sm font-semibold text-[#4DB87A]">{item.status}</td>
-                      <td className="px-4 py-4 text-center text-sm text-gray-700">{item.startAt || '-'}</td>
-                      <td className="px-4 py-4 text-center text-sm text-gray-700">{item.likes}</td>
-                      <td className="px-4 py-4 text-center text-sm text-gray-400">{item.memo || '-'}</td>
-                    </tr>
-                  ))}
+                  {LIVE_LIST.map((item) => {
+                    const isSelected = selectedLive?.no === item.no;
+                    return (
+                      <tr
+                        key={item.no}
+                        className={`border-b border-gray-100 last:border-0 transition-colors ${isSelected ? 'bg-[#f0faf5]' : 'hover:bg-gray-50'}`}
+                      >
+                        <td className="px-4 py-4 text-center text-sm text-gray-600">{item.no}</td>
+                        <td className="px-4 py-4">
+                          <p className="text-sm font-semibold text-gray-900 mb-0.5">{item.title}</p>
+                          <p className="text-xs text-gray-400 mb-1.5">{item.url}</p>
+                          <button
+                            onClick={() => handleCopy(item.url)}
+                            className="rounded border border-gray-300 px-2.5 py-1 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
+                          >
+                            라이브 링크 복사
+                          </button>
+                        </td>
+                        <td className="px-4 py-4 text-center text-sm text-gray-700">{item.productCount}</td>
+                        <td className="px-4 py-4 text-center text-sm font-semibold text-[#4DB87A]">{item.fee}</td>
+                        <td className="px-4 py-4 text-center text-sm text-gray-700">{item.visitors}</td>
+                        <td className="px-4 py-4 text-center text-sm font-semibold text-[#4DB87A]">{item.status}</td>
+                        <td className="px-4 py-4 text-center text-sm text-gray-700">{item.startAt || '-'}</td>
+                        <td className="px-4 py-4 text-center text-sm text-gray-700">{item.likes}</td>
+                        <td className="px-4 py-4 text-center text-sm text-gray-400">{item.memo || '-'}</td>
+                        <td className="px-4 py-4 text-center">
+                          {isSelected ? (
+                            <button
+                              onClick={() => setSelectedLive(null)}
+                              className="rounded-lg border border-red-300 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-500 hover:bg-red-100 transition-colors whitespace-nowrap"
+                            >
+                              선택 해제
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => { setSelectedLive(item); setShowLivePopup(false); }}
+                              className="rounded-lg bg-[#1e6b3c] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#165530] transition-colors"
+                            >
+                              선택
+                            </button>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
