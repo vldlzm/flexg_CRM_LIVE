@@ -40,6 +40,13 @@ const SCREEN_GROUPS: ScreenGroup[] = [
         description: '',
         notes: [],
       },
+      {
+        id: 'decisions',
+        name: '결정사항',
+        href: '/decisions',
+        description: '',
+        notes: [],
+      },
     ],
   },
 ];
