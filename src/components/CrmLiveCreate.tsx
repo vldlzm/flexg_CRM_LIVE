@@ -541,14 +541,62 @@ export default function CrmLiveCreate() {
                           </div>
                           {/* 상품 리스트 */}
                           {[
-                            { name: '여름 신상 원피스', regular: '39,000원', sale: '19,500원', bg: 'from-rose-200 to-pink-300', emoji: '👗' },
-                            { name: '크로스백 신상품',  regular: '52,000원', sale: '36,400원', bg: 'from-amber-200 to-yellow-300', emoji: '👜' },
-                            { name: 'UV 차단 선글라스', regular: '28,000원', sale: '16,800원', bg: 'from-sky-200 to-blue-300', emoji: '🕶️' },
-                            { name: '니트 반팔 티셔츠', regular: '35,000원', sale: '21,000원', bg: 'from-violet-200 to-purple-300', emoji: '👕' },
+                            {
+                              name: '여름 신상 원피스', regular: '39,000원', sale: '19,500원',
+                              img: (
+                                <svg viewBox="0 0 36 36" className="h-full w-full">
+                                  <rect width="36" height="36" fill="#fff0f3"/>
+                                  <path d="M18 5 C15 5 13 7 12 9 L8 10 L10 15 L13 14 L13 31 L23 31 L23 14 L26 15 L28 10 L24 9 C23 7 21 5 18 5Z" fill="#f87171"/>
+                                  <path d="M14 8 Q18 11 22 8" stroke="#fca5a5" strokeWidth="1" fill="none"/>
+                                  <ellipse cx="18" cy="6" rx="2.5" ry="1.5" fill="#fca5a5"/>
+                                </svg>
+                              ),
+                            },
+                            {
+                              name: '크로스백 신상품', regular: '52,000원', sale: '36,400원',
+                              img: (
+                                <svg viewBox="0 0 36 36" className="h-full w-full">
+                                  <rect width="36" height="36" fill="#fffbeb"/>
+                                  <rect x="7" y="13" width="22" height="16" rx="2" fill="#d97706"/>
+                                  <rect x="7" y="13" width="22" height="5" rx="2" fill="#b45309"/>
+                                  <path d="M13 13 Q13 8 18 8 Q23 8 23 13" stroke="#92400e" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+                                  <rect x="16" y="18" width="4" height="3" rx="1" fill="#fbbf24"/>
+                                  <line x1="29" y1="20" x2="34" y2="14" stroke="#92400e" strokeWidth="1"/>
+                                </svg>
+                              ),
+                            },
+                            {
+                              name: 'UV 차단 선글라스', regular: '28,000원', sale: '16,800원',
+                              img: (
+                                <svg viewBox="0 0 36 36" className="h-full w-full">
+                                  <rect width="36" height="36" fill="#eff6ff"/>
+                                  <circle cx="12" cy="18" r="7" fill="#1e3a5f" stroke="#0f172a" strokeWidth="0.8"/>
+                                  <circle cx="24" cy="18" r="7" fill="#1e3a5f" stroke="#0f172a" strokeWidth="0.8"/>
+                                  <line x1="19" y1="18" x2="17" y2="18" stroke="#334155" strokeWidth="1.5"/>
+                                  <line x1="5" y1="16" x2="5" y2="20" stroke="#0f172a" strokeWidth="1.2" strokeLinecap="round"/>
+                                  <line x1="31" y1="16" x2="31" y2="20" stroke="#0f172a" strokeWidth="1.2" strokeLinecap="round"/>
+                                  <path d="M12 13 Q12 11 14 11" stroke="#60a5fa" strokeWidth="0.8" fill="none" opacity="0.6"/>
+                                  <path d="M24 13 Q24 11 26 11" stroke="#60a5fa" strokeWidth="0.8" fill="none" opacity="0.6"/>
+                                </svg>
+                              ),
+                            },
+                            {
+                              name: '니트 반팔 티셔츠', regular: '35,000원', sale: '21,000원',
+                              img: (
+                                <svg viewBox="0 0 36 36" className="h-full w-full">
+                                  <rect width="36" height="36" fill="#f0fdf4"/>
+                                  <path d="M11 10 L7 14 L11 16 L11 30 L25 30 L25 16 L29 14 L25 10 Q22 8 18 8 Q14 8 11 10Z" fill="#4ade80"/>
+                                  <path d="M14 10 Q18 13 22 10" stroke="#22c55e" strokeWidth="1" fill="none"/>
+                                  <path d="M7 14 L11 16" stroke="#16a34a" strokeWidth="0.5"/>
+                                  <path d="M25 16 L29 14" stroke="#16a34a" strokeWidth="0.5"/>
+                                  <path d="M13 19 Q18 21 23 19" stroke="#86efac" strokeWidth="0.8" fill="none"/>
+                                </svg>
+                              ),
+                            },
                           ].map((item, i) => (
                             <div key={i} className="flex items-center gap-1.5 border-t border-gray-100 px-2 py-1.5">
-                              <div className={`h-9 w-9 shrink-0 rounded bg-gradient-to-br ${item.bg} flex items-center justify-center text-base`}>
-                                {item.emoji}
+                              <div className="h-9 w-9 shrink-0 rounded overflow-hidden shadow-sm border border-gray-100">
+                                {item.img}
                               </div>
                               <div className="min-w-0">
                                 <p className="text-[9px] font-semibold text-gray-800 leading-tight">{item.name}</p>
