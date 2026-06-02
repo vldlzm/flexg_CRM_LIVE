@@ -58,7 +58,7 @@ const RadioInput = ({ name, label, defaultChecked }: { name: string; label: stri
 );
 
 /* ── APP 푸시 폰 목업 ── */
-const PhoneNotification = () => (
+const PhoneNotification = ({ pushTitle = '⏰ LIVE 시작!', pushBody = '오늘 라이브에서만 만나는 특별가! 놓치기 전에 지금 확인하세요.' }: { pushTitle?: string; pushBody?: string }) => (
   <div className="relative flex h-[420px] w-64 flex-col rounded-3xl border-2 border-gray-300 bg-gray-100 overflow-hidden shadow-md">
     {/* 상단 시간 */}
     <div className="flex justify-between px-5 pt-3 pb-2 text-xs text-gray-400">
@@ -73,8 +73,8 @@ const PhoneNotification = () => (
         <div className="flex items-start gap-2">
           <div className="h-7 w-7 rounded shrink-0 bg-orange-500 flex items-center justify-center text-[10px] font-black text-white">F</div>
           <div className="min-w-0">
-            <p className="text-sm font-semibold text-gray-900 leading-tight">⏰ LIVE 시작!</p>
-            <p className="text-xs text-gray-500 leading-tight truncate">오늘 라이브에서만 만나는 특별가! 놓치기...</p>
+            <p className="text-sm font-semibold text-gray-900 leading-tight">{pushTitle}</p>
+            <p className="text-xs text-gray-500 leading-tight truncate">{pushBody.slice(0, 20)}...</p>
           </div>
           <span className="text-xs text-gray-400 shrink-0">›</span>
         </div>
@@ -84,10 +84,8 @@ const PhoneNotification = () => (
         <div className="flex items-start gap-2">
           <div className="h-7 w-7 rounded shrink-0 bg-orange-500 flex items-center justify-center text-[10px] font-black text-white">F</div>
           <div className="min-w-0">
-            <p className="text-sm font-semibold text-gray-900 leading-tight">⏰ LIVE 시작!</p>
-            <p className="text-xs text-gray-500 leading-snug mt-1">
-              오늘 라이브에서만 만나는 특별가! 놓치기 전에 지금 확인하세요.
-            </p>
+            <p className="text-sm font-semibold text-gray-900 leading-tight">{pushTitle}</p>
+            <p className="text-xs text-gray-500 leading-snug mt-1">{pushBody}</p>
           </div>
           <span className="text-xs text-gray-400 shrink-0">∧</span>
         </div>
@@ -196,10 +194,51 @@ const OffsiteIcon = () => (
 export default function CrmLiveCreate() {
   const [showLivePopup, setShowLivePopup] = useState(false);
   const [selectedLive, setSelectedLive] = useState<LiveItem | null>(null);
+  const [showLmsEditPopup, setShowLmsEditPopup] = useState(false);
+  const [showPushEditPopup, setShowPushEditPopup] = useState(false);
+  const [lmsTitle, setLmsTitle] = useState('(광고)[#{상점명}]');
+  const [lmsContent, setLmsContent] = useState(
+`#[채널명] 비밀 할인코드 소멸 안내
+
+#[회원명]님께 지급된 비밀 할인코드의 사용기한이 얼마 남지 않았습니다.
+
+▷ 할인코드: #[할인코드]
+▷ 할인내용: #[할인금액]
+▷ 만료일: #[만료일]
+
+▶ 할인코드 사용하기
+#[CUSTOM]
+
+* 만료일이 지나면 자동 소멸되어 사용이 불가능합니다.
+* 코드 지급에 동의한 회원에게 발송되는 안내 메시지입니다.
+* 할인코드는 주문/결제 페이지에서 자동으로 적용됩니다.
+
+[무료수신거부]
+010-1234-5678`
+  );
+  const [pushTitle, setPushTitle] = useState('⏰ LIVE 시작!');
+  const [pushBody, setPushBody] = useState('오늘 라이브에서만 만나는 특별가! 놓치기 전에 지금 확인하세요.');
 
   const handleCopy = (url: string) => {
     navigator.clipboard.writeText(url).catch(() => {});
   };
+
+  const LMS_REPLACEMENTS = [
+    { key: '#{상점명}', desc: '쇼핑몰명' },
+    { key: '#{채널명}', desc: '쇼핑몰 채널명' },
+    { key: '#{회원명}', desc: '주문자명' },
+    { key: '#{쿠폰명}', desc: '쿠폰 이름' },
+    { key: '#{할인코드}', desc: '할인 코드' },
+    { key: '#{할인금액}', desc: '쿠폰/할인코드 할인금액' },
+    { key: '#{만료일}', desc: '쿠폰/할인코드 만료일' },
+    { key: '#{MAIN}', desc: '메인 페이지 URL' },
+    { key: '#{RUNAPP}', desc: '앱 실행 URL' },
+    { key: '#{BEST}', desc: 'BEST 상품 리스트 페이지 URL' },
+    { key: '#{DETAIL}', desc: '상품 상세 페이지 URL' },
+    { key: '#{COUPON}', desc: '쿠폰 목록 페이지 URL' },
+    { key: '#{CUSTOM}', desc: '클릭 액션 URL' },
+    { key: '#{수신거부번호}', desc: '수신거부번호' },
+  ];
 
   return (
     <div className="flex min-h-screen flex-col bg-white">
@@ -328,15 +367,21 @@ export default function CrmLiveCreate() {
               </div>
             </div>
 
-            {/* 폰 목업 + AOS/iOS */}
+            {/* 폰 목업 + AOS/iOS + 수정 버튼 */}
             <div className="shrink-0 flex flex-col items-center gap-3">
-              <PhoneNotification />
+              <PhoneNotification pushTitle={pushTitle} pushBody={pushBody} />
               <div className="flex items-center gap-3">
                 <button className="rounded-full border border-[#4DB87A] px-5 py-1.5 text-sm font-semibold text-[#4DB87A]">
                   AOS 예시
                 </button>
                 <button className="text-sm text-gray-600 hover:text-gray-900">iOS 예시</button>
               </div>
+              <button
+                onClick={() => setShowPushEditPopup(true)}
+                className="w-full rounded-lg bg-[#111827] py-2.5 text-sm font-bold text-white hover:bg-black transition-colors"
+              >
+                메시지 수정하기
+              </button>
             </div>
           </div>
         </div>
@@ -406,7 +451,10 @@ export default function CrmLiveCreate() {
                   <span className="text-[11px] text-gray-200">LMS 오후 1:56</span>
                 </div>
               </div>
-              <button className="mt-2 w-full rounded-lg bg-[#111827] py-2.5 text-sm font-bold text-white hover:bg-black transition-colors">
+              <button
+                onClick={() => setShowLmsEditPopup(true)}
+                className="mt-2 w-full rounded-lg bg-[#111827] py-2.5 text-sm font-bold text-white hover:bg-black transition-colors"
+              >
                 메시지 수정하기
               </button>
             </div>
@@ -440,6 +488,210 @@ export default function CrmLiveCreate() {
           </button>
         </div>
       </div>
+
+      {/* ── LMS 메시지 수정 팝업 ── */}
+      {showLmsEditPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={() => setShowLmsEditPopup(false)}>
+          <div className="relative flex h-[90vh] w-[900px] max-w-[95vw] flex-col overflow-hidden rounded-xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            {/* 헤더 */}
+            <div className="flex items-center gap-3 bg-[#252830] px-6 py-4 shrink-0">
+              <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/10">
+                <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4 text-white" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="5" height="5" rx="1" /><rect x="9" y="2" width="5" height="5" rx="1" /><rect x="2" y="9" width="5" height="5" rx="1" /><rect x="9" y="9" width="5" height="5" rx="1" />
+                </svg>
+              </div>
+              <h2 className="text-base font-bold text-white">LMS 메시지 수정</h2>
+            </div>
+            {/* 본문 */}
+            <div className="flex flex-1 overflow-hidden">
+              {/* 좌측: LMS 미리보기 */}
+              <div className="w-72 shrink-0 border-r border-gray-200 bg-gray-50 p-5 overflow-y-auto">
+                <div className="rounded-xl bg-[#9ca3af] p-3">
+                  <div className="rounded-lg bg-white p-3 space-y-1.5">
+                    <p className="text-[11px] font-semibold text-gray-800">{'(광고) (광고)[#{상점명}]'}</p>
+                    <p className="text-[11px] font-medium text-[#22c55e] underline">{lmsTitle}</p>
+                    <p className="text-[11px] leading-relaxed text-gray-800 whitespace-pre-line">{lmsContent}</p>
+                  </div>
+                  <div className="mt-1 flex justify-end pr-1">
+                    <span className="text-[10px] text-gray-200">LMS 오후 1:56</span>
+                  </div>
+                </div>
+              </div>
+              {/* 우측: 폼 */}
+              <div className="flex-1 overflow-y-auto">
+                <div className="border border-gray-200 m-5">
+                  {/* 발신번호 */}
+                  <div className="flex border-b border-gray-200">
+                    <div className="flex w-36 shrink-0 items-center gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-3">
+                      <span className="text-sm font-bold text-[#4DB87A]">✓</span>
+                      <span className="text-sm font-medium text-gray-700">발신번호</span>
+                    </div>
+                    <div className="flex-1 px-4 py-3 text-sm text-gray-700">01025137030</div>
+                  </div>
+                  {/* 제목 */}
+                  <div className="flex border-b border-gray-200">
+                    <div className="flex w-36 shrink-0 items-center gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-3">
+                      <span className="text-sm font-bold text-[#4DB87A]">✓</span>
+                      <span className="text-sm font-medium text-gray-700">제목</span>
+                    </div>
+                    <div className="flex-1 px-4 py-3">
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={lmsTitle}
+                          onChange={(e) => e.target.value.length <= 40 && setLmsTitle(e.target.value)}
+                          className="w-full rounded border border-gray-300 px-3 py-2 pr-16 text-sm focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]"
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs">
+                          <span className="text-[#4DB87A] font-semibold">{lmsTitle.length}</span>
+                          <span className="text-gray-400">/40</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  {/* 메시지 내용 */}
+                  <div className="flex border-b border-gray-200">
+                    <div className="flex w-36 shrink-0 items-center gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-3">
+                      <span className="text-sm font-bold text-[#4DB87A]">✓</span>
+                      <span className="text-sm font-medium text-gray-700">메시지 내용</span>
+                    </div>
+                    <div className="flex-1 px-4 py-3">
+                      <div className="relative">
+                        <textarea
+                          value={lmsContent}
+                          onChange={(e) => e.target.value.length <= 2000 && setLmsContent(e.target.value)}
+                          rows={8}
+                          className="w-full rounded border border-gray-300 px-3 py-2 text-sm focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A] resize-none"
+                        />
+                        <span className="absolute right-3 bottom-3 text-xs">
+                          <span className="text-[#4DB87A] font-semibold">{lmsContent.length}</span>
+                          <span className="text-gray-400">/2000</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  {/* 무료수신거부 번호 */}
+                  <div className="flex border-b border-gray-200">
+                    <div className="flex w-36 shrink-0 items-center gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-3">
+                      <span className="text-sm font-bold text-[#4DB87A]">✓</span>
+                      <span className="text-sm font-medium text-gray-700">무료수신거부 번호</span>
+                    </div>
+                    <div className="flex-1 px-4 py-3 text-sm text-gray-700">010-1234-5678</div>
+                  </div>
+                  {/* 치환 */}
+                  <div className="flex">
+                    <div className="flex w-36 shrink-0 items-start gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-3">
+                      <span className="text-sm font-medium text-gray-700 mt-0.5">치환</span>
+                    </div>
+                    <div className="flex-1 px-4 py-3">
+                      <div className="space-y-1">
+                        {LMS_REPLACEMENTS.map((r) => (
+                          <p key={r.key} className="text-sm text-gray-700">
+                            <span className="font-semibold text-[#f97316]">{r.key}</span>{' '}
+                            <span className="text-gray-600">{r.desc}</span>
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* 하단 노트 */}
+                <p className="mx-5 mb-5 flex items-center gap-1 text-xs text-gray-500">
+                  <span className="inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border border-gray-400 text-[9px] font-bold">i</span>
+                  모바일 해상도에 따라 다소 차이가 있을 수 있습니다.
+                </p>
+              </div>
+            </div>
+            {/* 푸터 */}
+            <div className="flex items-center justify-center gap-3 border-t border-gray-200 bg-[#ebebeb] px-6 py-4 shrink-0">
+              <button onClick={() => setShowLmsEditPopup(false)} className="rounded-lg bg-[#4b5563] px-10 py-2.5 text-sm font-bold text-white hover:bg-[#374151] transition-colors">취소</button>
+              <button onClick={() => setShowLmsEditPopup(false)} className="rounded-lg bg-[#4b5563] px-10 py-2.5 text-sm font-bold text-white hover:bg-[#374151] transition-colors">수정</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── APP 푸시 메시지 수정 팝업 ── */}
+      {showPushEditPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={() => setShowPushEditPopup(false)}>
+          <div className="relative flex h-auto w-[750px] max-w-[95vw] flex-col overflow-hidden rounded-xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            {/* 헤더 */}
+            <div className="flex items-center gap-3 bg-[#252830] px-6 py-4">
+              <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/10">
+                <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4 text-white" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="5" height="5" rx="1" /><rect x="9" y="2" width="5" height="5" rx="1" /><rect x="2" y="9" width="5" height="5" rx="1" /><rect x="9" y="9" width="5" height="5" rx="1" />
+                </svg>
+              </div>
+              <h2 className="text-base font-bold text-white">APP푸시 메시지 수정</h2>
+            </div>
+            {/* 본문 */}
+            <div className="flex overflow-hidden">
+              {/* 좌측: 폰 미리보기 */}
+              <div className="w-72 shrink-0 border-r border-gray-200 bg-gray-50 flex items-center justify-center p-5">
+                <PhoneNotification pushTitle={pushTitle} pushBody={pushBody} />
+              </div>
+              {/* 우측: 폼 */}
+              <div className="flex-1 p-5 space-y-0">
+                <div className="border border-gray-200">
+                  {/* 제목 */}
+                  <div className="flex border-b border-gray-200">
+                    <div className="flex w-24 shrink-0 items-center gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-4">
+                      <span className="text-sm font-bold text-[#4DB87A]">✓</span>
+                      <span className="text-sm font-medium text-gray-700">제목</span>
+                    </div>
+                    <div className="flex-1 px-4 py-4">
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={pushTitle}
+                          onChange={(e) => e.target.value.length <= 30 && setPushTitle(e.target.value)}
+                          className="w-full rounded border border-gray-300 px-3 py-2 pr-16 text-sm focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]"
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs">
+                          <span className="text-[#4DB87A] font-semibold">{pushTitle.length}</span>
+                          <span className="text-gray-400">/30</span>
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs text-gray-400">최대 30자</p>
+                    </div>
+                  </div>
+                  {/* 본문 */}
+                  <div className="flex">
+                    <div className="flex w-24 shrink-0 items-center gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-4">
+                      <span className="text-sm font-bold text-[#4DB87A]">✓</span>
+                      <span className="text-sm font-medium text-gray-700">본문</span>
+                    </div>
+                    <div className="flex-1 px-4 py-4">
+                      <div className="relative">
+                        <textarea
+                          value={pushBody}
+                          onChange={(e) => e.target.value.length <= 100 && setPushBody(e.target.value)}
+                          rows={4}
+                          className="w-full rounded border border-gray-300 px-3 py-2 text-sm focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A] resize-none"
+                        />
+                        <span className="absolute right-3 bottom-3 text-xs">
+                          <span className="text-[#4DB87A] font-semibold">{pushBody.length}</span>
+                          <span className="text-gray-400">/100</span>
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs text-gray-400">최대 100자</p>
+                    </div>
+                  </div>
+                </div>
+                <p className="mt-3 flex items-center gap-1 text-xs text-gray-500">
+                  <span className="inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border border-gray-400 text-[9px] font-bold">i</span>
+                  모바일 해상도에 따라 다소 차이가 있을 수 있습니다.
+                </p>
+              </div>
+            </div>
+            {/* 푸터 */}
+            <div className="flex items-center justify-center gap-3 border-t border-gray-200 bg-[#ebebeb] px-6 py-4">
+              <button onClick={() => setShowPushEditPopup(false)} className="rounded-lg bg-[#4b5563] px-10 py-2.5 text-sm font-bold text-white hover:bg-[#374151] transition-colors">취소</button>
+              <button onClick={() => setShowPushEditPopup(false)} className="rounded-lg bg-[#4b5563] px-10 py-2.5 text-sm font-bold text-white hover:bg-[#374151] transition-colors">수정</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── LIVE 불러오기 팝업 ── */}
       {showLivePopup && (
