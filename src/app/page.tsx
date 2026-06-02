@@ -23,17 +23,8 @@ const SCREEN_GROUPS: ScreenGroup[] = [
         id: 'crm-live-list',
         name: '목록',
         href: '/crm/live',
-        description: '등록된 CRM 라이브 캠페인의 전체 목록을 카드 형태로 확인하는 화면입니다. 각 캠페인의 목적·상태·ROAS·구매금액·온/오프사이트 전환 수를 한눈에 파악할 수 있습니다.',
-        notes: [
-          '목적: 구매 등 캠페인 목표 유형 표시',
-          'NEW 뱃지: 신규 등록된 캠페인에 표시',
-          '진행중 / 일시정지 / 완료 상태 구분',
-          'ROAS: 광고 수익률 (초기값 0%)',
-          '구매 금액: 캠페인을 통한 총 구매 금액',
-          '온사이트: 온사이트 전환 수 (미지원 시 표시)',
-          '오프사이트: 오프사이트 전환 수 (c = conversions)',
-          '캠페인 상세 버튼: 상세 팝업 또는 페이지로 이동',
-        ],
+        description: '',
+        notes: [],
       },
     ],
   },
@@ -138,10 +129,12 @@ export default function ScreenIndex() {
           <p className="mt-0.5 text-[10px] text-gray-400">선택한 화면의 기능 및 정책 안내</p>
         </div>
         <div className="flex-1 overflow-y-auto p-5 space-y-5">
-          <div>
-            <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">화면 개요</p>
-            <p className="text-sm text-gray-600 leading-relaxed">{selected.description}</p>
-          </div>
+          {selected.description && (
+            <div>
+              <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">화면 개요</p>
+              <p className="text-sm text-gray-600 leading-relaxed">{selected.description}</p>
+            </div>
+          )}
           {selected.notes.length > 0 && (
             <div>
               <p className="mb-3 text-[11px] font-bold uppercase tracking-wider text-gray-400">주요 기능 및 정책</p>
