@@ -4,7 +4,7 @@ export default function Decisions() {
     { no: 2,  screen: '전화면', content: '문구 교체. 클릭 액션 → 랜딩 URL' },
     { no: 3,  screen: '/CRM/CRMGuide', content: '(기존)브랜드메시지(친구톡)의 경우 야간광고 전송 제한으로 인하여 오후 9시부터 그 다음날 오전 8시까지의 시간에 광고성 메시지 발송이 제한됩니다. 를 08:00 ~ 20:50(한국 시간) 시간으로 변경' },
     { no: 4,  screen: '브랜드메시지(친구톡) 생성', content: '와이드이미지, 와이드리스트, 캐러셀 동일 단가인지 재확인 필요' },
-    { no: 5,  screen: '', content: '' },
+    { no: 5,  screen: '생성', content: '와이드 이미지, 와이드리스트는 기존의 이미지형과 동일한 단가로 적용한다.' },
     { no: 6,  screen: '', content: '' },
     { no: 7,  screen: '', content: '' },
     { no: 8,  screen: '', content: '' },
