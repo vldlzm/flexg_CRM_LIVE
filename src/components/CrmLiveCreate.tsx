@@ -413,7 +413,7 @@ export default function CrmLiveCreate() {
               <div className="flex items-start gap-3">
                 <span className="inline-flex shrink-0 items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white">조건</span>
                 <p className="text-sm leading-relaxed text-gray-700">
-                  라이브에 연결된 상품이 3개 이상일 경우 <span className="font-semibold">와이드 리스트형</span>으로, 그 외에는 <span className="font-semibold">와이드 이미지</span>로 메시지가 자동 발송됩니다.<br />
+                  라이브에 연결된 상품이 2개 이상일 경우 <span className="font-semibold">와이드 리스트형</span>으로, 그 외에는 <span className="font-semibold">와이드 이미지</span>로 메시지가 자동 발송됩니다.<br />
                   단, 판매 중이 아니거나 재고가 없는 경우 다음 순서의 상품으로 대체 발송되거나 메시지가 발송되지 않습니다.
                 </p>
               </div>
