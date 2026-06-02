@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 
 const BULLETS = [
   { text: '콘텐츠 팝업은 반복 노출을 줄이기 위해, 동일한 계정에는 캠페인별로 하루 한 번만 노출됩니다.', red: false },
@@ -25,8 +26,8 @@ const FormRow = ({ label, children }: { label: string; children: React.ReactNode
   </div>
 );
 
-const DarkBtn = ({ children, small }: { children: React.ReactNode; small?: boolean }) => (
-  <button className={`rounded-md bg-[#4b5563] font-semibold text-white hover:bg-[#374151] transition-colors ${small ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'}`}>
+const DarkBtn = ({ children, small, onClick }: { children: React.ReactNode; small?: boolean; onClick?: () => void }) => (
+  <button onClick={onClick} className={`rounded-md bg-[#4b5563] font-semibold text-white hover:bg-[#374151] transition-colors ${small ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'}`}>
     {children}
   </button>
 );
@@ -145,6 +146,47 @@ const PhoneApp = () => (
   </div>
 );
 
+/* ── LIVE 목록 데이터 ── */
+interface LiveItem {
+  no: number;
+  title: string;
+  url: string;
+  productCount: number;
+  fee: string;
+  visitors: number;
+  status: string;
+  startAt: string;
+  likes: number;
+  memo: string;
+}
+
+const LIVE_LIST: LiveItem[] = [
+  {
+    no: 2,
+    title: '테스트_삭제해도 무방',
+    url: 'https://testflexg.tuk.link/MrWnGh5',
+    productCount: 1,
+    fee: '3%',
+    visitors: 0,
+    status: '라이브 대기중',
+    startAt: '2026-07-01 10:54',
+    likes: 0,
+    memo: '',
+  },
+  {
+    no: 1,
+    title: '라이브_끄시려면건희한테말씀해주세요 (1)',
+    url: 'https://testflexg.tuk.link/H9FndFC',
+    productCount: 4,
+    fee: '3%',
+    visitors: 0,
+    status: '라이브 대기중',
+    startAt: '',
+    likes: 0,
+    memo: '',
+  },
+];
+
 /* ── 오프사이트 아이콘 ── */
 const OffsiteIcon = () => (
   <svg viewBox="0 0 20 20" fill="none" className="h-5 w-5 text-gray-500" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round">
@@ -153,6 +195,13 @@ const OffsiteIcon = () => (
 );
 
 export default function CrmLiveCreate() {
+  const [showLivePopup, setShowLivePopup] = useState(false);
+  const [selectedLive, setSelectedLive] = useState<LiveItem | null>(null);
+
+  const handleCopy = (url: string) => {
+    navigator.clipboard.writeText(url).catch(() => {});
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-white">
 
@@ -196,18 +245,13 @@ export default function CrmLiveCreate() {
 
           {/* 캠페인 내용 */}
           <FormRow label="캠페인 내용">
-            <div className="space-y-3">
-              <div className="flex items-center gap-6">
-                <RadioInput name="content" label="할인코드" defaultChecked />
-                <RadioInput name="content" label="상품 추천" />
-              </div>
-              <div>
-                <DarkBtn>할인코드 생성 +</DarkBtn>
-              </div>
-              <div className="space-y-1">
-                <InfoNote>CRM 할인코드는 발송일 포함 3일 동안만 유효합니다.</InfoNote>
-                <InfoNote>설정된 할인코드를 사용하지 않는 계정만 캠페인이 노출되거나 발송됩니다.</InfoNote>
-              </div>
+            <div className="flex items-center gap-3">
+              <DarkBtn onClick={() => setShowLivePopup(true)}>LIVE 불러오기</DarkBtn>
+              {selectedLive && (
+                <span className="text-sm text-gray-700">
+                  <span className="font-semibold text-[#4DB87A]">{selectedLive.title}</span> 선택됨
+                </span>
+              )}
             </div>
           </FormRow>
 
@@ -398,6 +442,86 @@ export default function CrmLiveCreate() {
         </div>
       </div>
 
+      {/* ── LIVE 불러오기 팝업 ── */}
+      {showLivePopup && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+          onClick={() => setShowLivePopup(false)}
+        >
+          <div
+            className="relative w-[960px] max-h-[80vh] overflow-auto rounded-xl bg-white shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* 팝업 헤더 */}
+            <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
+              <h3 className="text-base font-bold text-gray-900">LIVE 목록</h3>
+              <button
+                onClick={() => setShowLivePopup(false)}
+                className="flex h-7 w-7 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* 테이블 */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-200 bg-gray-50">
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 w-12">No</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600">라이브 방송명</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">라이브 상품 수</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">라이브 수수료</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">총 접속자 수</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">라이브 진행 상태</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">라이브 방송 시작일시</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">좋아요 수</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600">메모</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {LIVE_LIST.map((item) => (
+                    <tr
+                      key={item.no}
+                      className="border-b border-gray-100 last:border-0 cursor-pointer hover:bg-[#f0faf5] transition-colors"
+                      onClick={() => { setSelectedLive(item); setShowLivePopup(false); }}
+                    >
+                      <td className="px-4 py-4 text-center text-sm text-gray-600">{item.no}</td>
+                      <td className="px-4 py-4">
+                        <p className="text-sm font-semibold text-gray-900 mb-0.5">{item.title}</p>
+                        <p className="text-xs text-gray-400 mb-1.5">{item.url}</p>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); handleCopy(item.url); }}
+                          className="rounded border border-gray-300 px-2.5 py-1 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
+                        >
+                          라이브 링크 복사
+                        </button>
+                      </td>
+                      <td className="px-4 py-4 text-center text-sm text-gray-700">{item.productCount}</td>
+                      <td className="px-4 py-4 text-center text-sm font-semibold text-[#4DB87A]">{item.fee}</td>
+                      <td className="px-4 py-4 text-center text-sm text-gray-700">{item.visitors}</td>
+                      <td className="px-4 py-4 text-center text-sm font-semibold text-[#4DB87A]">{item.status}</td>
+                      <td className="px-4 py-4 text-center text-sm text-gray-700">{item.startAt || '-'}</td>
+                      <td className="px-4 py-4 text-center text-sm text-gray-700">{item.likes}</td>
+                      <td className="px-4 py-4 text-center text-sm text-gray-400">{item.memo || '-'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* 팝업 하단 */}
+            <div className="flex justify-end gap-2 border-t border-gray-200 px-6 py-4">
+              <button
+                onClick={() => setShowLivePopup(false)}
+                className="rounded-lg border border-gray-300 px-6 py-2 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors"
+              >
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
