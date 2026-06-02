@@ -513,19 +513,23 @@ export default function CrmLiveCreate() {
                           </div>
                           {/* 상품 리스트 */}
                           {[
-                            { name: '여름 신상 원피스' },
-                            { name: '크로스백 신상품' },
-                            { name: 'UV 차단 선글라스' },
-                            { name: '니트 반팔 티셔츠' },
+                            { name: '여름 신상 원피스',   regular: '39,000원', sale: '19,500원', bg: 'from-rose-200 to-pink-300' },
+                            { name: '크로스백 신상품',    regular: '52,000원', sale: '36,400원', bg: 'from-amber-200 to-yellow-300' },
+                            { name: 'UV 차단 선글라스',   regular: '28,000원', sale: '16,800원', bg: 'from-sky-200 to-blue-300' },
+                            { name: '니트 반팔 티셔츠',   regular: '35,000원', sale: '21,000원', bg: 'from-violet-200 to-purple-300' },
                           ].map((item, i) => (
                             <div key={i} className="flex items-center gap-1.5 border-t border-gray-100 px-2 py-1.5">
-                              <div className="h-8 w-8 shrink-0 rounded bg-gray-200" />
-                              <p className="text-[9px] font-semibold text-gray-800 leading-tight">{item.name}</p>
+                              <div className={`h-9 w-9 shrink-0 rounded bg-gradient-to-br ${item.bg}`} />
+                              <div className="min-w-0">
+                                <p className="text-[9px] font-semibold text-gray-800 leading-tight">{item.name}</p>
+                                <p className="text-[7px] text-gray-400 line-through leading-tight">{item.regular}</p>
+                                <p className="text-[8px] font-bold text-red-500 leading-tight">{item.sale}</p>
+                              </div>
                             </div>
                           ))}
                           {/* 버튼 */}
-                          <div className="border-t border-gray-100 py-1.5 text-center">
-                            <span className="text-[10px] font-semibold text-gray-700">추천템 모아보기</span>
+                          <div className="border-t border-gray-100 py-1.5 text-center bg-gray-200">
+                            <span className="text-[10px] font-semibold text-gray-600">LIVE 보기</span>
                           </div>
                           <div className="border-t border-gray-100 px-2.5 py-1">
                             <p className="text-[7px] text-gray-400">수신거부 | 홈 &gt; 채널 차단</p>
