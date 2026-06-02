@@ -555,13 +555,9 @@ export default function CrmLiveCreate() {
                 </div>
               </div>
 
-              {/* 단일/캐러셀 탭 */}
-              <div className="flex items-center gap-3">
-                <button className="rounded-full border border-[#4DB87A] px-4 py-1.5 text-sm font-semibold text-[#4DB87A]">
-                  브랜드메시지 단일
-                </button>
-                <button className="text-sm text-gray-600 hover:text-gray-900">브랜드메시지 캐러셀</button>
-              </div>
+              <button className="w-full rounded-lg bg-[#111827] py-2.5 text-sm font-bold text-white hover:bg-black transition-colors">
+                메시지 수정하기
+              </button>
             </div>
 
           </div>
