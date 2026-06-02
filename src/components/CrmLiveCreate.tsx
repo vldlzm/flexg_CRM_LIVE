@@ -413,8 +413,7 @@ export default function CrmLiveCreate() {
               <div className="flex items-start gap-3">
                 <span className="inline-flex shrink-0 items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white">조건</span>
                 <p className="text-sm leading-relaxed text-gray-700">
-                  라이브에 연결된 상품이 2개 이상일 경우 <span className="font-semibold">와이드 리스트형</span>으로, 그 외에는 <span className="font-semibold">와이드 이미지</span>로 메시지가 자동 발송됩니다.<br />
-                  단, 판매 중이 아니거나 재고가 없는 경우 다음 순서의 상품으로 대체 발송되거나 메시지가 발송되지 않습니다.
+                  라이브에 연결된 상품이 2개 이상일 경우 <span className="font-semibold">와이드 리스트형</span>으로, 그 외에는 <span className="font-semibold">와이드 이미지</span>로 메시지가 자동 발송됩니다.
                 </p>
               </div>
               {/* 클릭액션 */}
@@ -810,12 +809,13 @@ export default function CrmLiveCreate() {
                                   <div className="h-7 w-7 shrink-0 rounded bg-gray-200" />
                                   <div className="min-w-0">
                                     <p className="text-[8px] font-semibold text-gray-800 leading-tight">{item.text}</p>
-                                    <p className="text-[7px] font-bold text-red-500">{item.price}</p>
                                   </div>
                                 </div>
                               ))}
-                              <div className="border-t border-gray-100 py-1.5 text-center bg-gray-200">
-                                <span className="text-[10px] font-semibold text-gray-600">{wideListBtn1 || 'LIVE 보기'}</span>
+                              <div className="flex border-t border-gray-100 bg-gray-200">
+                                {wideListBtn1 && <div className={`flex-1 py-1.5 text-center ${wideListBtn2 ? 'border-r border-gray-300' : ''}`}><span className="text-[10px] font-semibold text-gray-600">{wideListBtn1}</span></div>}
+                                {wideListBtn2 && <div className="flex-1 py-1.5 text-center"><span className="text-[10px] font-semibold text-gray-600">{wideListBtn2}</span></div>}
+                                {!wideListBtn1 && !wideListBtn2 && <div className="flex-1 py-1.5 text-center"><span className="text-[10px] font-semibold text-gray-600">LIVE 보기</span></div>}
                               </div>
                             </>
                           )}
@@ -909,7 +909,11 @@ export default function CrmLiveCreate() {
                     {wideListItems.slice(1).map((item, i) => (
                       <div key={i+1} className="flex border-b border-gray-200 last:border-0">
                         <div className="flex w-32 shrink-0 items-start gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-3">
-                          <span className="text-sm font-bold text-[#4DB87A]">✓</span><span className="text-sm font-medium text-gray-700">리스트 {i+2}</span>
+                          <span className={`text-sm font-bold ${i+2 <= 2 ? 'text-[#4DB87A]' : 'text-gray-400'}`}>✓</span>
+                          <div>
+                            <span className="text-sm font-medium text-gray-700">리스트 {i+2}</span>
+                            {i+2 >= 3 && <span className="ml-1 text-xs text-gray-400">(선택)</span>}
+                          </div>
                         </div>
                         <div className="flex-1 px-4 py-3 space-y-2">
                           <div className="flex h-12 items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 text-xs text-gray-400 cursor-pointer hover:bg-gray-100">
