@@ -3,6 +3,7 @@
 import Link from 'next/link';
 
 const BULLETS = [
+  { text: '광고성 메시지의 발송 가능 시간은 08:00 ~ 20:50(한국 시간) 입니다.', red: true },
   { text: '콘텐츠 팝업은 반복 노출을 줄이기 위해, 동일한 계정에는 캠페인별로 하루 한 번만 노출됩니다.', red: false },
   { text: '자동 > 오프사이트 캠페인은 고객의 피로도를 줄이기 위하여 동일한 계정에 대해 2일에 한 번만 발송됩니다.', red: false },
   { text: '상품명, 상품 이미지, 부연 설명을 변경하는 경우 다음 날 CRM 시스템에 반영됩니다.', red: false },
@@ -224,21 +225,21 @@ export default function CrmLiveCreate() {
           <FormRow label="캠페인 유형">
             <div className="space-y-3">
               <p className="text-sm text-gray-700">오프사이트 캠페인</p>
-              <div className="space-y-0">
-                <div className="ml-0"><PillCheck label="APP푸시  0명" /></div>
-                <div className="ml-5 -mt-0.5"><PillCheck label="알림톡  0명" /></div>
-                <div className="ml-10 -mt-0.5"><PillCheck label="LMS  0명" /></div>
+              <div className="space-y-1.5">
+                <div><PillCheck label="APP푸시  0명" /></div>
+                <div><PillCheck label="알림톡  0명" /></div>
+                <div><PillCheck label="LMS  0명" /></div>
               </div>
               <InfoNote orange>고객 반응률과 도달 데이터를 분석하여 최적의 캠페인 유형으로 자동 적용됩니다.</InfoNote>
             </div>
           </FormRow>
 
-          {/* 캠페인 기간 */}
-          <FormRow label="캠페인 기간">
+          {/* 발송 일시 */}
+          <FormRow label="발송 일시">
             <div className="flex items-center gap-2">
               <input
                 type="text"
-                placeholder="기간 설정"
+                placeholder="발송 일시"
                 className="rounded border border-gray-300 px-3 py-2 text-sm text-gray-400 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A] w-44"
               />
               <DarkBtn>기간 초기화</DarkBtn>
@@ -264,7 +265,7 @@ export default function CrmLiveCreate() {
         <div className="rounded-xl bg-[#f0f0f0] p-8">
           <div className="flex items-start gap-8">
             {/* 좌측 설명 */}
-            <div className="w-56 shrink-0 space-y-4 pt-2">
+            <div className="flex-1 space-y-4 pt-2">
               <div>
                 <h3 className="mb-1 text-base font-bold text-gray-900">APP푸시 예시</h3>
                 <p className="text-sm text-gray-600">APP푸시를 통하여 할인코드를 전달하고 상품 구매를 유도합니다.</p>
@@ -278,20 +279,12 @@ export default function CrmLiveCreate() {
               </div>
             </div>
 
-            {/* 중앙 폰 목업 */}
-            <div className="flex flex-col items-center gap-3">
+            {/* 우측 폰 목업 2개 */}
+            <div className="flex shrink-0 items-center gap-4">
               <PhoneNotification />
-            </div>
-
-            {/* 화살표 */}
-            <div className="flex items-center self-center">
-              <svg viewBox="0 0 24 24" className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" strokeWidth={2}>
+              <svg viewBox="0 0 24 24" className="h-6 w-6 shrink-0 text-gray-400" fill="none" stroke="currentColor" strokeWidth={2}>
                 <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </div>
-
-            {/* 우측 앱 화면 목업 */}
-            <div className="flex flex-col items-center gap-3">
               <PhoneApp />
             </div>
           </div>
@@ -306,7 +299,7 @@ export default function CrmLiveCreate() {
         </div>
 
         {/* LMS 예시 */}
-        <div className="rounded-xl bg-[#f0f0f0] p-8">
+        <div className="mt-6 rounded-xl bg-[#f0f0f0] p-8">
           <div className="flex items-start gap-8">
             {/* 좌측 설명 */}
             <div className="flex-1 space-y-4 pt-1">
@@ -382,7 +375,7 @@ export default function CrmLiveCreate() {
       {/* ── 하단 고정 ── */}
       <div className="sticky bottom-0 z-10 border-t border-gray-200">
         {/* 오프사이트 정보 */}
-        <div className="flex items-center gap-2 bg-white px-8 py-3">
+        <div className="flex items-center justify-center gap-2 bg-white px-8 py-3">
           <OffsiteIcon />
           <span className="text-sm text-gray-600">
             오프사이트 : 예약 발송 수 약{' '}
