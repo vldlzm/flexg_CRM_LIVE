@@ -3,12 +3,12 @@
 import Link from 'next/link';
 
 const BULLETS = [
-  { text: '광고성 메시지의 발송 가능 시간은 08:00 ~ 20:50(한국 시간) 입니다.', red: true },
   { text: '콘텐츠 팝업은 반복 노출을 줄이기 위해, 동일한 계정에는 캠페인별로 하루 한 번만 노출됩니다.', red: false },
   { text: '자동 > 오프사이트 캠페인은 고객의 피로도를 줄이기 위하여 동일한 계정에 대해 2일에 한 번만 발송됩니다.', red: false },
   { text: '상품명, 상품 이미지, 부연 설명을 변경하는 경우 다음 날 CRM 시스템에 반영됩니다.', red: false },
   { text: 'LMS는 관련 법령 및 개인정보 보호 정책에 따라 마케팅 정보 수신에 동의한 회원에게만 발송됩니다.', red: false },
   { text: '고객별 메시지 수 제한 및 발송 정책에 따라 실제 수신되는 메시지 수는 차이가 있을 수 있습니다.', red: true },
+  { text: '광고성 메시지의 발송 가능 시간은 08:00 ~ 20:50(한국 시간) 입니다.', red: true },
 ];
 
 const LabelCol = ({ children }: { children: React.ReactNode }) => (
@@ -270,12 +270,12 @@ export default function CrmLiveCreate() {
                 <h3 className="mb-1 text-base font-bold text-gray-900">APP푸시 예시</h3>
                 <p className="text-sm text-gray-600">APP푸시를 통하여 할인코드를 전달하고 상품 구매를 유도합니다.</p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="rounded-full bg-[#111827] px-3 py-1 text-xs font-bold text-white">비용</span>
                 <span className="text-sm text-gray-700">무료</span>
-              </div>
-              <div className="rounded-lg bg-[#22c55e] px-3 py-2">
-                <p className="text-xs font-bold text-white">APP푸시를 이용하면 0 c를 절약할 수 있어요!</p>
+                <div className="rounded-lg bg-[#22c55e] px-3 py-2">
+                  <p className="text-xs font-bold text-white">APP푸시를 이용하면 0 c를 절약할 수 있어요!</p>
+                </div>
               </div>
             </div>
 

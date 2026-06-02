@@ -17,7 +17,7 @@ interface ScreenGroup {
 
 const SCREEN_GROUPS: ScreenGroup[] = [
   {
-    category: 'CRM 라이브',
+    category: 'CRM LIVE',
     screens: [
       {
         id: 'crm-live-list',

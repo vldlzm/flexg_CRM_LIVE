@@ -153,7 +153,7 @@ export default function CrmLiveList() {
       {/* 상단 헤더 */}
       <div className="sticky top-0 z-20 border-b border-gray-200 bg-white">
         <div className="mx-auto flex max-w-[1440px] items-center px-6 py-4">
-          <h1 className="text-lg font-bold text-gray-900">CRM 라이브</h1>
+          <h1 className="text-lg font-bold text-gray-900">CRM LIVE</h1>
         </div>
       </div>
 
