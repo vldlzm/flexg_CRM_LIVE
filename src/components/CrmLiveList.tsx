@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 
 interface Campaign {
   id: string;
@@ -21,7 +20,7 @@ const CAMPAIGNS: Campaign[] = [
     purpose: '구매',
     isNew: true,
     status: '진행중',
-    title: '맞춤 시나리오로 보내기',
+    title: '라이브 시작 알림 보내기',
     roas: '0%',
     purchaseAmount: '0원',
     onsite: '미지원',
@@ -148,15 +147,6 @@ function CampaignCard({ campaign }: { campaign: Campaign }) {
 }
 
 export default function CrmLiveList() {
-  const [search, setSearch] = useState('');
-  const [statusFilter, setStatusFilter] = useState('전체');
-
-  const filtered = CAMPAIGNS.filter((c) => {
-    const matchStatus = statusFilter === '전체' || c.status === statusFilter;
-    const matchSearch = c.title.includes(search);
-    return matchStatus && matchSearch;
-  });
-
   return (
     <div className="min-h-screen bg-[#f8f8f8]">
       {/* 상단 헤더 */}
@@ -167,53 +157,13 @@ export default function CrmLiveList() {
       </div>
 
       <div className="mx-auto max-w-[1440px] space-y-5 p-6">
-        {/* 필터 */}
-        <section className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100">
-          <div className="flex flex-wrap items-center gap-3">
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-2 focus:ring-[#4DB87A]/20 transition-all"
-            >
-              <option value="전체">상태 전체</option>
-              <option value="진행중">진행중</option>
-              <option value="일시정지">일시정지</option>
-              <option value="완료">완료</option>
-            </select>
-            <div className="relative ml-auto min-w-[260px]">
-              <svg viewBox="0 0 20 20" fill="currentColor" className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400">
-                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-              </svg>
-              <input
-                type="text"
-                placeholder="캠페인명 검색"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 bg-gray-50 py-2.5 pl-9 pr-4 text-sm text-gray-700 placeholder-gray-400 focus:border-[#4DB87A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#4DB87A]/20 transition-all"
-              />
-            </div>
-          </div>
-        </section>
-
         {/* 캠페인 카드 그리드 */}
         <section>
-          {filtered.length === 0 ? (
-            <div className="flex flex-col items-center justify-center rounded-2xl bg-white py-20 text-center shadow-sm ring-1 ring-gray-100">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-100">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7 text-gray-400" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-              </div>
-              <p className="text-sm font-semibold text-gray-700">검색 결과가 없습니다</p>
-              <p className="mt-1.5 text-xs text-gray-400">다른 검색어나 필터를 적용해 보세요</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              {filtered.map((campaign) => (
-                <CampaignCard key={campaign.id} campaign={campaign} />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            {CAMPAIGNS.map((campaign) => (
+              <CampaignCard key={campaign.id} campaign={campaign} />
+            ))}
+          </div>
         </section>
       </div>
     </div>
