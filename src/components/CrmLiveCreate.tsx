@@ -440,14 +440,27 @@ export default function CrmLiveCreate() {
                       <div className="flex-1">
                         <div className="overflow-hidden rounded-xl bg-white shadow-sm">
                           <p className="px-2.5 pt-1.5 text-[8px] text-gray-400">(광고) 채널명</p>
-                          <div className="mx-2 my-1 h-24 rounded-lg bg-gray-300" />
+                          {/* LIVE 시작 이미지 배너 */}
+                          <div className="mx-2 my-1 h-24 rounded-lg overflow-hidden relative bg-gray-900">
+                            <div className="absolute inset-0 bg-gradient-to-br from-red-800/60 to-gray-900" />
+                            <div className="absolute inset-0 flex flex-col items-center justify-center gap-1">
+                              <div className="flex items-center gap-1.5">
+                                <span className="h-2 w-2 rounded-full bg-red-500 shadow-lg shadow-red-500/50" />
+                                <span className="text-sm font-black tracking-widest text-white">LIVE</span>
+                              </div>
+                              <span className="text-[10px] font-bold text-white/80 tracking-wider">시 작</span>
+                              <div className="mt-1 flex gap-1">
+                                {[0,1,2].map(i => <div key={i} className="h-0.5 w-4 rounded-full bg-white/40" />)}
+                              </div>
+                            </div>
+                          </div>
                           <div className="px-2.5 pb-1.5">
                             <p className="text-[9px] leading-snug text-gray-700">
-                              세일상품 20% 추가할인 기간한정 프로모션!! 원하는 사이즈를 놓치지 마세요.
+                              🔴 LIVE 시작! 인기 상품 특가 할인 중. 지금 바로 참여하고 혜택 챙겨가세요.
                             </p>
                           </div>
-                          <div className="border-t border-gray-100 py-1.5 text-center">
-                            <span className="text-[10px] font-semibold text-gray-700">추천템 모아보기</span>
+                          <div className="border-t border-gray-100 py-1.5 text-center bg-gray-200">
+                            <span className="text-[10px] font-semibold text-gray-600">LIVE 보기</span>
                           </div>
                           <div className="border-t border-gray-100 px-2.5 py-1">
                             <p className="text-[7px] text-gray-400">수신거부 | 홈 &gt; 채널 차단</p>
