@@ -761,9 +761,6 @@ export default function CrmLiveCreate() {
                   <span className="w-20 shrink-0 text-sm text-gray-600">생성 유형</span>
                   <select className="flex-1 rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none">
                     <option>진행중인 라이브 방송</option>
-                    <option>메인 페이지</option>
-                    <option>상품 상세</option>
-                    <option>쿠폰 목록</option>
                   </select>
                 </div>
                 <div className="flex items-center gap-4">
