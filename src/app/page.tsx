@@ -37,8 +37,12 @@ const SCREEN_GROUPS: ScreenGroup[] = [
         id: 'crm-live-create',
         name: '생성',
         href: '/crm/live/create',
-        description: '',
-        notes: [],
+        description: 'LIVE 캠페인 생성 화면입니다.',
+        notes: [
+          'LIVE 불러오기에서 방송을 선택하면 랜딩 URL에 해당 LIVE 방송의 URL이 자동으로 입력됩니다.',
+          '사용자는 랜딩 URL 옆 불러오기 버튼을 통해 URL 생성 팝업을 열어 생성 유형과 유입 채널을 선택하여 URL을 수정하거나 재설정할 수 있습니다.',
+          'URL 생성 팝업에서 적용 버튼 클릭 시 입력 필드에 반영됩니다.',
+        ],
       },
       {
         id: 'decisions',

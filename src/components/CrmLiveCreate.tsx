@@ -197,6 +197,7 @@ export default function CrmLiveCreate() {
   const [showLmsEditPopup, setShowLmsEditPopup] = useState(false);
   const [showPushEditPopup, setShowPushEditPopup] = useState(false);
   const [showBrandEditPopup, setShowBrandEditPopup] = useState(false);
+  const [showUrlGenPopup, setShowUrlGenPopup] = useState(false);
   const [brandEditTab, setBrandEditTab] = useState<'wide-image' | 'wide-list'>('wide-image');
   const [wideImageContent, setWideImageContent] = useState('🔴 LIVE 시작! 인기 상품 특가 할인 중. 지금 바로 참여하고 혜택 챙겨가세요.');
   const [wideImageBtn1, setWideImageBtn1] = useState('LIVE 보기');
@@ -348,15 +349,15 @@ export default function CrmLiveCreate() {
             </div>
           </FormRow>
 
-          {/* 클릭 액션 */}
-          <FormRow label="클릭 액션">
+          {/* 랜딩 URL */}
+          <FormRow label="랜딩 URL">
             <div className="flex items-center gap-2">
               <input
                 type="text"
                 defaultValue="/Home/Index"
                 className="rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A] w-72"
               />
-              <DarkBtn>불러오기</DarkBtn>
+              <DarkBtn onClick={() => setShowUrlGenPopup(true)}>불러오기</DarkBtn>
               <DarkBtn>초기화</DarkBtn>
             </div>
           </FormRow>
@@ -736,6 +737,55 @@ export default function CrmLiveCreate() {
         </div>
       </div>
 
+      {/* ── URL 생성 팝업 ── */}
+      {showUrlGenPopup && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40" onClick={() => setShowUrlGenPopup(false)}>
+          <div className="w-[95vw] max-w-[520px] overflow-hidden rounded-xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            {/* 헤더 */}
+            <div className="flex items-center gap-3 bg-[#252830] px-6 py-4">
+              <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/10">
+                <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4 text-white" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="1" y="3" width="14" height="9" rx="1.5" />
+                  <path d="M5.5 13.5h5M8 12v1.5" />
+                </svg>
+              </div>
+              <h2 className="text-base font-bold text-white">URL 생성</h2>
+            </div>
+            {/* 본문 */}
+            <div className="p-6">
+              <p className="mb-5 text-sm text-[#4DB87A]">
+                · URL 생성은 쇼핑몰의 페이지 URL을 간편하게 불러올 수 있는 기능입니다.
+              </p>
+              <div className="rounded-lg bg-gray-50 px-6 py-5 space-y-4">
+                <div className="flex items-center gap-4">
+                  <span className="w-20 shrink-0 text-sm text-gray-600">생성 유형</span>
+                  <select className="flex-1 rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none">
+                    <option>진행중인 라이브 방송</option>
+                    <option>메인 페이지</option>
+                    <option>상품 상세</option>
+                    <option>쿠폰 목록</option>
+                  </select>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="w-20 shrink-0 text-sm text-gray-600">유입 채널</span>
+                  <select className="flex-1 rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none">
+                    <option>사용 안함</option>
+                    <option>APP 푸시</option>
+                    <option>브랜드메시지</option>
+                    <option>LMS</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            {/* 푸터 */}
+            <div className="flex items-center justify-center gap-3 border-t border-gray-200 bg-[#ebebeb] px-6 py-4">
+              <button onClick={() => setShowUrlGenPopup(false)} className="rounded-lg bg-[#4b5563] px-10 py-2.5 text-sm font-bold text-white hover:bg-[#374151] transition-colors">취소</button>
+              <button onClick={() => setShowUrlGenPopup(false)} className="rounded-lg bg-[#3a3f45] px-10 py-2.5 text-sm font-bold text-white hover:bg-[#2d3138] transition-colors">적용</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ── 브랜드메시지 수정 팝업 ── */}
       {showBrandEditPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={() => setShowBrandEditPopup(false)}>
@@ -870,7 +920,7 @@ export default function CrmLiveCreate() {
                           </div>
                           <div className="flex items-center gap-2">
                             <input type="text" placeholder="/Home/Index" className="flex-1 rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
-                            <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
+                            <button onClick={() => setShowUrlGenPopup(true)} className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
                             <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">초기화</button>
                           </div>
                         </div>
@@ -881,7 +931,7 @@ export default function CrmLiveCreate() {
                           </div>
                           <div className="flex items-center gap-2">
                             <input type="text" placeholder="/Home/Index" className="flex-1 rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
-                            <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
+                            <button onClick={() => setShowUrlGenPopup(true)} className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
                             <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">초기화</button>
                           </div>
                         </div>
@@ -953,7 +1003,7 @@ export default function CrmLiveCreate() {
                           </div>
                           <div className="flex items-center gap-2">
                             <input type="text" placeholder="/Home/Index" className="flex-1 rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
-                            <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
+                            <button onClick={() => setShowUrlGenPopup(true)} className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
                             <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">초기화</button>
                           </div>
                         </div>
@@ -964,7 +1014,7 @@ export default function CrmLiveCreate() {
                           </div>
                           <div className="flex items-center gap-2">
                             <input type="text" placeholder="/Home/Index" className="flex-1 rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
-                            <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
+                            <button onClick={() => setShowUrlGenPopup(true)} className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
                             <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">초기화</button>
                           </div>
                         </div>
@@ -1189,7 +1239,7 @@ export default function CrmLiveCreate() {
                           placeholder="/Home/Index"
                           className="flex-1 rounded border border-gray-300 px-3 py-2 text-sm focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]"
                         />
-                        <button className="rounded-md bg-[#4b5563] px-4 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
+                        <button onClick={() => setShowUrlGenPopup(true)} className="rounded-md bg-[#4b5563] px-4 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
                         <button className="rounded-md bg-[#4b5563] px-4 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">초기화</button>
                       </div>
                     </div>
