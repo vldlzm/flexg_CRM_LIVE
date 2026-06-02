@@ -73,25 +73,24 @@ const PhoneNotification = () => (
         <div className="flex items-start gap-1.5">
           <div className="h-5 w-5 rounded shrink-0 bg-orange-500 flex items-center justify-center text-[7px] font-black text-white">F</div>
           <div className="min-w-0">
-            <p className="text-[9px] font-semibold text-gray-900 leading-tight">쉿! secret 할인코드 🎁</p>
-            <p className="text-[8px] text-gray-500 leading-tight truncate">#[회원명]님을 위한 혜택 🎪 #[할인금액]할인 🔑 #[할인...</p>
+            <p className="text-[9px] font-semibold text-gray-900 leading-tight">⏰ LIVE 시작!</p>
+            <p className="text-[8px] text-gray-500 leading-tight truncate">오늘 라이브에서만 만나는 특별가! 놓치기...</p>
           </div>
           <span className="text-[8px] text-gray-400 shrink-0">›</span>
         </div>
       </div>
       {/* 알림 (확장) */}
       <div className="rounded-xl bg-white p-2 shadow-sm">
-        <div className="flex items-start gap-1.5 mb-2">
+        <div className="flex items-start gap-1.5">
           <div className="h-5 w-5 rounded shrink-0 bg-orange-500 flex items-center justify-center text-[7px] font-black text-white">F</div>
           <div className="min-w-0">
-            <p className="text-[9px] font-semibold text-gray-900 leading-tight">쉿! secret 할인코드 🎁</p>
+            <p className="text-[9px] font-semibold text-gray-900 leading-tight">⏰ LIVE 시작!</p>
             <p className="text-[8px] text-gray-500 leading-tight">
-              #[회원명]님을 위한 혜택 🎪 #[할인금액]할인 🔑 #[할인코드]*결제 시 자동 적용
+              오늘 라이브에서만 만나는 특별가! 놓치기 전에 지금 확인하세요.
             </p>
           </div>
           <span className="text-[8px] text-gray-400 shrink-0">∧</span>
         </div>
-        <button className="w-full rounded-lg bg-black py-1.5 text-[9px] font-bold text-white">#[할인코드]</button>
       </div>
     </div>
     {/* 하단 네비 */}
@@ -168,7 +167,7 @@ const LIVE_LIST: LiveItem[] = [
     productCount: 1,
     fee: '3%',
     visitors: 0,
-    status: '라이브 대기중',
+    status: 'LIVE 대기중',
     startAt: '2026-07-01 10:54',
     likes: 0,
     memo: '',
@@ -180,7 +179,7 @@ const LIVE_LIST: LiveItem[] = [
     productCount: 4,
     fee: '3%',
     visitors: 0,
-    status: '라이브 대기중',
+    status: 'LIVE 대기중',
     startAt: '',
     likes: 0,
     memo: '',
@@ -277,7 +276,7 @@ export default function CrmLiveCreate() {
               <p className="text-sm text-gray-700">오프사이트 캠페인</p>
               <div className="space-y-1.5">
                 <div><PillCheck label="APP푸시  0명" /></div>
-                <div><PillCheck label="알림톡  0명" /></div>
+                <div><PillCheck label="브랜드메시지(친구톡)  0명" /></div>
                 <div><PillCheck label="LMS  0명" /></div>
               </div>
               <InfoNote orange>고객 반응률과 도달 데이터를 분석하여 최적의 캠페인 유형으로 자동 적용됩니다.</InfoNote>
@@ -329,13 +328,9 @@ export default function CrmLiveCreate() {
               </div>
             </div>
 
-            {/* 우측 폰 목업 2개 */}
-            <div className="flex shrink-0 items-center gap-4">
+            {/* 폰 목업 */}
+            <div className="shrink-0">
               <PhoneNotification />
-              <svg viewBox="0 0 24 24" className="h-6 w-6 shrink-0 text-gray-400" fill="none" stroke="currentColor" strokeWidth={2}>
-                <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <PhoneApp />
             </div>
           </div>
 
@@ -475,12 +470,12 @@ export default function CrmLiveCreate() {
                 <thead>
                   <tr className="border-b border-gray-200 bg-gray-50">
                     <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 w-12">No</th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600">라이브 방송명</th>
-                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">라이브 상품 수</th>
-                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">라이브 수수료</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600">LIVE 방송명</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">LIVE 상품 수</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">LIVE 수수료</th>
                     <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">총 접속자 수</th>
-                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">라이브 진행 상태</th>
-                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">라이브 방송 시작일시</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">LIVE 진행 상태</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">LIVE 방송 시작일시</th>
                     <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">좋아요 수</th>
                     <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600">메모</th>
                     <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600">선택</th>
@@ -502,7 +497,7 @@ export default function CrmLiveCreate() {
                             onClick={() => handleCopy(item.url)}
                             className="rounded border border-gray-300 px-2.5 py-1 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
                           >
-                            라이브 링크 복사
+                            LIVE 링크 복사
                           </button>
                         </td>
                         <td className="px-4 py-4 text-center text-sm text-gray-700">{item.productCount}</td>

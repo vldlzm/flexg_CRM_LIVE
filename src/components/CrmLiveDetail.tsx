@@ -91,7 +91,7 @@ export default function CrmLiveDetail() {
             </div>
             <div className="flex items-center gap-1">
               <Badge>캠페인 유형</Badge>
-              <Badge>APP푸시, 브랜드메시지, LMS</Badge>
+              <Badge>APP푸시, 브랜드메시지(친구톡), LMS</Badge>
             </div>
             <div className="flex items-center gap-1">
               <Badge>대상자</Badge>
