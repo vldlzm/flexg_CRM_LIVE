@@ -20,6 +20,13 @@ const SCREEN_GROUPS: ScreenGroup[] = [
     category: 'CRM LIVE',
     screens: [
       {
+        id: 'crm-home',
+        name: '홈',
+        href: '/home',
+        description: '',
+        notes: [],
+      },
+      {
         id: 'crm-live-list',
         name: '목록',
         href: '/crm/live',
