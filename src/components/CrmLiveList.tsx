@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 
 interface Campaign {
   id: string;
@@ -139,9 +140,9 @@ function CampaignCard({ campaign }: { campaign: Campaign }) {
       </div>
 
       {/* 캠페인 상세 버튼 */}
-      <button className="w-full rounded-xl bg-[#3d4043] py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#2d3138] active:scale-[0.98]">
+      <Link href="/crm/live/detail" className="block w-full rounded-xl bg-[#3d4043] py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-[#2d3138] active:scale-[0.98]">
         캠페인 상세
-      </button>
+      </Link>
     </div>
   );
 }
