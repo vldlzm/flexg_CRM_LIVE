@@ -6,9 +6,9 @@ export default function CrmHome() {
         {/* ── CRM 현황 ── */}
         <div className="w-[300px] shrink-0 rounded-lg border border-gray-200 p-5">
           <h2 className="mb-4 text-sm font-bold text-gray-800">CRM 현황</h2>
-
+          <div className="flex gap-0 items-start">
           {/* 캠페인 진행 현황 */}
-          <div className="mb-5">
+          <div className="flex-1">
             <p className="mb-2.5 text-xs text-gray-500">캠페인 진행 현황</p>
             <div className="flex items-start gap-5">
               <div className="flex flex-col items-center gap-1">
@@ -26,11 +26,10 @@ export default function CrmHome() {
             </div>
           </div>
 
-          {/* 구분선 */}
-          <div className="mb-4 border-t border-gray-100" />
+            <div className="mb-4 border-l border-gray-100 ml-4 pl-4 flex-1 hidden" />
 
-          {/* 캐시 현황 */}
-          <div>
+          {/* 캐시 현황 - 가로 배열 */}
+          <div className="border-l border-gray-100 pl-5">
             <div className="mb-2 flex items-center justify-between">
               <p className="text-xs text-gray-500">캐시 현황</p>
               <button className="text-xs font-semibold text-[#4DB87A] hover:underline">충전하기 &gt;</button>
@@ -44,6 +43,7 @@ export default function CrmHome() {
               <p>· 이번 달 지출 <span className="text-gray-700">0c</span></p>
             </div>
           </div>
+          </div>{/* flex 닫기 */}
         </div>
 
         {/* ── 어제의 CRM 지표 ── */}
