@@ -915,10 +915,10 @@ export default function CrmLiveCreate() {
                     {wideListItems.slice(1).map((item, i) => (
                       <div key={i+1} className="flex border-b border-gray-200 last:border-0">
                         <div className="flex w-32 shrink-0 items-start gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-3">
-                          <span className={`text-sm font-bold ${i+2 <= 2 ? 'text-[#4DB87A]' : 'text-gray-400'}`}>✓</span>
+                          <span className={`text-sm font-bold ${i+2 <= 3 ? 'text-[#4DB87A]' : 'text-gray-400'}`}>✓</span>
                           <div>
                             <span className="text-sm font-medium text-gray-700">리스트 {i+2}</span>
-                            {i+2 >= 3 && <span className="ml-1 text-xs text-gray-400">(선택)</span>}
+                            {i+2 >= 4 && <span className="ml-1 text-xs text-gray-400">(선택)</span>}
                           </div>
                         </div>
                         <div className="flex-1 px-4 py-3 space-y-2">
