@@ -489,30 +489,23 @@ export default function CrmLiveCreate() {
                         <div className="overflow-hidden rounded-xl bg-white shadow-sm">
                           <p className="px-2.5 pt-1.5 text-[8px] text-gray-400">(광고) 채널명</p>
                           {/* 타이틀 */}
-                          <p className="text-center text-[10px] font-bold text-gray-800 py-1">새로 나온 신상품</p>
+                          <p className="text-center text-[10px] font-bold text-gray-800 py-1">LIVE 시작!</p>
                           {/* 메인 이미지 */}
                           <div className="relative mx-2 h-20 rounded-lg bg-gray-300 overflow-hidden">
                             <div className="absolute bottom-0 left-0 right-0 bg-black/50 px-2 py-1">
-                              <p className="text-[8px] font-semibold text-white leading-tight">고양이 춘식이가 최고양 반값세일</p>
+                              <p className="text-[8px] font-semibold text-white leading-tight">지금 LIVE 특가 진행 중!</p>
                             </div>
                           </div>
-                          {/* 캐러셀 아이템 */}
+                          {/* 상품 리스트 */}
                           {[
-                            { title: '블랙춘 시리즈', sub: '최대 52% 세일가에 득템해요!', live: false },
-                            { title: '반값세일 상품 전체보기', sub: '', live: false },
-                            { title: '기간한정 프로모션', sub: '', live: true },
-                            { title: '신상만 쏙쏙 골라보기', sub: '', live: false },
+                            { name: '여름 신상 원피스' },
+                            { name: '크로스백 신상품' },
+                            { name: 'UV 차단 선글라스' },
+                            { name: '니트 반팔 티셔츠' },
                           ].map((item, i) => (
                             <div key={i} className="flex items-center gap-1.5 border-t border-gray-100 px-2 py-1.5">
-                              <div className="relative h-8 w-8 shrink-0 rounded bg-gray-200">
-                                {item.live && (
-                                  <span className="absolute bottom-0 left-0 right-0 bg-red-500 text-center text-[6px] font-bold text-white leading-tight py-px">LIVE</span>
-                                )}
-                              </div>
-                              <div className="min-w-0">
-                                <p className="text-[9px] font-semibold text-gray-800 leading-tight">{item.title}</p>
-                                {item.sub && <p className="text-[8px] text-gray-500 leading-tight">{item.sub}</p>}
-                              </div>
+                              <div className="h-8 w-8 shrink-0 rounded bg-gray-200" />
+                              <p className="text-[9px] font-semibold text-gray-800 leading-tight">{item.name}</p>
                             </div>
                           ))}
                           {/* 버튼 */}
