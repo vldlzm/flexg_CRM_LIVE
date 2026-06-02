@@ -61,6 +61,13 @@ const SCREEN_GROUPS: ScreenGroup[] = [
         description: '',
         notes: [],
       },
+      {
+        id: 'service-notification',
+        name: '서비스 알림',
+        href: '/service-notification',
+        description: '',
+        notes: [],
+      },
     ],
   },
 ];
