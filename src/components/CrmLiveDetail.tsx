@@ -28,16 +28,15 @@ const PurchaseIconWhite = () => (
 
 const STATS_DATA = [
   { type: 'APP푸시', purchase: '0', sent: '0', clicks: '0', clickRate: '0%', buyCount: '0', convRate: '0%', roas: '0%', cost: '무료', sentBlue: false, clicksBlue: false },
-  { type: '알림톡',  purchase: '0', sent: '0', clicks: '0', clickRate: '0%', buyCount: '0', convRate: '0%', roas: '0%', cost: '0c',  sentBlue: true,  clicksBlue: false },
   { type: '브랜드메시지', purchase: '0', sent: '0', clicks: '0', clickRate: '0%', buyCount: '0', convRate: '0%', roas: '0%', cost: '0c', sentBlue: false, clicksBlue: false },
   { type: 'LMS',    purchase: '0', sent: '0', clicks: '1', clickRate: '0%', buyCount: '0', convRate: '0%', roas: '0%', cost: '12c', sentBlue: true,  clicksBlue: true  },
 ];
 
 const CAMPAIGN_LIST = [
-  { no: 17, name: '맞춤 시나리오로 보내기_20260526_1', startDate: '2026-06-18 18:30', startHighlight: true,  createdAt: '2026-05-26 15:25:23', hasStats: true,  hasSend: true,  hasDownload: true  },
-  { no: 16, name: '맞춤 시나리오로 보내기_20260511_1', startDate: '2026-05-11 23:00', startHighlight: false, createdAt: '2026-05-11 22:01:12', hasStats: false, hasSend: false, hasDownload: false },
-  { no: 15, name: '맞춤 시나리오로 보내기_20260310_1', startDate: '2026-03-10 16:00', startHighlight: false, createdAt: '2026-03-10 14:50:32', hasStats: false, hasSend: false, hasDownload: false },
-  { no: 14, name: '맞춤 시나리오로 보내기_20251211_1', startDate: '2025-12-20 00:00', startHighlight: false, createdAt: '2025-12-11 10:28:39', hasStats: true,  hasSend: true,  hasDownload: false },
+  { no: 17, name: '라이브 시작 알림 보내기_20260526_1', startDate: '2026-06-18 18:30', startHighlight: true,  createdAt: '2026-05-26 15:25:23', hasStats: true,  hasSend: true,  },
+  { no: 16, name: '라이브 시작 알림 보내기_20260511_1', startDate: '2026-05-11 23:00', startHighlight: false, createdAt: '2026-05-11 22:01:12', hasStats: false, hasSend: false, },
+  { no: 15, name: '라이브 시작 알림 보내기_20260310_1', startDate: '2026-03-10 16:00', startHighlight: false, createdAt: '2026-03-10 14:50:32', hasStats: false, hasSend: false, },
+  { no: 14, name: '라이브 시작 알림 보내기_20251211_1', startDate: '2025-12-20 00:00', startHighlight: false, createdAt: '2025-12-11 10:28:39', hasStats: true,  hasSend: true,  },
 ];
 
 const Badge = ({ children }: { children: React.ReactNode }) => (
@@ -70,11 +69,6 @@ export default function CrmLiveDetail() {
               <span className="cursor-pointer font-medium text-[#4DB87A] hover:underline">원클릭 수동 캠페인이란?</span>
               {' '}직접 선택한 고객에게 특정 시점에 개별적으로 메시지를 노출하거나 발송합니다.
             </p>
-            <p className="text-sm text-gray-700">
-              <span className="mr-1 text-gray-500">·</span>
-              <span className="cursor-pointer font-medium text-[#4DB87A] hover:underline">맞춤 시나리오란?</span>
-              {' '}구매 가능성이 높은 고객을 직접 선택해 맞춤형으로 할인코드와 상품 추천을 진행할 수 있는 캠페인입니다.
-            </p>
           </div>
 
           {/* 캠페인 정보 배지 행 */}
@@ -89,7 +83,7 @@ export default function CrmLiveDetail() {
             </div>
             <div className="flex items-center gap-1">
               <Badge>캠페인명</Badge>
-              <Badge>맞춤 시나리오로 보내기</Badge>
+              <Badge>라이브 시작 알림 보내기</Badge>
             </div>
             <div className="flex items-center gap-1">
               <Badge>캠페인 목적</Badge>
@@ -199,7 +193,6 @@ export default function CrmLiveDetail() {
                   <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600">통계</th>
                   <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">테스트 발행</th>
                   <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">발송 내역</th>
-                  <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">다운로드</th>
                   <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">진행 여부</th>
                 </tr>
               </thead>
@@ -235,13 +228,6 @@ export default function CrmLiveDetail() {
                       {row.hasSend && (
                         <button className="rounded-md bg-[#3a3f45] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap">
                           발송 내역&gt;
-                        </button>
-                      )}
-                    </td>
-                    <td className="px-4 py-3 text-center">
-                      {row.hasDownload && (
-                        <button className="rounded-md bg-[#1e6b3c] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#165530] transition-colors whitespace-nowrap">
-                          대상자 ↓
                         </button>
                       )}
                     </td>

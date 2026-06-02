@@ -184,19 +184,11 @@ export default function CrmLiveCreate() {
         {/* 폼 */}
         <div className="mb-8 border border-gray-200">
 
-          {/* 분류 */}
-          <FormRow label="분류">
-            <div className="flex items-center gap-6">
-              <RadioInput name="category" label="메시지 발송" defaultChecked />
-              <RadioInput name="category" label="대상자 추출 + 할인코드만 발행" />
-            </div>
-          </FormRow>
-
           {/* 캠페인명 */}
           <FormRow label="캠페인명">
             <input
               type="text"
-              defaultValue="맞춤 시나리오로 보내기_20260602_1"
+              defaultValue="라이브 시작 알림 보내기_20260602_1"
               className="w-full max-w-lg rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]"
             />
           </FormRow>
@@ -310,6 +302,78 @@ export default function CrmLiveCreate() {
               AOS 예시
             </button>
             <button className="text-sm text-gray-600 hover:text-gray-900">iOS 예시</button>
+          </div>
+        </div>
+
+        {/* LMS 예시 */}
+        <div className="rounded-xl bg-[#f0f0f0] p-8">
+          <div className="flex items-start gap-8">
+            {/* 좌측 설명 */}
+            <div className="flex-1 space-y-4 pt-1">
+              <div>
+                <h3 className="mb-1 text-base font-bold text-gray-900">LMS 예시</h3>
+                <p className="text-sm text-gray-600">LMS를 통하여 할인코드를 전달하고 상품 구매를 유도합니다.</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="inline-flex shrink-0 items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white">
+                  시점 및 조건
+                </span>
+                <p className="text-sm leading-relaxed text-gray-700">
+                  알림톡 발송이 실패한 경우에 한하여, 이후 진행되는 캠페인부터 자동으로 발송
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white">
+                  비용
+                </span>
+                <span className="text-sm text-gray-700">
+                  건당 비용 39c &nbsp;/&nbsp; 현재 보유 캐시{' '}
+                  <span className="font-bold text-[#f97316]">9,969,148c</span>
+                </span>
+                <button className="rounded border border-gray-400 px-3 py-1 text-xs text-gray-600 hover:bg-gray-100 transition-colors">
+                  캐시 충전하기 &gt;
+                </button>
+              </div>
+            </div>
+
+            {/* 우측 LMS 메시지 카드 */}
+            <div className="w-56 shrink-0">
+              <div className="rounded-xl bg-[#9ca3af] p-3">
+                <div className="rounded-lg bg-white p-3 space-y-1.5">
+                  <p className="text-[11px] font-semibold text-gray-800">(광고) (광고)[#[상점명]]</p>
+                  <p className="text-[11px] font-medium text-[#22c55e] underline cursor-pointer">
+                    #[채널명] 비밀 할인코드 소멸 안내
+                  </p>
+                  <p className="text-[11px] leading-relaxed text-gray-800">
+                    #[회원명]님께 지급된 비밀 할인코드의 사용기한이 얼마 남지 않았습니다.
+                  </p>
+                  <div className="space-y-0.5 text-[11px] text-gray-800">
+                    <p>▷ 할인코드: #[할인코드]</p>
+                    <p>▷ 할인내용: #[할인금액]</p>
+                    <p>▷ 만료일: #[만료일]</p>
+                  </div>
+                  <div className="text-[11px] text-gray-800">
+                    <p>▶ 할인코드 사용하기</p>
+                    <p>#[CUSTOM]</p>
+                  </div>
+                  <div className="space-y-0.5 text-[10px] leading-tight text-gray-500">
+                    <p>* 만료일이 지나면 자동 소멸되어 사용이 불가능합니다.</p>
+                    <p>* 코드 지급에 동의한 회원에게 발송되는 안내 메시지입니다.</p>
+                    <p>* 할인코드는 주문/결제 페이지에서 자동으로 적용됩니다.</p>
+                  </div>
+                  <div className="pt-1 text-[11px] text-gray-600">
+                    <p>[무료수신거부]</p>
+                    <p>010-1234-5678</p>
+                  </div>
+                </div>
+                <div className="mt-1 flex justify-end pr-1">
+                  <span className="text-[10px] text-gray-200">LMS 오후 1:56</span>
+                </div>
+              </div>
+              <button className="mt-2 w-full rounded-lg bg-[#111827] py-2.5 text-sm font-bold text-white hover:bg-black transition-colors">
+                메시지 수정하기
+              </button>
+            </div>
           </div>
         </div>
 
