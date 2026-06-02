@@ -505,25 +505,38 @@ export default function CrmLiveCreate() {
                           <p className="px-2.5 pt-1.5 text-[8px] text-gray-400">(광고) 채널명</p>
                           {/* 타이틀 */}
                           <p className="text-center text-[10px] font-bold text-gray-800 py-1">LIVE 시작!</p>
-                          {/* 메인 이미지 */}
-                          <div className="relative mx-2 h-20 rounded-lg bg-gray-300 overflow-hidden">
-                            <div className="absolute bottom-0 left-0 right-0 bg-black/50 px-2 py-1">
-                              <p className="text-[8px] font-semibold text-white leading-tight">지금 LIVE 특가 진행 중!</p>
+                          {/* LIVE 시작 일러스트 배너 */}
+                          <div className="mx-2 my-1 h-20 rounded-lg overflow-hidden relative">
+                            <div className="absolute inset-0 bg-gradient-to-br from-rose-400 via-fuchsia-400 to-orange-300" />
+                            <div className="absolute -top-3 -right-3 h-12 w-12 rounded-full bg-white/20" />
+                            <div className="absolute -bottom-2 -left-2 h-8 w-8 rounded-full bg-white/15" />
+                            <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
+                              <div className="flex gap-1 text-sm"><span>✨</span><span>📹</span><span>✨</span></div>
+                              <div className="flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5">
+                                <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                                <span className="text-[9px] font-black tracking-widest text-red-500">LIVE</span>
+                              </div>
+                              <p className="text-xs font-black text-white drop-shadow-md">시작!</p>
+                              <div className="flex gap-0.5 text-[9px]"><span>⭐</span><span>🎉</span><span>⭐</span></div>
                             </div>
                           </div>
                           {/* 상품 리스트 */}
                           {[
-                            { name: '여름 신상 원피스',   regular: '39,000원', sale: '19,500원', bg: 'from-rose-200 to-pink-300' },
-                            { name: '크로스백 신상품',    regular: '52,000원', sale: '36,400원', bg: 'from-amber-200 to-yellow-300' },
-                            { name: 'UV 차단 선글라스',   regular: '28,000원', sale: '16,800원', bg: 'from-sky-200 to-blue-300' },
-                            { name: '니트 반팔 티셔츠',   regular: '35,000원', sale: '21,000원', bg: 'from-violet-200 to-purple-300' },
+                            { name: '여름 신상 원피스', regular: '39,000원', sale: '19,500원', bg: 'from-rose-200 to-pink-300', emoji: '👗' },
+                            { name: '크로스백 신상품',  regular: '52,000원', sale: '36,400원', bg: 'from-amber-200 to-yellow-300', emoji: '👜' },
+                            { name: 'UV 차단 선글라스', regular: '28,000원', sale: '16,800원', bg: 'from-sky-200 to-blue-300', emoji: '🕶️' },
+                            { name: '니트 반팔 티셔츠', regular: '35,000원', sale: '21,000원', bg: 'from-violet-200 to-purple-300', emoji: '👕' },
                           ].map((item, i) => (
                             <div key={i} className="flex items-center gap-1.5 border-t border-gray-100 px-2 py-1.5">
-                              <div className={`h-9 w-9 shrink-0 rounded bg-gradient-to-br ${item.bg}`} />
+                              <div className={`h-9 w-9 shrink-0 rounded bg-gradient-to-br ${item.bg} flex items-center justify-center text-base`}>
+                                {item.emoji}
+                              </div>
                               <div className="min-w-0">
                                 <p className="text-[9px] font-semibold text-gray-800 leading-tight">{item.name}</p>
-                                <p className="text-[7px] text-gray-400 line-through leading-tight">{item.regular}</p>
-                                <p className="text-[8px] font-bold text-red-500 leading-tight">{item.sale}</p>
+                                <p className="text-[7px] leading-tight">
+                                  <span className="text-gray-400 line-through">{item.regular}</span>
+                                  <span className="ml-1 font-bold text-red-500">{item.sale}</span>
+                                </p>
                               </div>
                             </div>
                           ))}
