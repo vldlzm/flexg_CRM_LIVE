@@ -356,7 +356,7 @@ export default function CrmLiveCreate() {
             <div className="flex-1 space-y-4 pt-2">
               <div>
                 <h3 className="mb-1 text-base font-bold text-gray-900">APP푸시 예시</h3>
-                <p className="text-sm text-gray-600">APP푸시를 통하여 할인코드를 전달하고 상품 구매를 유도합니다.</p>
+                <p className="text-sm text-gray-600">APP푸시를 통하여 라이브 시작을 알리고 상품 구매를 유도합니다.</p>
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 <span className="rounded-full bg-[#111827] px-3 py-1 text-xs font-bold text-white">비용</span>
@@ -393,7 +393,7 @@ export default function CrmLiveCreate() {
             <div className="flex-1 space-y-4 pt-1">
               <div>
                 <h3 className="mb-1 text-base font-bold text-gray-900">브랜드메시지(친구톡) 예시</h3>
-                <p className="text-sm text-gray-600">친구톡 발송을 통해 고객의 구매를 유도합니다.</p>
+                <p className="text-sm text-gray-600">친구톡 발송을 통해 라이브 시작을 알리고 고객의 구매를 유도합니다.</p>
               </div>
               {/* 조건 */}
               <div className="flex items-start gap-3">
@@ -421,34 +421,51 @@ export default function CrmLiveCreate() {
               </div>
             </div>
 
-            {/* 중앙: 카카오톡 메시지 미리보기 */}
+            {/* 중앙: 카카오톡 채팅 화면 목업 */}
             <div className="shrink-0 flex flex-col items-center gap-3">
-              {/* 카카오톡 버블 */}
-              <div className="w-56 rounded-2xl bg-[#bcd3ee] px-3 pt-2.5 pb-3 shadow-md">
-                <p className="mb-2 text-center text-[9px] text-gray-500">(광고) 채널명</p>
-                <div className="overflow-hidden rounded-xl bg-white shadow-sm">
-                  {/* 이미지 + 뱃지 + 오버레이 텍스트 */}
-                  <div className="relative h-44 bg-gray-300">
-                    {/* 관심상품 뱃지 */}
-                    <span className="absolute left-2 top-2 rounded-full bg-red-500 px-2 py-0.5 text-[9px] font-bold text-white">관심상품</span>
-                    {/* 상품명 오버레이 */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/65 to-transparent px-3 pb-3 pt-6">
-                      <p className="text-sm font-bold leading-tight text-white">여성 숄더백 & 크로스백</p>
-                      <p className="text-[10px] text-white/90">이번주 인기 컬렉션을 확인해 보세요!</p>
-                    </div>
+              <div className="w-56 overflow-hidden rounded-3xl border-2 border-gray-300 bg-[#c5d9ed] shadow-md">
+                {/* KakaoTalk 헤더 */}
+                <div className="flex items-center justify-between bg-[#c5d9ed] px-3 py-2.5 border-b border-[#b0c8e0]">
+                  <span className="text-sm font-bold text-gray-700">‹</span>
+                  <div className="flex flex-col items-center">
+                    <span className="text-xs font-bold text-gray-800">채널명 ✓</span>
+                    <span className="text-[9px] text-gray-500">1577-0000</span>
                   </div>
-                  {/* 메시지 내용 */}
-                  <div className="space-y-1 px-3 py-2.5">
-                    <p className="text-xs text-gray-700">무엇을 살지 고민 중이세요?🤔</p>
-                    <p className="text-xs font-medium text-[#4b6be6]">{'✔ 정상가 : #{정상가}'}</p>
-                    <p className="text-xs font-medium text-[#4b6be6]">{'✔ 할인가 : #{판매가}'}</p>
-                  </div>
-                  {/* 버튼 */}
-                  <div className="border-t border-gray-100 px-3 py-2.5 text-center">
-                    <span className="text-sm font-semibold text-gray-700">구매하러 가기</span>
+                  <div className="flex gap-2 text-sm text-gray-600">
+                    <span>Q</span><span>≡</span>
                   </div>
                 </div>
-                <p className="mt-1.5 text-right text-[9px] text-gray-400">수신거부 | 홈 &gt; 채널 차단</p>
+                {/* 채팅 영역 */}
+                <div className="px-2 py-3 space-y-1">
+                  {/* 채널 프로필 + 메시지 */}
+                  <div className="flex items-start gap-1.5">
+                    <div className="h-7 w-7 shrink-0 rounded-full bg-yellow-300 flex items-center justify-center text-[10px] font-bold border border-yellow-400">K</div>
+                    <div className="flex-1">
+                      <div className="overflow-hidden rounded-xl bg-white shadow-sm">
+                        {/* 광고 라벨 */}
+                        <p className="px-3 pt-2 text-[9px] text-gray-400">(광고) 채널명</p>
+                        {/* 상품 이미지 */}
+                        <div className="mx-2 my-1.5 h-32 rounded-lg bg-gray-300" />
+                        {/* 텍스트 */}
+                        <div className="px-3 pb-2">
+                          <p className="text-[10px] leading-snug text-gray-700">
+                            세일상품 20% 추가할인 기간한정 프로모션!!<br />
+                            원하는 사이즈를 놓치지 마세요.
+                          </p>
+                        </div>
+                        {/* 버튼 */}
+                        <div className="border-t border-gray-100 py-2 text-center">
+                          <span className="text-xs font-semibold text-gray-700">추천템 모아보기</span>
+                        </div>
+                        {/* 수신거부 */}
+                        <div className="border-t border-gray-100 px-3 py-1.5">
+                          <p className="text-[8px] text-gray-400">수신거부 | 홈 &gt; 채널 차단</p>
+                        </div>
+                      </div>
+                      <p className="mt-0.5 text-[8px] text-gray-400">오전 9:00</p>
+                    </div>
+                  </div>
+                </div>
               </div>
               {/* 단일/캐러셀 탭 */}
               <div className="flex items-center gap-3">
