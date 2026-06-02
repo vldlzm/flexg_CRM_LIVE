@@ -33,10 +33,10 @@ const STATS_DATA = [
 ];
 
 const CAMPAIGN_LIST = [
-  { no: 17, name: '라이브 시작 알림 보내기_20260526_1', startDate: '2026-06-18 18:30', startHighlight: true,  createdAt: '2026-05-26 15:25:23', hasStats: true,  hasSend: true,  },
-  { no: 16, name: '라이브 시작 알림 보내기_20260511_1', startDate: '2026-05-11 23:00', startHighlight: false, createdAt: '2026-05-11 22:01:12', hasStats: false, hasSend: false, },
-  { no: 15, name: '라이브 시작 알림 보내기_20260310_1', startDate: '2026-03-10 16:00', startHighlight: false, createdAt: '2026-03-10 14:50:32', hasStats: false, hasSend: false, },
-  { no: 14, name: '라이브 시작 알림 보내기_20251211_1', startDate: '2025-12-20 00:00', startHighlight: false, createdAt: '2025-12-11 10:28:39', hasStats: true,  hasSend: true,  },
+  { no: 17, name: 'LIVE 시작 알림 보내기_20260526_1', startDate: '2026-06-18 18:30', startHighlight: true,  createdAt: '2026-05-26 15:25:23', hasStats: true,  hasSend: true,  },
+  { no: 16, name: 'LIVE 시작 알림 보내기_20260511_1', startDate: '2026-05-11 23:00', startHighlight: false, createdAt: '2026-05-11 22:01:12', hasStats: false, hasSend: false, },
+  { no: 15, name: 'LIVE 시작 알림 보내기_20260310_1', startDate: '2026-03-10 16:00', startHighlight: false, createdAt: '2026-03-10 14:50:32', hasStats: false, hasSend: false, },
+  { no: 14, name: 'LIVE 시작 알림 보내기_20251211_1', startDate: '2025-12-20 00:00', startHighlight: false, createdAt: '2025-12-11 10:28:39', hasStats: true,  hasSend: true,  },
 ];
 
 const Badge = ({ children }: { children: React.ReactNode }) => (
@@ -83,7 +83,7 @@ export default function CrmLiveDetail() {
             </div>
             <div className="flex items-center gap-1">
               <Badge>캠페인명</Badge>
-              <Badge>라이브 시작 알림 보내기</Badge>
+              <Badge>LIVE 시작 알림 보내기</Badge>
             </div>
             <div className="flex items-center gap-1">
               <Badge>캠페인 목적</Badge>

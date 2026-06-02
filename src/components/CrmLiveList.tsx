@@ -21,7 +21,7 @@ const CAMPAIGNS: Campaign[] = [
     purpose: '구매',
     isNew: true,
     status: '진행중',
-    title: '라이브 시작 알림 보내기',
+    title: 'LIVE 시작 알림 보내기',
     roas: '0%',
     purchaseAmount: '0원',
     onsite: '미지원',

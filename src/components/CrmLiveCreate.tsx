@@ -237,7 +237,7 @@ export default function CrmLiveCreate() {
           <FormRow label="캠페인명">
             <input
               type="text"
-              defaultValue="라이브 시작 알림 보내기_20260602_1"
+              defaultValue="LIVE 시작 알림 보내기_20260602_1"
               className="w-full max-w-lg rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]"
             />
           </FormRow>
