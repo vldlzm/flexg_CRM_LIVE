@@ -745,15 +745,15 @@ export default function CrmLiveCreate() {
                         <input
                           type="text"
                           value={pushTitle}
-                          onChange={(e) => e.target.value.length <= 30 && setPushTitle(e.target.value)}
+                          onChange={(e) => e.target.value.length <= 65 && setPushTitle(e.target.value)}
                           className="w-full rounded border border-gray-300 px-3 py-2 pr-16 text-sm focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]"
                         />
                         <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs">
                           <span className="text-[#4DB87A] font-semibold">{pushTitle.length}</span>
-                          <span className="text-gray-400">/30</span>
+                          <span className="text-gray-400">/65</span>
                         </span>
                       </div>
-                      <p className="mt-1 text-xs text-gray-400">최대 30자</p>
+                      <p className="mt-1 text-xs text-gray-400">최대 65자</p>
                     </div>
                   </div>
                   {/* 본문 */}
@@ -766,16 +766,16 @@ export default function CrmLiveCreate() {
                       <div className="relative">
                         <textarea
                           value={pushBody}
-                          onChange={(e) => e.target.value.length <= 100 && setPushBody(e.target.value)}
+                          onChange={(e) => e.target.value.length <= 110 && setPushBody(e.target.value)}
                           rows={4}
                           className="w-full rounded border border-gray-300 px-3 py-2 text-sm focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A] resize-none"
                         />
                         <span className="absolute right-3 bottom-3 text-xs">
                           <span className="text-[#4DB87A] font-semibold">{pushBody.length}</span>
-                          <span className="text-gray-400">/100</span>
+                          <span className="text-gray-400">/110</span>
                         </span>
                       </div>
-                      <p className="mt-1 text-xs text-gray-400">최대 100자</p>
+                      <p className="mt-1 text-xs text-gray-400">최대 110자</p>
                     </div>
                   </div>
                 </div>
