@@ -41,7 +41,7 @@ const CAMPAIGN_LIST = [
 ];
 
 const Badge = ({ children }: { children: React.ReactNode }) => (
-  <span className="inline-flex items-center rounded-full bg-[#1f2937] px-3 py-1.5 text-xs font-bold text-white whitespace-nowrap">
+  <span className="inline-flex items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white whitespace-nowrap">
     {children}
   </span>
 );
@@ -66,10 +66,12 @@ export default function CrmLiveDetail() {
           <h2 className="mb-3 text-xl font-bold text-gray-900">캠페인</h2>
           <div className="mb-5 space-y-1.5">
             <p className="text-sm text-gray-700">
+              <span className="mr-1 text-gray-500">·</span>
               <span className="cursor-pointer font-medium text-[#4DB87A] hover:underline">원클릭 수동 캠페인이란?</span>
               {' '}직접 선택한 고객에게 특정 시점에 개별적으로 메시지를 노출하거나 발송합니다.
             </p>
             <p className="text-sm text-gray-700">
+              <span className="mr-1 text-gray-500">·</span>
               <span className="cursor-pointer font-medium text-[#4DB87A] hover:underline">맞춤 시나리오란?</span>
               {' '}구매 가능성이 높은 고객을 직접 선택해 맞춤형으로 할인코드와 상품 추천을 진행할 수 있는 캠페인입니다.
             </p>
@@ -99,7 +101,7 @@ export default function CrmLiveDetail() {
             </div>
             <div className="flex items-center gap-1">
               <Badge>대상자</Badge>
-              <span className="inline-flex items-center rounded-full bg-[#4DB87A] px-3 py-1.5 text-xs font-bold text-white whitespace-nowrap">
+              <span className="inline-flex items-center rounded-full bg-[#1e6b3c] px-3 py-1.5 text-xs font-bold text-white whitespace-nowrap">
                 직접 설정
               </span>
             </div>
@@ -113,7 +115,7 @@ export default function CrmLiveDetail() {
 
           <div className="flex">
             {/* 좌측 그린 카드 */}
-            <div className="w-44 shrink-0 rounded-l-xl bg-[#2d7a4f] px-5 py-6 flex flex-col justify-center gap-5">
+            <div className="w-44 shrink-0 rounded-l-xl bg-[#1e6b3c] px-5 py-6 flex flex-col justify-center gap-5">
               <div>
                 <div className="mb-2 flex items-center gap-2">
                   <RoasIconWhite />
@@ -175,7 +177,7 @@ export default function CrmLiveDetail() {
               <span className="text-sm font-normal text-gray-500">전체 17건 (페이지 1/2)</span>
             </h2>
             <div className="flex items-center gap-2">
-              <button className="rounded-lg bg-[#2d7a4f] px-4 py-2 text-sm font-bold text-white hover:bg-[#236040] transition-colors">
+              <button className="rounded-lg bg-[#1e6b3c] px-4 py-2 text-sm font-bold text-white hover:bg-[#165530] transition-colors">
                 캠페인 생성 +
               </button>
               <select className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 focus:outline-none">
@@ -217,28 +219,28 @@ export default function CrmLiveDetail() {
                     <td className="px-4 py-3 text-center text-sm text-gray-600 whitespace-nowrap">{row.createdAt}</td>
                     <td className="px-4 py-3 text-center">
                       {row.hasStats && (
-                        <button className="rounded-md bg-[#3d4043] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap">
+                        <button className="rounded-md bg-[#3a3f45] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap">
                           통계&gt;
                         </button>
                       )}
                     </td>
                     <td className="px-4 py-3 text-center">
                       {row.hasSend && (
-                        <button className="rounded-md bg-[#3d4043] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap">
+                        <button className="rounded-md bg-[#3a3f45] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap">
                           테스트 발행&gt;
                         </button>
                       )}
                     </td>
                     <td className="px-4 py-3 text-center">
                       {row.hasSend && (
-                        <button className="rounded-md bg-[#3d4043] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap">
+                        <button className="rounded-md bg-[#3a3f45] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap">
                           발송 내역&gt;
                         </button>
                       )}
                     </td>
                     <td className="px-4 py-3 text-center">
                       {row.hasDownload && (
-                        <button className="rounded-md bg-[#2d7a4f] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#236040] transition-colors whitespace-nowrap">
+                        <button className="rounded-md bg-[#1e6b3c] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#165530] transition-colors whitespace-nowrap">
                           대상자 ↓
                         </button>
                       )}
