@@ -868,14 +868,22 @@ export default function CrmLiveCreate() {
                             <input type="text" value={wideImageBtn1} onChange={(e) => e.target.value.length <= 8 && setWideImageBtn1(e.target.value)} placeholder="버튼 1" className="w-full rounded border border-gray-300 px-3 py-2 pr-12 text-sm focus:border-[#4DB87A] focus:outline-none" />
                             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs"><span className="font-semibold text-[#4DB87A]">{wideImageBtn1.length}</span><span className="text-gray-400">/8</span></span>
                           </div>
-                          <input type="text" placeholder="버튼 1 랜딩 URL (https://)" className="w-full rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
+                          <div className="flex items-center gap-2">
+                            <input type="text" placeholder="/Home/Index" className="flex-1 rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
+                            <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
+                            <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">초기화</button>
+                          </div>
                         </div>
                         <div className="space-y-1.5">
                           <div className="relative">
                             <input type="text" value={wideImageBtn2} onChange={(e) => e.target.value.length <= 8 && setWideImageBtn2(e.target.value)} placeholder="버튼 2 (선택)" className="w-full rounded border border-gray-300 px-3 py-2 pr-12 text-sm focus:border-[#4DB87A] focus:outline-none" />
                             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs"><span className="font-semibold text-[#4DB87A]">{wideImageBtn2.length}</span><span className="text-gray-400">/8</span></span>
                           </div>
-                          <input type="text" placeholder="버튼 2 랜딩 URL (https://)" className="w-full rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
+                          <div className="flex items-center gap-2">
+                            <input type="text" placeholder="/Home/Index" className="flex-1 rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
+                            <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
+                            <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">초기화</button>
+                          </div>
                         </div>
                         <p className="text-xs text-gray-400">버튼명 8자 제한 / 최대 2개 (가로 배열)</p>
                       </div>
@@ -943,14 +951,22 @@ export default function CrmLiveCreate() {
                             <input type="text" value={wideListBtn1} onChange={(e) => e.target.value.length <= 8 && setWideListBtn1(e.target.value)} placeholder="버튼 1" className="w-full rounded border border-gray-300 px-3 py-2 pr-12 text-sm focus:border-[#4DB87A] focus:outline-none" />
                             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs"><span className="font-semibold text-[#4DB87A]">{wideListBtn1.length}</span><span className="text-gray-400">/8</span></span>
                           </div>
-                          <input type="text" placeholder="버튼 1 랜딩 URL (https://)" className="w-full rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
+                          <div className="flex items-center gap-2">
+                            <input type="text" placeholder="/Home/Index" className="flex-1 rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
+                            <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
+                            <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">초기화</button>
+                          </div>
                         </div>
                         <div className="space-y-1.5">
                           <div className="relative">
                             <input type="text" value={wideListBtn2} onChange={(e) => e.target.value.length <= 8 && setWideListBtn2(e.target.value)} placeholder="버튼 2 (선택)" className="w-full rounded border border-gray-300 px-3 py-2 pr-12 text-sm focus:border-[#4DB87A] focus:outline-none" />
                             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs"><span className="font-semibold text-[#4DB87A]">{wideListBtn2.length}</span><span className="text-gray-400">/8</span></span>
                           </div>
-                          <input type="text" placeholder="버튼 2 랜딩 URL (https://)" className="w-full rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
+                          <div className="flex items-center gap-2">
+                            <input type="text" placeholder="/Home/Index" className="flex-1 rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
+                            <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
+                            <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">초기화</button>
+                          </div>
                         </div>
                         <p className="text-xs text-gray-400">버튼명 8자 제한 / 최대 2개 (가로 배열)</p>
                       </div>
@@ -1167,12 +1183,15 @@ export default function CrmLiveCreate() {
                       <span className="text-sm font-medium text-gray-700">랜딩 URL</span>
                     </div>
                     <div className="flex-1 px-4 py-4">
-                      <input
-                        type="text"
-                        placeholder="https://"
-                        className="w-full rounded border border-gray-300 px-3 py-2 text-sm focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]"
-                      />
-                      <p className="mt-1 text-xs text-gray-400">앱 푸시 클릭 시 이동할 URL을 입력하세요.</p>
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="text"
+                          placeholder="/Home/Index"
+                          className="flex-1 rounded border border-gray-300 px-3 py-2 text-sm focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]"
+                        />
+                        <button className="rounded-md bg-[#4b5563] px-4 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
+                        <button className="rounded-md bg-[#4b5563] px-4 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">초기화</button>
+                      </div>
                     </div>
                   </div>
                 </div>
