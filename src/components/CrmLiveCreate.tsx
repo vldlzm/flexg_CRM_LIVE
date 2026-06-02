@@ -1,0 +1,346 @@
+'use client';
+
+import Link from 'next/link';
+
+const BULLETS = [
+  { text: '콘텐츠 팝업은 반복 노출을 줄이기 위해, 동일한 계정에는 캠페인별로 하루 한 번만 노출됩니다.', red: false },
+  { text: '자동 > 오프사이트 캠페인은 고객의 피로도를 줄이기 위하여 동일한 계정에 대해 2일에 한 번만 발송됩니다.', red: false },
+  { text: '상품명, 상품 이미지, 부연 설명을 변경하는 경우 다음 날 CRM 시스템에 반영됩니다.', red: false },
+  { text: 'LMS는 관련 법령 및 개인정보 보호 정책에 따라 마케팅 정보 수신에 동의한 회원에게만 발송됩니다.', red: false },
+  { text: '고객별 메시지 수 제한 및 발송 정책에 따라 실제 수신되는 메시지 수는 차이가 있을 수 있습니다.', red: true },
+];
+
+const LabelCol = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex w-36 shrink-0 items-center gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-4">
+    <span className="text-sm font-bold text-[#4DB87A]">✓</span>
+    <span className="text-sm font-medium text-gray-700">{children}</span>
+  </div>
+);
+
+const FormRow = ({ label, children }: { label: string; children: React.ReactNode }) => (
+  <div className="flex border-b border-gray-200 last:border-0">
+    <LabelCol>{label}</LabelCol>
+    <div className="flex-1 px-5 py-4">{children}</div>
+  </div>
+);
+
+const DarkBtn = ({ children, small }: { children: React.ReactNode; small?: boolean }) => (
+  <button className={`rounded-md bg-[#4b5563] font-semibold text-white hover:bg-[#374151] transition-colors ${small ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'}`}>
+    {children}
+  </button>
+);
+
+const InfoNote = ({ children, orange }: { children: React.ReactNode; orange?: boolean }) => (
+  <p className={`flex items-start gap-1 text-xs ${orange ? 'text-[#f97316]' : 'text-gray-400'}`}>
+    <span className="mt-0.5 inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border border-current text-[9px] font-bold">i</span>
+    {children}
+  </p>
+);
+
+const PillCheck = ({ label }: { label: string }) => (
+  <div className="inline-flex items-center gap-2 rounded-full border border-[#4DB87A] bg-white px-4 py-1.5">
+    <span className="inline-flex h-4 w-4 items-center justify-center rounded bg-[#4DB87A]">
+      <svg viewBox="0 0 10 10" fill="none" className="h-2.5 w-2.5" stroke="white" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="2,5 4.2,7.5 8,3" />
+      </svg>
+    </span>
+    <span className="text-sm text-gray-700">{label}</span>
+  </div>
+);
+
+const RadioInput = ({ name, label, defaultChecked }: { name: string; label: string; defaultChecked?: boolean }) => (
+  <label className="flex cursor-pointer items-center gap-2 text-sm text-gray-700">
+    <input type="radio" name={name} defaultChecked={defaultChecked} className="accent-[#4DB87A] h-4 w-4" />
+    {label}
+  </label>
+);
+
+/* ── APP 푸시 폰 목업 ── */
+const PhoneNotification = () => (
+  <div className="relative flex h-72 w-44 flex-col rounded-3xl border-2 border-gray-300 bg-gray-100 overflow-hidden shadow-md">
+    {/* 상단 시간 */}
+    <div className="flex justify-between px-4 pt-2 pb-1 text-[9px] text-gray-400">
+      <span>9:41</span>
+      <div className="flex gap-1">
+        <span>▲</span><span>●</span>
+      </div>
+    </div>
+    <div className="flex-1 flex flex-col gap-2 px-2">
+      {/* 알림 (축소) */}
+      <div className="rounded-xl bg-white p-2 shadow-sm">
+        <div className="flex items-start gap-1.5">
+          <div className="h-5 w-5 rounded shrink-0 bg-orange-500 flex items-center justify-center text-[7px] font-black text-white">F</div>
+          <div className="min-w-0">
+            <p className="text-[9px] font-semibold text-gray-900 leading-tight">쉿! secret 할인코드 🎁</p>
+            <p className="text-[8px] text-gray-500 leading-tight truncate">#[회원명]님을 위한 혜택 🎪 #[할인금액]할인 🔑 #[할인...</p>
+          </div>
+          <span className="text-[8px] text-gray-400 shrink-0">›</span>
+        </div>
+      </div>
+      {/* 알림 (확장) */}
+      <div className="rounded-xl bg-white p-2 shadow-sm">
+        <div className="flex items-start gap-1.5 mb-2">
+          <div className="h-5 w-5 rounded shrink-0 bg-orange-500 flex items-center justify-center text-[7px] font-black text-white">F</div>
+          <div className="min-w-0">
+            <p className="text-[9px] font-semibold text-gray-900 leading-tight">쉿! secret 할인코드 🎁</p>
+            <p className="text-[8px] text-gray-500 leading-tight">
+              #[회원명]님을 위한 혜택 🎪 #[할인금액]할인 🔑 #[할인코드]*결제 시 자동 적용
+            </p>
+          </div>
+          <span className="text-[8px] text-gray-400 shrink-0">∧</span>
+        </div>
+        <button className="w-full rounded-lg bg-black py-1.5 text-[9px] font-bold text-white">#[할인코드]</button>
+      </div>
+    </div>
+    {/* 하단 네비 */}
+    <div className="flex justify-center gap-3 py-2">
+      <div className="h-2 w-2 rounded-full bg-gray-400" />
+      <div className="h-2 w-2 rounded-full bg-gray-400" />
+    </div>
+  </div>
+);
+
+const PhoneApp = () => (
+  <div className="relative flex h-72 w-44 flex-col rounded-3xl border-2 border-gray-300 bg-gray-100 overflow-hidden shadow-md">
+    {/* 네비 바 */}
+    <div className="flex items-center justify-between bg-white px-3 py-2 border-b border-gray-200">
+      <div className="flex flex-col gap-0.5 w-4">
+        <div className="h-[1.5px] bg-gray-600 rounded" />
+        <div className="h-[1.5px] bg-gray-600 rounded" />
+        <div className="h-[1.5px] bg-gray-600 rounded" />
+      </div>
+      <div className="flex gap-2">
+        <div className="h-3.5 w-3.5 rounded-full border border-gray-400" />
+        <div className="h-3.5 w-3.5 rounded border border-gray-400" />
+      </div>
+    </div>
+    {/* 콘텐츠 */}
+    <div className="flex-1 p-2 space-y-1.5">
+      <div className="h-16 w-full rounded-lg bg-gray-300" />
+      <div className="grid grid-cols-3 gap-1">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className="h-4 rounded-full bg-gray-300" />
+        ))}
+      </div>
+      <div className="grid grid-cols-2 gap-1">
+        <div className="h-14 rounded-lg bg-gray-300" />
+        <div className="h-14 rounded-lg bg-gray-300" />
+      </div>
+    </div>
+    {/* 쿠폰 토스트 */}
+    <div className="absolute bottom-8 right-2 flex items-center gap-1 rounded-full bg-purple-500 px-2.5 py-1 shadow-lg">
+      <div className="flex h-4 w-4 items-center justify-center rounded-full bg-white/20">
+        <svg viewBox="0 0 8 8" className="h-2.5 w-2.5 fill-white">
+          <path d="M4 0L5.5 3H8L6 5L7 8L4 6.5L1 8L2 5L0 3H2.5L4 0Z" />
+        </svg>
+      </div>
+      <span className="text-[9px] font-bold text-white">할인코드 적용 중</span>
+    </div>
+    {/* 하단 */}
+    <div className="flex justify-center gap-2 py-2">
+      <div className="h-2 w-8 rounded-full bg-gray-400" />
+      <div className="h-2 w-2 rounded-full bg-gray-300" />
+    </div>
+  </div>
+);
+
+/* ── 오프사이트 아이콘 ── */
+const OffsiteIcon = () => (
+  <svg viewBox="0 0 20 20" fill="none" className="h-5 w-5 text-gray-500" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 5.5A2.5 2.5 0 015.5 3h9A2.5 2.5 0 0117 5.5v7A2.5 2.5 0 0114.5 15H11l-3.5 3V15H5.5A2.5 2.5 0 013 12.5v-7z" />
+  </svg>
+);
+
+export default function CrmLiveCreate() {
+  return (
+    <div className="flex min-h-screen flex-col bg-white">
+
+      {/* ── 상단 헤더 ── */}
+      <div className="sticky top-0 z-20 flex items-center gap-3 bg-[#252830] px-6 py-4">
+        <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/10">
+          <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4 text-white" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+            <rect x="2" y="2" width="5" height="5" rx="1" />
+            <rect x="9" y="2" width="5" height="5" rx="1" />
+            <rect x="2" y="9" width="5" height="5" rx="1" />
+            <rect x="9" y="9" width="5" height="5" rx="1" />
+          </svg>
+        </div>
+        <h1 className="text-base font-bold text-white">캠페인 생성</h1>
+      </div>
+
+      {/* ── 메인 콘텐츠 ── */}
+      <div className="flex-1 px-8 py-6">
+
+        {/* 캠페인 설정 */}
+        <h2 className="mb-3 text-xl font-bold text-gray-900">캠페인 설정</h2>
+        <ul className="mb-6 space-y-1">
+          {BULLETS.map((b, i) => (
+            <li key={i} className={`text-sm ${b.red ? 'text-[#ef4444]' : 'text-gray-700'}`}>
+              · {b.text}
+            </li>
+          ))}
+        </ul>
+
+        {/* 폼 */}
+        <div className="mb-8 border border-gray-200">
+
+          {/* 분류 */}
+          <FormRow label="분류">
+            <div className="flex items-center gap-6">
+              <RadioInput name="category" label="메시지 발송" defaultChecked />
+              <RadioInput name="category" label="대상자 추출 + 할인코드만 발행" />
+            </div>
+          </FormRow>
+
+          {/* 캠페인명 */}
+          <FormRow label="캠페인명">
+            <input
+              type="text"
+              defaultValue="맞춤 시나리오로 보내기_20260602_1"
+              className="w-full max-w-lg rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]"
+            />
+          </FormRow>
+
+          {/* 캠페인 내용 */}
+          <FormRow label="캠페인 내용">
+            <div className="space-y-3">
+              <div className="flex items-center gap-6">
+                <RadioInput name="content" label="할인코드" defaultChecked />
+                <RadioInput name="content" label="상품 추천" />
+              </div>
+              <div>
+                <DarkBtn>할인코드 생성 +</DarkBtn>
+              </div>
+              <div className="space-y-1">
+                <InfoNote>CRM 할인코드는 발송일 포함 3일 동안만 유효합니다.</InfoNote>
+                <InfoNote>설정된 할인코드를 사용하지 않는 계정만 캠페인이 노출되거나 발송됩니다.</InfoNote>
+              </div>
+            </div>
+          </FormRow>
+
+          {/* 대상자 */}
+          <FormRow label="대상자">
+            <div className="flex items-center gap-3">
+              <RadioInput name="target" label="전체" defaultChecked />
+              <RadioInput name="target" label="특정 고객" />
+              <DarkBtn>전체 회원 조회 &gt;</DarkBtn>
+              <span className="text-sm font-semibold text-[#4DB87A]">0명</span>
+            </div>
+          </FormRow>
+
+          {/* 캠페인 유형 */}
+          <FormRow label="캠페인 유형">
+            <div className="space-y-3">
+              <p className="text-sm text-gray-700">오프사이트 캠페인</p>
+              <div className="space-y-0">
+                <div className="ml-0"><PillCheck label="APP푸시  0명" /></div>
+                <div className="ml-5 -mt-0.5"><PillCheck label="알림톡  0명" /></div>
+                <div className="ml-10 -mt-0.5"><PillCheck label="LMS  0명" /></div>
+              </div>
+              <InfoNote orange>고객 반응률과 도달 데이터를 분석하여 최적의 캠페인 유형으로 자동 적용됩니다.</InfoNote>
+            </div>
+          </FormRow>
+
+          {/* 캠페인 기간 */}
+          <FormRow label="캠페인 기간">
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                placeholder="기간 설정"
+                className="rounded border border-gray-300 px-3 py-2 text-sm text-gray-400 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A] w-44"
+              />
+              <DarkBtn>기간 초기화</DarkBtn>
+            </div>
+          </FormRow>
+
+          {/* 클릭 액션 */}
+          <FormRow label="클릭 액션">
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                defaultValue="/Home/Index"
+                className="rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A] w-72"
+              />
+              <DarkBtn>불러오기</DarkBtn>
+              <DarkBtn>초기화</DarkBtn>
+            </div>
+          </FormRow>
+
+        </div>
+
+        {/* APP 푸시 예시 */}
+        <div className="rounded-xl bg-[#f0f0f0] p-8">
+          <div className="flex items-start gap-8">
+            {/* 좌측 설명 */}
+            <div className="w-56 shrink-0 space-y-4 pt-2">
+              <div>
+                <h3 className="mb-1 text-base font-bold text-gray-900">APP푸시 예시</h3>
+                <p className="text-sm text-gray-600">APP푸시를 통하여 할인코드를 전달하고 상품 구매를 유도합니다.</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="rounded-full bg-[#111827] px-3 py-1 text-xs font-bold text-white">비용</span>
+                <span className="text-sm text-gray-700">무료</span>
+              </div>
+              <div className="rounded-lg bg-[#22c55e] px-3 py-2">
+                <p className="text-xs font-bold text-white">APP푸시를 이용하면 0 c를 절약할 수 있어요!</p>
+              </div>
+            </div>
+
+            {/* 중앙 폰 목업 */}
+            <div className="flex flex-col items-center gap-3">
+              <PhoneNotification />
+            </div>
+
+            {/* 화살표 */}
+            <div className="flex items-center self-center">
+              <svg viewBox="0 0 24 24" className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" strokeWidth={2}>
+                <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+
+            {/* 우측 앱 화면 목업 */}
+            <div className="flex flex-col items-center gap-3">
+              <PhoneApp />
+            </div>
+          </div>
+
+          {/* AOS / iOS 탭 */}
+          <div className="mt-4 flex items-center justify-center gap-3">
+            <button className="rounded-full border border-[#4DB87A] px-5 py-1.5 text-sm font-semibold text-[#4DB87A]">
+              AOS 예시
+            </button>
+            <button className="text-sm text-gray-600 hover:text-gray-900">iOS 예시</button>
+          </div>
+        </div>
+
+      </div>
+
+      {/* ── 하단 고정 ── */}
+      <div className="sticky bottom-0 z-10 border-t border-gray-200">
+        {/* 오프사이트 정보 */}
+        <div className="flex items-center gap-2 bg-white px-8 py-3">
+          <OffsiteIcon />
+          <span className="text-sm text-gray-600">
+            오프사이트 : 예약 발송 수 약{' '}
+            <span className="font-bold text-[#4DB87A]">0건</span>
+            {' '}|{' '}예상 지출 캐시 약{' '}
+            <span className="font-bold text-[#4DB87A]">0c</span>
+          </span>
+        </div>
+        {/* 액션 버튼 */}
+        <div className="flex items-center justify-center gap-3 bg-[#e8e8e8] px-8 py-4">
+          <button className="rounded-lg bg-[#4b5563] px-10 py-2.5 text-sm font-bold text-white hover:bg-[#374151] transition-colors">
+            취소
+          </button>
+          <button className="rounded-lg bg-[#4b5563] px-10 py-2.5 text-sm font-bold text-white hover:bg-[#374151] transition-colors">
+            테스트 발행
+          </button>
+          <button className="rounded-lg bg-[#4b5563] px-10 py-2.5 text-sm font-bold text-white hover:bg-[#374151] transition-colors">
+            캠페인 발행
+          </button>
+        </div>
+      </div>
+
+    </div>
+  );
+}

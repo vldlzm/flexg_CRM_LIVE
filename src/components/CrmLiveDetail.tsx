@@ -177,9 +177,9 @@ export default function CrmLiveDetail() {
               <span className="text-sm font-normal text-gray-500">전체 17건 (페이지 1/2)</span>
             </h2>
             <div className="flex items-center gap-2">
-              <button className="rounded-lg bg-[#1e6b3c] px-4 py-2 text-sm font-bold text-white hover:bg-[#165530] transition-colors">
+              <Link href="/crm/live/create" className="rounded-lg bg-[#1e6b3c] px-4 py-2 text-sm font-bold text-white hover:bg-[#165530] transition-colors">
                 캠페인 생성 +
-              </button>
+              </Link>
               <select className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 focus:outline-none">
                 <option>10개씩 보기</option>
                 <option>20개씩 보기</option>

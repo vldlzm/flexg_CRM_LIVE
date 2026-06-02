@@ -33,6 +33,13 @@ const SCREEN_GROUPS: ScreenGroup[] = [
         description: '',
         notes: [],
       },
+      {
+        id: 'crm-live-create',
+        name: '생성',
+        href: '/crm/live/create',
+        description: '',
+        notes: [],
+      },
     ],
   },
 ];
