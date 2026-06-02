@@ -440,17 +440,32 @@ export default function CrmLiveCreate() {
                       <div className="flex-1">
                         <div className="overflow-hidden rounded-xl bg-white shadow-sm">
                           <p className="px-2.5 pt-1.5 text-[8px] text-gray-400">(광고) 채널명</p>
-                          {/* LIVE 시작 이미지 배너 */}
-                          <div className="mx-2 my-1 h-24 rounded-lg overflow-hidden relative bg-gray-900">
-                            <div className="absolute inset-0 bg-gradient-to-br from-red-800/60 to-gray-900" />
-                            <div className="absolute inset-0 flex flex-col items-center justify-center gap-1">
-                              <div className="flex items-center gap-1.5">
-                                <span className="h-2 w-2 rounded-full bg-red-500 shadow-lg shadow-red-500/50" />
-                                <span className="text-sm font-black tracking-widest text-white">LIVE</span>
+                          {/* LIVE 시작 일러스트 배너 */}
+                          <div className="mx-2 my-1 h-24 rounded-lg overflow-hidden relative">
+                            {/* 배경 그라디언트 */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-rose-400 via-fuchsia-400 to-orange-300" />
+                            {/* 배경 장식 원 */}
+                            <div className="absolute -top-4 -right-4 h-14 w-14 rounded-full bg-white/20" />
+                            <div className="absolute -bottom-3 -left-3 h-10 w-10 rounded-full bg-white/15" />
+                            <div className="absolute top-1 left-1 h-4 w-4 rounded-full bg-yellow-200/40" />
+                            {/* 콘텐츠 */}
+                            <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
+                              {/* 상단 이모지 장식 */}
+                              <div className="flex gap-1.5 text-base">
+                                <span>✨</span>
+                                <span>📹</span>
+                                <span>✨</span>
                               </div>
-                              <span className="text-[10px] font-bold text-white/80 tracking-wider">시 작</span>
-                              <div className="mt-1 flex gap-1">
-                                {[0,1,2].map(i => <div key={i} className="h-0.5 w-4 rounded-full bg-white/40" />)}
+                              {/* LIVE 뱃지 */}
+                              <div className="flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-0.5 shadow-sm">
+                                <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                                <span className="text-[10px] font-black tracking-widest text-red-500">LIVE</span>
+                              </div>
+                              {/* 시작 텍스트 */}
+                              <p className="text-sm font-black text-white drop-shadow-md">시작!</p>
+                              {/* 하단 장식 */}
+                              <div className="flex gap-1 text-[10px]">
+                                <span>⭐</span><span>🎉</span><span>⭐</span>
                               </div>
                             </div>
                           </div>
