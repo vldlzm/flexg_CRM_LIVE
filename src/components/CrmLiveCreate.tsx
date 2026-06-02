@@ -739,7 +739,7 @@ export default function CrmLiveCreate() {
       {/* ── 브랜드메시지 수정 팝업 ── */}
       {showBrandEditPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={() => setShowBrandEditPopup(false)}>
-          <div className="relative flex h-[90vh] w-[960px] max-w-[95vw] flex-col overflow-hidden rounded-xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          <div className="relative flex h-[90vh] w-[95vw] max-w-[1100px] flex-col overflow-hidden rounded-xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
             {/* 헤더 */}
             <div className="flex items-center gap-3 bg-[#252830] px-6 py-4 shrink-0">
               <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/10">
@@ -829,7 +829,7 @@ export default function CrmLiveCreate() {
               </div>
 
               {/* 우측: 에디터 */}
-              <div className="flex-1 overflow-y-auto p-5">
+              <div className="flex-1 overflow-y-auto overflow-x-auto p-5">
                 {brandEditTab === 'wide-image' ? (
                   <div className="border border-gray-200">
                     {/* 이미지 */}
@@ -991,7 +991,7 @@ export default function CrmLiveCreate() {
       {/* ── LMS 메시지 수정 팝업 ── */}
       {showLmsEditPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={() => setShowLmsEditPopup(false)}>
-          <div className="relative flex h-[90vh] w-[900px] max-w-[95vw] flex-col overflow-hidden rounded-xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          <div className="relative flex h-[90vh] w-[95vw] max-w-[1000px] flex-col overflow-hidden rounded-xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
             {/* 헤더 */}
             <div className="flex items-center gap-3 bg-[#252830] px-6 py-4 shrink-0">
               <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/10">
@@ -1017,7 +1017,7 @@ export default function CrmLiveCreate() {
                 </div>
               </div>
               {/* 우측: 폼 */}
-              <div className="flex-1 overflow-y-auto">
+              <div className="flex-1 overflow-y-auto overflow-x-auto">
                 <div className="border border-gray-200 m-5">
                   {/* 발신번호 */}
                   <div className="flex border-b border-gray-200">
@@ -1113,7 +1113,7 @@ export default function CrmLiveCreate() {
       {/* ── APP 푸시 메시지 수정 팝업 ── */}
       {showPushEditPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={() => setShowPushEditPopup(false)}>
-          <div className="relative flex h-auto w-[750px] max-w-[95vw] flex-col overflow-hidden rounded-xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          <div className="relative flex h-auto w-[95vw] max-w-[860px] flex-col overflow-hidden rounded-xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
             {/* 헤더 */}
             <div className="flex items-center gap-3 bg-[#252830] px-6 py-4">
               <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/10">
@@ -1217,7 +1217,7 @@ export default function CrmLiveCreate() {
           onClick={() => setShowLivePopup(false)}
         >
           <div
-            className="relative w-[960px] max-h-[80vh] overflow-auto rounded-xl bg-white shadow-2xl"
+            className="relative w-[95vw] max-w-[1100px] max-h-[80vh] overflow-auto rounded-xl bg-white shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* 팝업 헤더 */}
