@@ -59,42 +59,42 @@ const RadioInput = ({ name, label, defaultChecked }: { name: string; label: stri
 
 /* ── APP 푸시 폰 목업 ── */
 const PhoneNotification = () => (
-  <div className="relative flex h-72 w-44 flex-col rounded-3xl border-2 border-gray-300 bg-gray-100 overflow-hidden shadow-md">
+  <div className="relative flex h-[420px] w-64 flex-col rounded-3xl border-2 border-gray-300 bg-gray-100 overflow-hidden shadow-md">
     {/* 상단 시간 */}
-    <div className="flex justify-between px-4 pt-2 pb-1 text-[9px] text-gray-400">
+    <div className="flex justify-between px-5 pt-3 pb-2 text-xs text-gray-400">
       <span>9:41</span>
       <div className="flex gap-1">
         <span>▲</span><span>●</span>
       </div>
     </div>
-    <div className="flex-1 flex flex-col gap-2 px-2">
+    <div className="flex-1 flex flex-col gap-3 px-3">
       {/* 알림 (축소) */}
-      <div className="rounded-xl bg-white p-2 shadow-sm">
-        <div className="flex items-start gap-1.5">
-          <div className="h-5 w-5 rounded shrink-0 bg-orange-500 flex items-center justify-center text-[7px] font-black text-white">F</div>
+      <div className="rounded-xl bg-white p-3 shadow-sm">
+        <div className="flex items-start gap-2">
+          <div className="h-7 w-7 rounded shrink-0 bg-orange-500 flex items-center justify-center text-[10px] font-black text-white">F</div>
           <div className="min-w-0">
-            <p className="text-[9px] font-semibold text-gray-900 leading-tight">⏰ LIVE 시작!</p>
-            <p className="text-[8px] text-gray-500 leading-tight truncate">오늘 라이브에서만 만나는 특별가! 놓치기...</p>
+            <p className="text-sm font-semibold text-gray-900 leading-tight">⏰ LIVE 시작!</p>
+            <p className="text-xs text-gray-500 leading-tight truncate">오늘 라이브에서만 만나는 특별가! 놓치기...</p>
           </div>
-          <span className="text-[8px] text-gray-400 shrink-0">›</span>
+          <span className="text-xs text-gray-400 shrink-0">›</span>
         </div>
       </div>
       {/* 알림 (확장) */}
-      <div className="rounded-xl bg-white p-2 shadow-sm">
-        <div className="flex items-start gap-1.5">
-          <div className="h-5 w-5 rounded shrink-0 bg-orange-500 flex items-center justify-center text-[7px] font-black text-white">F</div>
+      <div className="rounded-xl bg-white p-3 shadow-sm">
+        <div className="flex items-start gap-2">
+          <div className="h-7 w-7 rounded shrink-0 bg-orange-500 flex items-center justify-center text-[10px] font-black text-white">F</div>
           <div className="min-w-0">
-            <p className="text-[9px] font-semibold text-gray-900 leading-tight">⏰ LIVE 시작!</p>
-            <p className="text-[8px] text-gray-500 leading-tight">
+            <p className="text-sm font-semibold text-gray-900 leading-tight">⏰ LIVE 시작!</p>
+            <p className="text-xs text-gray-500 leading-snug mt-1">
               오늘 라이브에서만 만나는 특별가! 놓치기 전에 지금 확인하세요.
             </p>
           </div>
-          <span className="text-[8px] text-gray-400 shrink-0">∧</span>
+          <span className="text-xs text-gray-400 shrink-0">∧</span>
         </div>
       </div>
     </div>
     {/* 하단 네비 */}
-    <div className="flex justify-center gap-3 py-2">
+    <div className="flex justify-center gap-3 py-3">
       <div className="h-2 w-2 rounded-full bg-gray-400" />
       <div className="h-2 w-2 rounded-full bg-gray-400" />
     </div>
@@ -328,18 +328,16 @@ export default function CrmLiveCreate() {
               </div>
             </div>
 
-            {/* 폰 목업 */}
-            <div className="shrink-0">
+            {/* 폰 목업 + AOS/iOS */}
+            <div className="shrink-0 flex flex-col items-center gap-3">
               <PhoneNotification />
+              <div className="flex items-center gap-3">
+                <button className="rounded-full border border-[#4DB87A] px-5 py-1.5 text-sm font-semibold text-[#4DB87A]">
+                  AOS 예시
+                </button>
+                <button className="text-sm text-gray-600 hover:text-gray-900">iOS 예시</button>
+              </div>
             </div>
-          </div>
-
-          {/* AOS / iOS 탭 */}
-          <div className="mt-4 flex items-center justify-center gap-3">
-            <button className="rounded-full border border-[#4DB87A] px-5 py-1.5 text-sm font-semibold text-[#4DB87A]">
-              AOS 예시
-            </button>
-            <button className="text-sm text-gray-600 hover:text-gray-900">iOS 예시</button>
           </div>
         </div>
 
@@ -375,37 +373,37 @@ export default function CrmLiveCreate() {
             </div>
 
             {/* 우측 LMS 메시지 카드 */}
-            <div className="w-56 shrink-0">
+            <div className="w-72 shrink-0">
               <div className="rounded-xl bg-[#9ca3af] p-3">
-                <div className="rounded-lg bg-white p-3 space-y-1.5">
-                  <p className="text-[11px] font-semibold text-gray-800">(광고) (광고)[#[상점명]]</p>
-                  <p className="text-[11px] font-medium text-[#22c55e] underline cursor-pointer">
+                <div className="rounded-lg bg-white p-4 space-y-2">
+                  <p className="text-xs font-semibold text-gray-800">(광고) (광고)[#[상점명]]</p>
+                  <p className="text-xs font-medium text-[#22c55e] underline cursor-pointer">
                     #[채널명] 비밀 할인코드 소멸 안내
                   </p>
-                  <p className="text-[11px] leading-relaxed text-gray-800">
+                  <p className="text-xs leading-relaxed text-gray-800">
                     #[회원명]님께 지급된 비밀 할인코드의 사용기한이 얼마 남지 않았습니다.
                   </p>
-                  <div className="space-y-0.5 text-[11px] text-gray-800">
+                  <div className="space-y-0.5 text-xs text-gray-800">
                     <p>▷ 할인코드: #[할인코드]</p>
                     <p>▷ 할인내용: #[할인금액]</p>
                     <p>▷ 만료일: #[만료일]</p>
                   </div>
-                  <div className="text-[11px] text-gray-800">
+                  <div className="text-xs text-gray-800">
                     <p>▶ 할인코드 사용하기</p>
                     <p>#[CUSTOM]</p>
                   </div>
-                  <div className="space-y-0.5 text-[10px] leading-tight text-gray-500">
+                  <div className="space-y-0.5 text-[11px] leading-tight text-gray-500">
                     <p>* 만료일이 지나면 자동 소멸되어 사용이 불가능합니다.</p>
                     <p>* 코드 지급에 동의한 회원에게 발송되는 안내 메시지입니다.</p>
                     <p>* 할인코드는 주문/결제 페이지에서 자동으로 적용됩니다.</p>
                   </div>
-                  <div className="pt-1 text-[11px] text-gray-600">
+                  <div className="pt-1 text-xs text-gray-600">
                     <p>[무료수신거부]</p>
                     <p>010-1234-5678</p>
                   </div>
                 </div>
                 <div className="mt-1 flex justify-end pr-1">
-                  <span className="text-[10px] text-gray-200">LMS 오후 1:56</span>
+                  <span className="text-[11px] text-gray-200">LMS 오후 1:56</span>
                 </div>
               </div>
               <button className="mt-2 w-full rounded-lg bg-[#111827] py-2.5 text-sm font-bold text-white hover:bg-black transition-colors">
