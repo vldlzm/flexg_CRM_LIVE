@@ -418,10 +418,10 @@ export default function CrmLiveCreate() {
                   라이브에 연결된 상품이 2개 이상일 경우 <span className="font-semibold">와이드 리스트형</span>으로, 그 외에는 <span className="font-semibold">와이드 이미지</span>로 메시지가 자동 발송됩니다.
                 </p>
               </div>
-              {/* 클릭액션 */}
+              {/* 랜딩 URL */}
               <div className="flex items-center gap-3">
-                <span className="inline-flex shrink-0 items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white">클릭액션</span>
-                <p className="text-sm text-gray-700">상품 상세페이지로 이동</p>
+                <span className="inline-flex shrink-0 items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white">랜딩 URL</span>
+                <p className="text-sm text-gray-700">LIVE 페이지로 이동</p>
               </div>
               {/* 비용 */}
               <div className="flex flex-wrap items-center gap-2">
