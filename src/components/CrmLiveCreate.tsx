@@ -1155,7 +1155,7 @@ export default function CrmLiveCreate() {
                       <div className="space-y-1">
                         {LMS_REPLACEMENTS.map((r) => (
                           <p key={r.key} className="text-sm text-gray-700">
-                            <span className="font-semibold text-gray-800">{r.key}</span>{' '}
+                            <span className="text-gray-800">{r.key}</span>{' '}
                             <span className="text-gray-600">{r.desc}</span>
                           </p>
                         ))}
@@ -1276,7 +1276,7 @@ export default function CrmLiveCreate() {
                       <div className="space-y-1">
                         {LMS_REPLACEMENTS.map((r) => (
                           <p key={r.key} className="text-sm text-gray-700">
-                            <span className="font-semibold text-gray-800">{r.key}</span>{' '}
+                            <span className="text-gray-800">{r.key}</span>{' '}
                             <span className="text-gray-600">{r.desc}</span>
                           </p>
                         ))}
@@ -1410,7 +1410,7 @@ export default function CrmLiveCreate() {
                       <div className="space-y-1">
                         {LMS_REPLACEMENTS.map((r) => (
                           <p key={r.key} className="text-sm text-gray-700">
-                            <span className="font-semibold text-gray-800">{r.key}</span>{' '}
+                            <span className="text-gray-800">{r.key}</span>{' '}
                             <span className="text-gray-600">{r.desc}</span>
                           </p>
                         ))}

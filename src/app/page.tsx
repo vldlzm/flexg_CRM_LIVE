@@ -46,6 +46,15 @@ const SCREEN_GROUPS: ScreenGroup[] = [
         ],
       },
       {
+        id: 'customer-group',
+        name: '고객 그룹 생성',
+        href: '/customer-group',
+        description: '고객 그룹 생성 화면입니다.',
+        notes: [
+          '구매상품에서 특정 상품을 다중 선택 시 OR 조건으로 적용됩니다.',
+        ],
+      },
+      {
         id: 'decisions',
         name: '결정사항',
         href: '/decisions',
