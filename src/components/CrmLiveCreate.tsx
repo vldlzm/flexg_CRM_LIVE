@@ -208,6 +208,7 @@ export default function CrmLiveCreate() {
     { text: '크로스백 신상품',  price: '36,400원' },
     { text: 'UV 차단 선글라스', price: '16,800원' },
     { text: '니트 반팔 티셔츠', price: '21,000원' },
+    { text: '',               price: '' },
   ]);
   const [wideListBtn1, setWideListBtn1] = useState('LIVE 보기');
   const [wideListBtn2, setWideListBtn2] = useState('');
@@ -891,8 +892,11 @@ export default function CrmLiveCreate() {
                               <div className="mx-2 my-1 h-16 rounded-lg bg-gradient-to-br from-rose-400 via-fuchsia-400 to-orange-300 overflow-hidden relative">
                                 <div className="absolute inset-0 flex items-center justify-center"><span className="text-xs font-black text-white drop-shadow-md">LIVE 시작!</span></div>
                               </div>
-                              {wideListItems.map((item, i) => (
-                                <div key={i} className="flex items-center gap-1.5 border-t border-gray-100 px-2 py-1">
+                              {wideListItems[0].text && (
+                                <p className="px-2.5 pb-1 text-[8px] leading-snug text-gray-700">{wideListItems[0].text}</p>
+                              )}
+                              {wideListItems.slice(1).map((item, i) => (
+                                <div key={i+1} className="flex items-center gap-1.5 border-t border-gray-100 px-2 py-1">
                                   <div className="h-7 w-7 shrink-0 rounded bg-gray-200" />
                                   <div className="min-w-0">
                                     <p className="text-[8px] font-semibold text-gray-800 leading-tight">{item.text}</p>
@@ -1011,7 +1015,7 @@ export default function CrmLiveCreate() {
                         </div>
                       </div>
                     </div>
-                    {/* 리스트 2~4 */}
+                    {/* 리스트 2~5 */}
                     {wideListItems.slice(1).map((item, i) => (
                       <div key={i+1} className="flex border-b border-gray-200 last:border-0">
                         <div className="flex w-32 shrink-0 items-start gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-3">
