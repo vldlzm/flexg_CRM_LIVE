@@ -99,6 +99,84 @@ const PhoneNotification = ({ pushTitle = '⏰ LIVE 시작!', pushBody = '오늘 
   </div>
 );
 
+const PushThumb = () => (
+  <div className="h-12 w-12 shrink-0 rounded-lg overflow-hidden border border-gray-200 bg-[#fff3e0]">
+    <svg viewBox="0 0 48 48" className="h-full w-full">
+      <rect width="48" height="48" fill="#fff3e0"/>
+      <rect x="8" y="20" width="32" height="22" rx="2" fill="#e65100"/>
+      <rect x="8" y="20" width="32" height="7" rx="2" fill="#bf360c"/>
+      <path d="M18 20 Q18 12 24 12 Q30 12 30 20" stroke="#6d2400" strokeWidth="2" fill="none" strokeLinecap="round"/>
+      <rect x="22" y="26" width="4" height="4" rx="1" fill="#ffcc02"/>
+    </svg>
+  </div>
+);
+
+const PhoneNotificationAOS = ({ pushTitle, pushBody }: { pushTitle: string; pushBody: string }) => (
+  <div className="relative flex h-[420px] w-64 flex-col rounded-3xl border-2 border-gray-300 bg-gray-100 overflow-hidden shadow-md">
+    <div className="flex justify-between px-5 pt-3 pb-2 text-xs text-gray-400">
+      <span>9:41</span>
+      <div className="flex gap-1"><span>▲</span><span>●</span></div>
+    </div>
+    <div className="flex-1 flex flex-col gap-3 px-3">
+      {/* 축소 알림 */}
+      <div className="rounded-xl bg-white p-3 shadow-sm">
+        <div className="flex items-center gap-2">
+          <div className="h-7 w-7 rounded shrink-0 bg-orange-500 flex items-center justify-center text-[10px] font-black text-white">F</div>
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-semibold text-gray-900 leading-tight truncate">{pushTitle}</p>
+            <p className="text-xs text-gray-500 leading-tight truncate">{pushBody.slice(0, 20)}...</p>
+          </div>
+          <PushThumb />
+        </div>
+      </div>
+      {/* 확장 알림 */}
+      <div className="rounded-xl bg-white p-3 shadow-sm">
+        <div className="flex items-start gap-2">
+          <div className="h-7 w-7 rounded shrink-0 bg-orange-500 flex items-center justify-center text-[10px] font-black text-white">F</div>
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-semibold text-gray-900 leading-tight">{pushTitle}</p>
+            <p className="text-xs text-gray-500 leading-snug mt-1 whitespace-pre-line">{pushBody}</p>
+          </div>
+          <PushThumb />
+        </div>
+      </div>
+    </div>
+    <div className="flex justify-center gap-3 py-3">
+      <div className="h-2 w-2 rounded-full bg-gray-400" />
+      <div className="h-2 w-2 rounded-full bg-gray-400" />
+    </div>
+  </div>
+);
+
+const PhoneNotificationIOS = ({ pushTitle, pushBody }: { pushTitle: string; pushBody: string }) => (
+  <div className="relative flex h-[420px] w-64 flex-col rounded-3xl border-2 border-gray-300 bg-gray-200 overflow-hidden shadow-md">
+    <div className="flex justify-between px-5 pt-3 pb-1 text-xs text-gray-500">
+      <span>7:34</span>
+      <div className="flex gap-1"><span>▲</span><span>●</span></div>
+    </div>
+    {/* 잠금화면 시계 */}
+    <div className="flex flex-col items-center pt-6 pb-4">
+      <p className="text-[52px] font-thin text-gray-700 leading-none tracking-tight">7:34</p>
+      <div className="mt-2 h-0.5 w-8 rounded-full bg-gray-400" />
+    </div>
+    {/* 알림 카드 */}
+    <div className="mx-3 rounded-2xl bg-white/90 shadow-sm p-3">
+      <div className="flex items-start gap-2">
+        <div className="h-8 w-8 rounded-xl shrink-0 bg-orange-500 flex items-center justify-center text-[11px] font-black text-white">F</div>
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-semibold text-gray-900 leading-tight">{pushTitle}</p>
+          <p className="text-xs text-gray-500 leading-snug mt-0.5 whitespace-pre-line">{pushBody}</p>
+        </div>
+      </div>
+    </div>
+    {/* 하단 버튼 */}
+    <div className="flex-1 flex items-end justify-center gap-8 pb-4">
+      <div className="h-9 w-9 rounded-full bg-gray-400/50" />
+      <div className="h-9 w-9 rounded-full bg-gray-400/50" />
+    </div>
+  </div>
+);
+
 const PhoneApp = () => (
   <div className="relative flex h-72 w-44 flex-col rounded-3xl border-2 border-gray-300 bg-gray-100 overflow-hidden shadow-md">
     {/* 네비 바 */}
@@ -196,6 +274,7 @@ export default function CrmLiveCreate() {
   const [selectedLive, setSelectedLive] = useState<LiveItem | null>(null);
   const [showLmsEditPopup, setShowLmsEditPopup] = useState(false);
   const [showPushEditPopup, setShowPushEditPopup] = useState(false);
+  const [pushPreviewTab, setPushPreviewTab] = useState<'aos' | 'ios'>('aos');
   const [showBrandEditPopup, setShowBrandEditPopup] = useState(false);
   const [showUrlGenPopup, setShowUrlGenPopup] = useState(false);
   const [brandEditTab, setBrandEditTab] = useState<'wide-image' | 'wide-list'>('wide-image');
@@ -385,12 +464,23 @@ export default function CrmLiveCreate() {
 
             {/* 폰 목업 + AOS/iOS + 수정 버튼 */}
             <div className="shrink-0 flex flex-col items-center gap-3">
-              <PhoneNotification pushTitle={pushTitle} pushBody={pushBody} />
+              {pushPreviewTab === 'aos'
+                ? <PhoneNotificationAOS pushTitle={pushTitle} pushBody={pushBody} />
+                : <PhoneNotificationIOS pushTitle={pushTitle} pushBody={pushBody} />
+              }
               <div className="flex items-center gap-3">
-                <button className="rounded-full border border-[#4DB87A] px-5 py-1.5 text-sm font-semibold text-[#4DB87A]">
+                <button
+                  onClick={() => setPushPreviewTab('aos')}
+                  className={`rounded-full border px-5 py-1.5 text-sm font-semibold transition-colors ${pushPreviewTab === 'aos' ? 'border-[#4DB87A] text-[#4DB87A]' : 'border-gray-300 text-gray-500 hover:border-gray-400'}`}
+                >
                   AOS 예시
                 </button>
-                <button className="text-sm text-gray-600 hover:text-gray-900">iOS 예시</button>
+                <button
+                  onClick={() => setPushPreviewTab('ios')}
+                  className={`text-sm font-semibold transition-colors ${pushPreviewTab === 'ios' ? 'text-[#4DB87A]' : 'text-gray-600 hover:text-gray-900'}`}
+                >
+                  iOS 예시
+                </button>
               </div>
               <button
                 onClick={() => setShowPushEditPopup(true)}
