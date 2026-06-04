@@ -247,6 +247,13 @@ export default function CrmLiveCreate() {
     { key: '#{COUPON}', desc: '쿠폰 목록 페이지 URL' },
     { key: '#{CUSTOM}', desc: '클릭 액션 URL' },
     { key: '#{수신거부번호}', desc: '수신거부번호' },
+    { key: '#[LIVE 방송명]', desc: 'LIVE 방송 제목' },
+    { key: '#[LIVE 시작일시]', desc: 'LIVE 방송 시작 일시' },
+    { key: '#[LIVE 종료일시]', desc: 'LIVE 방송 종료 일시' },
+    { key: '#[LIVE 진행상태]', desc: 'LIVE 방송 진행 상태' },
+    { key: '#[LIVE 상품수]', desc: 'LIVE 방송 상품 수' },
+    { key: '#[LIVE 좋아요수]', desc: 'LIVE 방송 좋아요 수' },
+    { key: '#[LIVE 토탈뷰]', desc: 'LIVE 방송 총 조회수' },
   ];
 
   return (
