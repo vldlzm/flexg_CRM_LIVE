@@ -48,6 +48,132 @@ const Badge = ({ children }: { children: React.ReactNode }) => (
 
 const STAT_TABS = ['APP푸시', '브랜드메시지(친구톡)', 'LMS'] as const;
 
+const SEND_HISTORY_TABS = ['APP푸시', '브랜드메시지(친구톡)', 'LMS'] as const;
+const SEND_HISTORY_TYPES = ['APP푸시', '브랜드메시지(친구톡)', 'LMS'] as const;
+const SEND_HISTORY_HEADERS = [
+  { top: '이름', bottom: '휴대폰번호' },
+  { top: '아이디', bottom: '이메일' },
+  { top: '가입일', bottom: '' },
+  { top: '최종 로그인 일자', bottom: '최근 구매일' },
+  { top: '로그인 횟수', bottom: '' },
+  { top: '마케팅 수신 동의', bottom: '' },
+  { top: '처리 내역', bottom: '' },
+  { top: '발송일', bottom: '' },
+];
+
+function SendHistoryPopup({ campaignName, onClose }: { campaignName: string; onClose: () => void }) {
+  const [activeTab, setActiveTab] = useState<string>('APP푸시');
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+      <div className="flex flex-col bg-white rounded-lg shadow-2xl w-[95vw] max-w-[1100px] max-h-[90vh] overflow-hidden">
+
+        {/* 헤더 */}
+        <div className="flex items-center gap-3 bg-[#2d3138] px-6 py-4 shrink-0">
+          <div className="flex h-7 w-7 items-center justify-center rounded bg-white/20">
+            <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4 text-white" stroke="currentColor" strokeWidth={1.5}>
+              <rect x="1" y="2" width="14" height="12" rx="1" />
+              <line x1="1" y1="6" x2="15" y2="6" />
+              <line x1="5" y1="2" x2="5" y2="14" />
+            </svg>
+          </div>
+          <h2 className="text-base font-bold text-white">발송 내역</h2>
+        </div>
+
+        <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4">
+
+          {/* 캠페인명 + 종 대상자 */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="text-lg font-bold text-gray-900">{campaignName}</span>
+            <span className="text-sm text-gray-500">종 대상자 <span className="font-semibold text-gray-700">0</span>명</span>
+          </div>
+
+          {/* 유형별 성공/실패 요약 */}
+          <div className="flex items-center gap-4 flex-wrap">
+            {SEND_HISTORY_TYPES.map((type) => (
+              <div key={type} className="flex items-center gap-2">
+                <span className="inline-flex items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white whitespace-nowrap">{type}</span>
+                <span className="text-xs text-gray-600">
+                  성공 <span className="font-semibold text-[#4DB87A]">0</span>건 / 실패 <span className="font-semibold text-red-500">0</span>건
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* 탭 */}
+          <div className="border-b border-gray-200">
+            <div className="flex">
+              {SEND_HISTORY_TABS.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-5 py-2.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+                    activeTab === tab
+                      ? 'border-[#4DB87A] text-[#4DB87A]'
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 발송 내역 테이블 */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-bold text-gray-800">
+                발송 내역{' '}
+                <span className="text-xs font-normal text-gray-500">전체 0개 (페이지 1/0)</span>
+              </h3>
+              <button className="inline-flex items-center gap-1.5 rounded-md bg-[#1e6b3c] px-4 py-2 text-xs font-bold text-white hover:bg-[#165530] transition-colors whitespace-nowrap">
+                고객정보
+                <svg viewBox="0 0 16 16" fill="currentColor" className="h-3 w-3">
+                  <path d="M8 12l-5-5h3V2h4v5h3L8 12z" />
+                  <rect x="2" y="13" width="12" height="1.5" rx="0.75" />
+                </svg>
+              </button>
+            </div>
+            <div className="overflow-x-auto rounded-lg border border-gray-200">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-200 bg-gray-50">
+                    {SEND_HISTORY_HEADERS.map((h, i) => (
+                      <th key={i} className="px-3 py-2.5 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">
+                        <div>{h.top}</div>
+                        {h.bottom && <div>{h.bottom}</div>}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colSpan={SEND_HISTORY_HEADERS.length} className="py-10 text-center text-sm text-gray-400">
+                      발송 내역이 없습니다.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        {/* 닫기 버튼 */}
+        <div className="border-t border-gray-200 py-4 flex justify-center bg-white shrink-0">
+          <button
+            onClick={onClose}
+            className="rounded-md bg-[#6b7280] px-12 py-2 text-sm font-semibold text-white hover:bg-[#4b5563] transition-colors"
+          >
+            닫기
+          </button>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
 const TEST_CAMPAIGN_TYPES = ['APP푸시', '브랜드메시지(친구톡)', 'LMS'] as const;
 
 function TestPublishPopup({ onClose }: { onClose: () => void }) {
@@ -326,6 +452,7 @@ function StatsPopup({ campaignName, onClose }: { campaignName: string; onClose: 
 export default function CrmLiveDetail() {
   const [statsPopup, setStatsPopup] = useState<{ open: boolean; campaignName: string }>({ open: false, campaignName: '' });
   const [showTestPopup, setShowTestPopup] = useState(false);
+  const [sendHistoryPopup, setSendHistoryPopup] = useState<{ open: boolean; campaignName: string }>({ open: false, campaignName: '' });
 
   return (
     <div className="min-h-screen bg-white">
@@ -513,7 +640,10 @@ export default function CrmLiveDetail() {
                     </td>
                     <td className="px-4 py-3 text-center">
                       {row.hasSend && (
-                        <button className="rounded-md bg-[#3a3f45] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap">
+                        <button
+                          onClick={() => setSendHistoryPopup({ open: true, campaignName: row.name })}
+                          className="rounded-md bg-[#3a3f45] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap"
+                        >
                           발송 내역&gt;
                         </button>
                       )}
@@ -534,6 +664,14 @@ export default function CrmLiveDetail() {
 
       {/* 테스트 발행 팝업 */}
       {showTestPopup && <TestPublishPopup onClose={() => setShowTestPopup(false)} />}
+
+      {/* 발송 내역 팝업 */}
+      {sendHistoryPopup.open && (
+        <SendHistoryPopup
+          campaignName={sendHistoryPopup.campaignName}
+          onClose={() => setSendHistoryPopup({ open: false, campaignName: '' })}
+        />
+      )}
 
       {/* 캠페인 통계 팝업 */}
       {statsPopup.open && (
