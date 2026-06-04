@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 
 const HelpIcon = () => (
@@ -45,7 +46,191 @@ const Badge = ({ children }: { children: React.ReactNode }) => (
   </span>
 );
 
+const STAT_TABS = ['APP푸시', '브랜드메시지(친구톡)', 'LMS'] as const;
+
+const TABLE_HEADERS = ['발송일', '구매 금액', '발송 수', '클릭 수', '클릭률', '구매건수', '구매전환율', 'ROAS', '지출 캐시'];
+
+function StatsPopup({ campaignName, onClose }: { campaignName: string; onClose: () => void }) {
+  const [activeTab, setActiveTab] = useState<string>('APP푸시');
+  const [startDate, setStartDate] = useState('2026-06-03');
+  const [endDate, setEndDate] = useState('2026-06-03');
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+      <div className="flex flex-col bg-white rounded-lg shadow-2xl w-[900px] max-h-[90vh] overflow-hidden">
+
+        {/* 헤더 */}
+        <div className="flex items-center gap-3 bg-[#2d3138] px-6 py-4">
+          <div className="flex h-7 w-7 items-center justify-center rounded bg-white/20">
+            <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4 text-white" stroke="currentColor" strokeWidth={1.5}>
+              <rect x="1" y="1" width="14" height="14" rx="1" />
+              <line x1="4" y1="11" x2="4" y2="8" />
+              <line x1="7" y1="11" x2="7" y2="6" />
+              <line x1="10" y1="11" x2="10" y2="4" />
+              <line x1="13" y1="11" x2="13" y2="7" />
+            </svg>
+          </div>
+          <h2 className="text-base font-bold text-white">캠페인 통계</h2>
+        </div>
+
+        <div className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
+
+          {/* 기간 필터 */}
+          <div className="rounded-lg border border-gray-200 bg-gray-50 px-5 py-4">
+            <div className="flex items-center gap-3 flex-wrap">
+              <span className="text-sm font-semibold text-gray-700">기간</span>
+              <input
+                type="text"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                className="rounded border border-gray-300 px-3 py-1.5 text-sm text-gray-700 w-32 focus:outline-none focus:border-gray-400"
+              />
+              <span className="text-gray-500 text-sm">~</span>
+              <input
+                type="text"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                className="rounded border border-gray-300 px-3 py-1.5 text-sm text-gray-700 w-32 focus:outline-none focus:border-gray-400"
+              />
+              {['어제', '이전 7일', '이전 15일', '이전 30일', '전체'].map((label) => (
+                <button key={label} className="rounded border border-gray-300 bg-white px-3 py-1.5 text-xs text-gray-600 hover:bg-gray-100 transition-colors whitespace-nowrap">
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 초기화 / 검색 버튼 */}
+          <div className="flex justify-center gap-3">
+            <button className="rounded-md bg-[#6b7280] px-8 py-2 text-sm font-semibold text-white hover:bg-[#4b5563] transition-colors">
+              초기화
+            </button>
+            <button className="rounded-md bg-[#3a3f45] px-8 py-2 text-sm font-semibold text-white hover:bg-[#2d3138] transition-colors">
+              검색
+            </button>
+          </div>
+
+          {/* 탭 */}
+          <div className="border-b border-gray-200">
+            <div className="flex">
+              {STAT_TABS.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-5 py-2.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+                    activeTab === tab
+                      ? 'border-[#3a3f45] text-[#3a3f45]'
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 캠페인명 / 지출 캐시 배지 */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-1.5">
+              <span className="inline-flex items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white whitespace-nowrap">캠페인명</span>
+              <span className="inline-flex items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white whitespace-nowrap">{campaignName}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="inline-flex items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white whitespace-nowrap">지출 캐시</span>
+              <span className="inline-flex items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white whitespace-nowrap">0c</span>
+            </div>
+          </div>
+
+          {/* 통계 지표 그리드 */}
+          <div className="rounded-lg border border-gray-200 overflow-hidden">
+            <div className="grid grid-cols-4 divide-x divide-gray-200 border-b border-gray-200">
+              {[
+                { label: '구매 금액', value: '–', help: true },
+                { label: '클릭 수',   value: '–', help: true },
+                { label: '구매건수',  value: '–', help: false },
+                { label: 'ROAS',      value: '–', help: true },
+              ].map((item) => (
+                <div key={item.label} className="px-5 py-4 text-center">
+                  <p className="text-xs text-gray-500 mb-2">
+                    {item.label}
+                    {item.help && <HelpIcon />}
+                  </p>
+                  <p className="text-xl font-bold text-gray-800">{item.value}</p>
+                </div>
+              ))}
+            </div>
+            <div className="grid grid-cols-3 divide-x divide-gray-200">
+              {[
+                { label: '발송 수',    value: '–', help: false },
+                { label: '클릭률',     value: '–', help: true },
+                { label: '구매전환율', value: '–', help: true },
+              ].map((item) => (
+                <div key={item.label} className="px-5 py-4 text-center">
+                  <p className="text-xs text-gray-500 mb-2">
+                    {item.label}
+                    {item.help && <HelpIcon />}
+                  </p>
+                  <p className="text-xl font-bold text-gray-800">{item.value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 캠페인 일자별 내역 */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-bold text-gray-800">
+                캠페인 일자별 내역{' '}
+                <span className="text-xs font-normal text-gray-500">전체 0일 (페이지 1/0)</span>
+              </h3>
+              <button className="inline-flex items-center gap-1.5 rounded-md bg-[#1e6b3c] px-4 py-2 text-xs font-bold text-white hover:bg-[#165530] transition-colors whitespace-nowrap">
+                일자별 내역
+                <svg viewBox="0 0 16 16" fill="currentColor" className="h-3 w-3">
+                  <path d="M8 12l-5-5h3V2h4v5h3L8 12z" />
+                  <rect x="2" y="13" width="12" height="1.5" rx="0.75" />
+                </svg>
+              </button>
+            </div>
+            <div className="overflow-x-auto rounded-lg border border-gray-200">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-200 bg-gray-50">
+                    {TABLE_HEADERS.map((h) => (
+                      <th key={h} className="px-3 py-2.5 text-center text-xs font-semibold text-gray-600 whitespace-nowrap">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colSpan={TABLE_HEADERS.length} className="py-10 text-center text-sm text-gray-400">
+                      데이터가 없습니다.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        {/* 닫기 버튼 */}
+        <div className="border-t border-gray-200 py-4 flex justify-center bg-white">
+          <button
+            onClick={onClose}
+            className="rounded-md bg-[#6b7280] px-12 py-2 text-sm font-semibold text-white hover:bg-[#4b5563] transition-colors"
+          >
+            닫기
+          </button>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
 export default function CrmLiveDetail() {
+  const [statsPopup, setStatsPopup] = useState<{ open: boolean; campaignName: string }>({ open: false, campaignName: '' });
+
   return (
     <div className="min-h-screen bg-white">
       {/* ← 목록 */}
@@ -212,7 +397,10 @@ export default function CrmLiveDetail() {
                     <td className="px-4 py-3 text-center text-sm text-gray-600 whitespace-nowrap">{row.createdAt}</td>
                     <td className="px-4 py-3 text-center">
                       {row.hasStats && (
-                        <button className="rounded-md bg-[#3a3f45] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap">
+                        <button
+                          onClick={() => setStatsPopup({ open: true, campaignName: row.name })}
+                          className="rounded-md bg-[#3a3f45] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap"
+                        >
                           통계&gt;
                         </button>
                       )}
@@ -244,6 +432,14 @@ export default function CrmLiveDetail() {
         </section>
 
       </div>
+
+      {/* 캠페인 통계 팝업 */}
+      {statsPopup.open && (
+        <StatsPopup
+          campaignName={statsPopup.campaignName}
+          onClose={() => setStatsPopup({ open: false, campaignName: '' })}
+        />
+      )}
     </div>
   );
 }
