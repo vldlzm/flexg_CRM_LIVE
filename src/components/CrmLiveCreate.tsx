@@ -601,8 +601,7 @@ export default function CrmLiveCreate() {
                               <div className="min-w-0">
                                 <p className="text-[9px] font-semibold text-gray-800 leading-tight">{item.name}</p>
                                 <p className="text-[7px] leading-tight">
-                                  <span className="text-gray-400 line-through">{item.regular}</span>
-                                  <span className="ml-1 font-bold text-red-500">{item.sale}</span>
+                                  <span className="font-bold text-red-500">{item.sale}</span>
                                 </p>
                               </div>
                             </div>
