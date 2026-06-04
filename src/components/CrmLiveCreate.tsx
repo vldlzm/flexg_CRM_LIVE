@@ -154,13 +154,8 @@ const PhoneNotificationIOS = ({ pushTitle, pushBody }: { pushTitle: string; push
       <span>7:34</span>
       <div className="flex gap-1"><span>▲</span><span>●</span></div>
     </div>
-    {/* 잠금화면 시계 */}
-    <div className="flex flex-col items-center pt-6 pb-4">
-      <p className="text-[52px] font-thin text-gray-700 leading-none tracking-tight">7:34</p>
-      <div className="mt-2 h-0.5 w-8 rounded-full bg-gray-400" />
-    </div>
     {/* 알림 카드 */}
-    <div className="mx-3 rounded-2xl bg-white/90 shadow-sm p-3">
+    <div className="mx-3 mt-2 rounded-2xl bg-white/90 shadow-sm p-3">
       <div className="flex items-start gap-2">
         <div className="h-8 w-8 rounded-xl shrink-0 bg-orange-500 flex items-center justify-center text-[11px] font-black text-white">F</div>
         <div className="min-w-0 flex-1">
@@ -168,6 +163,11 @@ const PhoneNotificationIOS = ({ pushTitle, pushBody }: { pushTitle: string; push
           <p className="text-xs text-gray-500 leading-snug mt-0.5 whitespace-pre-line">{pushBody}</p>
         </div>
       </div>
+    </div>
+    {/* 잠금화면 시계 */}
+    <div className="flex flex-col items-center pt-6 pb-4">
+      <p className="text-[52px] font-thin text-gray-700 leading-none tracking-tight">7:34</p>
+      <div className="mt-2 h-0.5 w-8 rounded-full bg-gray-400" />
     </div>
     {/* 하단 버튼 */}
     <div className="flex-1 flex items-end justify-center gap-8 pb-4">
