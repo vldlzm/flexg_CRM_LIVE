@@ -233,7 +233,7 @@ export default function CrmLiveCreate() {
 010-1234-5678`
   );
   const [pushTitle, setPushTitle] = useState('⏰ LIVE 시작!');
-  const [pushBody, setPushBody] = useState('오늘 라이브에서만 만나는 특별가! 놓치기 전에 지금 확인하세요.');
+  const [pushBody, setPushBody] = useState('오늘 라이브에서만 만나는 특별가! 놓치기 전에 지금 확인하세요.\n#[LIVE 시작일시]');
 
   const handleCopy = (url: string) => {
     navigator.clipboard.writeText(url).catch(() => {});
