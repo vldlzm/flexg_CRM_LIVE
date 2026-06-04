@@ -199,7 +199,7 @@ export default function CrmLiveCreate() {
   const [showBrandEditPopup, setShowBrandEditPopup] = useState(false);
   const [showUrlGenPopup, setShowUrlGenPopup] = useState(false);
   const [brandEditTab, setBrandEditTab] = useState<'wide-image' | 'wide-list'>('wide-image');
-  const [wideImageContent, setWideImageContent] = useState('🔴 LIVE 시작! 인기 상품 특가 할인 중. 지금 바로 참여하고 혜택 챙겨가세요.');
+  const [wideImageContent, setWideImageContent] = useState('🔴 LIVE 시작! 인기 상품 특가 할인 중. 지금 바로 참여하고 혜택 챙겨가세요.\n📅 방송 시작 일시: #[LIVE 시작일시]');
   const [wideImageBtn1, setWideImageBtn1] = useState('LIVE 보기');
   const [wideImageBtn2, setWideImageBtn2] = useState('');
   const [wideListHeader, setWideListHeader] = useState('LIVE 시작!');
