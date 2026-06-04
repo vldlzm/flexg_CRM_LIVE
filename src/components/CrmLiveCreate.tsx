@@ -1198,7 +1198,6 @@ export default function CrmLiveCreate() {
                 <div className="rounded-xl bg-[#9ca3af] p-3">
                   <div className="rounded-lg bg-white p-3 space-y-1.5">
                     <p className="text-[11px] font-semibold text-gray-800">{'(광고) (광고)[#{상점명}]'}</p>
-                    <p className="text-[11px] font-medium text-[#22c55e] underline">{lmsTitle}</p>
                     <p className="text-[11px] leading-relaxed text-gray-800 whitespace-pre-line">{lmsContent}</p>
                   </div>
                   <div className="mt-1 flex justify-end pr-1">
