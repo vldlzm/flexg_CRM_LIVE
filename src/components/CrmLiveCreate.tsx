@@ -1065,7 +1065,7 @@ export default function CrmLiveCreate() {
                       <div className="space-y-1">
                         {LMS_REPLACEMENTS.map((r) => (
                           <p key={r.key} className="text-sm text-gray-700">
-                            <span className="font-semibold text-[#f97316]">{r.key}</span>{' '}
+                            <span className="font-semibold text-gray-800">{r.key}</span>{' '}
                             <span className="text-gray-600">{r.desc}</span>
                           </p>
                         ))}
@@ -1186,7 +1186,7 @@ export default function CrmLiveCreate() {
                       <div className="space-y-1">
                         {LMS_REPLACEMENTS.map((r) => (
                           <p key={r.key} className="text-sm text-gray-700">
-                            <span className="font-semibold text-[#f97316]">{r.key}</span>{' '}
+                            <span className="font-semibold text-gray-800">{r.key}</span>{' '}
                             <span className="text-gray-600">{r.desc}</span>
                           </p>
                         ))}
@@ -1251,7 +1251,6 @@ export default function CrmLiveCreate() {
                           <span className="text-gray-400">/65</span>
                         </span>
                       </div>
-                      <p className="mt-1 text-xs text-gray-400">최대 65자</p>
                     </div>
                   </div>
                   {/* 본문 */}
@@ -1273,7 +1272,6 @@ export default function CrmLiveCreate() {
                           <span className="text-gray-400">/110</span>
                         </span>
                       </div>
-                      <p className="mt-1 text-xs text-gray-400">최대 110자</p>
                     </div>
                   </div>
                   {/* 랜딩 URL */}
@@ -1294,6 +1292,25 @@ export default function CrmLiveCreate() {
                       </div>
                     </div>
                   </div>
+                  {/* 이미지 */}
+                  <div className="flex border-t border-gray-200">
+                    <div className="flex w-24 shrink-0 items-center gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-3">
+                      <span className="text-sm font-bold text-[#4DB87A]">✓</span>
+                      <span className="text-sm font-medium text-gray-700">이미지</span>
+                    </div>
+                    <div className="flex-1 px-4 py-3">
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <button className="rounded border border-gray-300 bg-white px-4 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors whitespace-nowrap">
+                          파일 선택
+                        </button>
+                        <p className="flex items-center gap-1 text-xs text-gray-500">
+                          <span className="inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border border-gray-400 text-[9px] font-bold">i</span>
+                          10M 이하의 JPG, GIF, PNG, BMP 파일만 가능하며 892*303 크기를 권장합니다.
+                        </p>
+                      </div>
+                      <p className="mt-1.5 text-xs text-gray-400">이미지는 안드로이드만 표시됩니다.</p>
+                    </div>
+                  </div>
                   {/* 치환 */}
                   <div className="flex border-t border-gray-200">
                     <div className="flex w-24 shrink-0 items-start gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-3">
@@ -1303,7 +1320,7 @@ export default function CrmLiveCreate() {
                       <div className="space-y-1">
                         {LMS_REPLACEMENTS.map((r) => (
                           <p key={r.key} className="text-sm text-gray-700">
-                            <span className="font-semibold text-[#f97316]">{r.key}</span>{' '}
+                            <span className="font-semibold text-gray-800">{r.key}</span>{' '}
                             <span className="text-gray-600">{r.desc}</span>
                           </p>
                         ))}
