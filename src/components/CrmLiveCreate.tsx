@@ -1055,6 +1055,24 @@ export default function CrmLiveCreate() {
                     </div>
                   </div>
                 )}
+                {/* 치환 */}
+                <div className="mt-3 border border-gray-200">
+                  <div className="flex">
+                    <div className="flex w-32 shrink-0 items-start gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-3">
+                      <span className="text-sm font-medium text-gray-700 mt-0.5">치환</span>
+                    </div>
+                    <div className="flex-1 px-4 py-3">
+                      <div className="space-y-1">
+                        {LMS_REPLACEMENTS.map((r) => (
+                          <p key={r.key} className="text-sm text-gray-700">
+                            <span className="font-semibold text-[#f97316]">{r.key}</span>{' '}
+                            <span className="text-gray-600">{r.desc}</span>
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <p className="mt-3 flex items-center gap-1 text-xs text-gray-500">
                   <span className="inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border border-gray-400 text-[9px] font-bold">i</span>
                   모바일 해상도에 따라 다소 차이가 있을 수 있습니다.
@@ -1273,6 +1291,22 @@ export default function CrmLiveCreate() {
                         />
                         <button onClick={() => setShowUrlGenPopup(true)} className="rounded-md bg-[#4b5563] px-4 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
                         <button className="rounded-md bg-[#4b5563] px-4 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">초기화</button>
+                      </div>
+                    </div>
+                  </div>
+                  {/* 치환 */}
+                  <div className="flex border-t border-gray-200">
+                    <div className="flex w-24 shrink-0 items-start gap-1.5 border-r border-gray-200 bg-gray-50 px-4 py-3">
+                      <span className="text-sm font-medium text-gray-700 mt-0.5">치환</span>
+                    </div>
+                    <div className="flex-1 px-4 py-3">
+                      <div className="space-y-1">
+                        {LMS_REPLACEMENTS.map((r) => (
+                          <p key={r.key} className="text-sm text-gray-700">
+                            <span className="font-semibold text-[#f97316]">{r.key}</span>{' '}
+                            <span className="text-gray-600">{r.desc}</span>
+                          </p>
+                        ))}
                       </div>
                     </div>
                   </div>
