@@ -1,43 +1,33 @@
 'use client';
 
-type RadioOption = { label: string; green?: boolean };
-
 const RadioRow = ({
   dot,
   options,
   defaultIdx = 0,
 }: {
   dot: string;
-  options: RadioOption[];
+  options: string[];
   defaultIdx?: number;
 }) => (
   <div className="flex items-center gap-3 py-1">
     <span className="text-sm text-gray-500">·</span>
     <span className="w-28 shrink-0 text-sm text-gray-700">{dot}</span>
     <div className="flex items-center gap-5 flex-wrap">
-      {options.map((opt, i) => (
-        <label key={opt.label} className="flex items-center gap-1.5 cursor-pointer select-none">
-          <span className={`inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 ${i === defaultIdx ? 'border-[#4DB87A]' : 'border-gray-400'}`}>
-            {i === defaultIdx && <span className="h-2 w-2 rounded-full bg-[#4DB87A]" />}
+      {options.map((label, i) => (
+        <label key={label} className="flex items-center gap-1.5 cursor-pointer select-none">
+          <span className={`inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 ${i === defaultIdx ? 'border-gray-700' : 'border-gray-400'}`}>
+            {i === defaultIdx && <span className="h-2 w-2 rounded-full bg-gray-700" />}
           </span>
-          <span className={`text-sm ${opt.green ? 'text-[#4DB87A]' : 'text-gray-700'}`}>{opt.label}</span>
+          <span className="text-sm text-gray-700">{label}</span>
         </label>
       ))}
     </div>
   </div>
 );
 
-const SectionRow = ({
-  label,
-  children,
-  rowSpan,
-}: {
-  label: string;
-  children: React.ReactNode;
-  rowSpan?: boolean;
-}) => (
+const SectionRow = ({ label, children }: { label: React.ReactNode; children: React.ReactNode }) => (
   <tr className="border-b border-gray-200">
-    <td className={`w-32 shrink-0 bg-gray-50 px-5 py-4 text-sm font-medium text-gray-700 border-r border-gray-200 align-top ${rowSpan ? 'leading-loose' : ''}`}>
+    <td className="w-32 bg-gray-50 px-5 py-4 text-sm font-medium text-gray-700 border-r border-gray-200 align-top">
       {label}
     </td>
     <td className="px-6 py-3 space-y-0.5">{children}</td>
@@ -84,12 +74,12 @@ export default function CustomerGroupCreate() {
               <tr className="border-b border-gray-200">
                 <td className="w-32 bg-gray-50 px-5 py-4 text-sm font-medium text-gray-700 border-r border-gray-200 align-top">구매</td>
                 <td className="px-6 py-3 space-y-0.5">
-                  <RadioRow dot="구매기간" options={[{ label: '전체' }, { label: '최근' }, { label: '특정 기간(최대 1년)', green: true }]} />
-                  <RadioRow dot="구매금액" options={[{ label: '전체' }, { label: '특정 금액' }]} />
-                  <RadioRow dot="구매건수" options={[{ label: '전체' }, { label: '특정 건수' }]} />
+                  <RadioRow dot="구매기간" options={['전체', '최근', '특정 기간(최대 1년)']} />
+                  <RadioRow dot="구매금액" options={['전체', '특정 금액']} />
+                  <RadioRow dot="구매건수" options={['전체', '특정 건수']} />
                   {/* 구매상품 - 붉은 박스 + OR조건 가이드 */}
                   <div className="rounded border-2 border-red-400 px-3 py-1.5">
-                    <RadioRow dot="구매상품" options={[{ label: '전체' }, { label: '특정 상품' }]} />
+                    <RadioRow dot="구매상품" options={['전체', '특정 상품']} />
                     <p className="mt-0.5 pl-[calc(0.75rem+7rem+0.75rem)] text-xs text-red-500">
                       ※ 특정 상품 다중 선택 시 OR 조건으로 적용됩니다.
                     </p>
@@ -99,32 +89,31 @@ export default function CustomerGroupCreate() {
 
               {/* 회원가입 */}
               <SectionRow label="회원가입">
-                <RadioRow dot="가입기간" options={[{ label: '전체' }, { label: '최근' }, { label: '특정 기간(최대 1년)', green: true }]} />
+                <RadioRow dot="가입기간" options={['전체', '최근', '특정 기간(최대 1년)']} />
               </SectionRow>
 
               {/* APP설치 */}
               <SectionRow label="APP설치">
-                <RadioRow dot="설치여부" options={[{ label: '전체' }, { label: '설치' }, { label: '미설치' }]} />
-                <RadioRow dot="설치시기" options={[{ label: '전체' }, { label: '최근' }, { label: '특정 기간(최대 1년)', green: true }]} />
+                <RadioRow dot="설치여부" options={['전체', '설치', '미설치']} />
+                <RadioRow dot="설치시기" options={['전체', '최근', '특정 기간(최대 1년)']} />
               </SectionRow>
 
               {/* 방문 */}
               <SectionRow label="방문">
-                <RadioRow dot="방문여부" options={[{ label: '전체' }, { label: '방문(최대 1년)', green: true }, { label: '미방문(최대 1년)', green: true }]} />
-                <RadioRow dot="방문횟수" options={[{ label: '전체' }, { label: '특정 횟수' }]} />
+                <RadioRow dot="방문여부" options={['전체', '방문(최대 1년)', '미방문(최대 1년)']} />
+                <RadioRow dot="방문횟수" options={['전체', '특정 횟수']} />
               </SectionRow>
 
               {/* 관심상품 */}
-              <tr>
-                <td className="w-32 bg-gray-50 px-5 py-4 text-sm font-medium text-gray-700 border-r border-gray-200 align-top">
+              <SectionRow label={
+                <>
                   관심상품{' '}
                   <span className="inline-flex h-3.5 w-3.5 items-center justify-center rounded-full border border-gray-400 text-[9px] font-bold text-gray-400">?</span>
-                </td>
-                <td className="px-6 py-3 space-y-0.5">
-                  <RadioRow dot="관심상품" options={[{ label: '전체' }, { label: '특정 상품' }]} />
-                  <RadioRow dot="관심상품으로 등록한 시기" options={[{ label: '최근 3개월' }, { label: '최근 1개월' }]} />
-                </td>
-              </tr>
+                </>
+              }>
+                <RadioRow dot="관심상품" options={['전체', '특정 상품']} />
+                <RadioRow dot="관심상품으로 등록한 시기" options={['최근 3개월', '최근 1개월']} />
+              </SectionRow>
             </tbody>
           </table>
         </div>
