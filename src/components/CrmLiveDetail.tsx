@@ -48,6 +48,101 @@ const Badge = ({ children }: { children: React.ReactNode }) => (
 
 const STAT_TABS = ['APP푸시', '브랜드메시지(친구톡)', 'LMS'] as const;
 
+const TEST_CAMPAIGN_TYPES = ['APP푸시', '브랜드메시지(친구톡)', 'LMS'] as const;
+
+function TestPublishPopup({ onClose }: { onClose: () => void }) {
+  const [checkedTypes, setCheckedTypes] = useState<string[]>(['APP푸시', '브랜드메시지(친구톡)', 'LMS']);
+  const [phone, setPhone] = useState('');
+
+  const toggle = (type: string) =>
+    setCheckedTypes((prev) =>
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    );
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+      <div className="flex flex-col bg-white rounded-lg shadow-2xl w-[480px] overflow-hidden">
+        {/* 헤더 */}
+        <div className="flex items-center gap-3 bg-[#2d3138] px-5 py-4">
+          <div className="flex h-7 w-7 items-center justify-center rounded bg-white/20">
+            <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4 text-white" stroke="currentColor" strokeWidth={1.5}>
+              <rect x="1" y="1" width="14" height="14" rx="1" />
+              <line x1="4" y1="11" x2="4" y2="8" />
+              <line x1="7" y1="11" x2="7" y2="6" />
+              <line x1="10" y1="11" x2="10" y2="4" />
+              <line x1="13" y1="11" x2="13" y2="7" />
+            </svg>
+          </div>
+          <h2 className="text-base font-bold text-white">테스트 생성</h2>
+        </div>
+
+        {/* 본문 */}
+        <div className="px-6 py-5 space-y-4">
+          <p className="text-sm text-gray-700">
+            <span className="mr-1 text-gray-500">·</span>
+            테스트 발행은 통계에 포함되지 않습니다.
+          </p>
+
+          <div className="border border-gray-200 rounded">
+            {/* 캠페인 유형 */}
+            <div className="flex border-b border-gray-200">
+              <div className="w-28 shrink-0 flex items-center bg-gray-50 border-r border-gray-200 px-4 py-3">
+                <span className="text-sm font-medium text-gray-700">캠페인 유형</span>
+              </div>
+              <div className="flex-1 flex items-center gap-5 px-4 py-3 flex-wrap">
+                {TEST_CAMPAIGN_TYPES.map((type) => (
+                  <label key={type} className="flex items-center gap-1.5 cursor-pointer select-none">
+                    <span className={`inline-flex h-4 w-4 items-center justify-center rounded-full border-2 ${checkedTypes.includes(type) ? 'border-[#4DB87A] bg-[#4DB87A]' : 'border-gray-300 bg-white'}`}>
+                      {checkedTypes.includes(type) && (
+                        <svg viewBox="0 0 10 10" fill="none" className="h-2.5 w-2.5" stroke="white" strokeWidth={2}>
+                          <polyline points="1.5,5 4,7.5 8.5,2.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                    </span>
+                    <input type="checkbox" className="sr-only" checked={checkedTypes.includes(type)} onChange={() => toggle(type)} />
+                    <span className="text-sm text-gray-700">{type}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            {/* 휴대폰번호 */}
+            <div className="flex">
+              <div className="w-28 shrink-0 flex items-center bg-gray-50 border-r border-gray-200 px-4 py-3">
+                <span className="text-sm font-medium text-gray-700">휴대폰번호</span>
+              </div>
+              <div className="flex-1 px-4 py-3">
+                <input
+                  type="text"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="휴대폰번호 입력"
+                  className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 placeholder-gray-400 focus:border-[#4DB87A] focus:outline-none"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 푸터 */}
+        <div className="border-t border-gray-200 bg-gray-50 flex justify-center gap-3 py-4">
+          <button
+            onClick={onClose}
+            className="rounded-md bg-[#6b7280] px-10 py-2 text-sm font-semibold text-white hover:bg-[#4b5563] transition-colors"
+          >
+            취소
+          </button>
+          <button
+            onClick={onClose}
+            className="rounded-md bg-[#3a3f45] px-10 py-2 text-sm font-semibold text-white hover:bg-[#2d3138] transition-colors"
+          >
+            발행
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const TABLE_HEADERS = ['발송일', '구매 금액', '발송 수', '클릭 수', '클릭률', '구매건수', '구매전환율', 'ROAS', '지출 캐시'];
 
 function StatsPopup({ campaignName, onClose }: { campaignName: string; onClose: () => void }) {
@@ -230,6 +325,7 @@ function StatsPopup({ campaignName, onClose }: { campaignName: string; onClose: 
 
 export default function CrmLiveDetail() {
   const [statsPopup, setStatsPopup] = useState<{ open: boolean; campaignName: string }>({ open: false, campaignName: '' });
+  const [showTestPopup, setShowTestPopup] = useState(false);
 
   return (
     <div className="min-h-screen bg-white">
@@ -407,7 +503,10 @@ export default function CrmLiveDetail() {
                     </td>
                     <td className="px-4 py-3 text-center">
                       {row.hasSend && (
-                        <button className="rounded-md bg-[#3a3f45] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap">
+                        <button
+                          onClick={() => setShowTestPopup(true)}
+                          className="rounded-md bg-[#3a3f45] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#2d3138] transition-colors whitespace-nowrap"
+                        >
                           테스트 발행&gt;
                         </button>
                       )}
@@ -432,6 +531,9 @@ export default function CrmLiveDetail() {
         </section>
 
       </div>
+
+      {/* 테스트 발행 팝업 */}
+      {showTestPopup && <TestPublishPopup onClose={() => setShowTestPopup(false)} />}
 
       {/* 캠페인 통계 팝업 */}
       {statsPopup.open && (
