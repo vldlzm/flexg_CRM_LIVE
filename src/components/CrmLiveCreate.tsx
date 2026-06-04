@@ -214,20 +214,13 @@ export default function CrmLiveCreate() {
   const [wideListBtn2, setWideListBtn2] = useState('');
   const [lmsTitle, setLmsTitle] = useState('(광고)[#{상점명}]');
   const [lmsContent, setLmsContent] = useState(
-`#[채널명] 비밀 할인코드 소멸 안내
+`안녕하세요!
+#[LIVE 방송명] 라이브가
+#[LIVE 시작일시]에 시작됩니다.
 
-#[회원명]님께 지급된 비밀 할인코드의 사용기한이 얼마 남지 않았습니다.
+지금 바로 참여하고 다양한 혜택을 받아보세요!
 
-▷ 할인코드: #[할인코드]
-▷ 할인내용: #[할인금액]
-▷ 만료일: #[만료일]
-
-▶ 할인코드 사용하기
-#[CUSTOM]
-
-* 만료일이 지나면 자동 소멸되어 사용이 불가능합니다.
-* 코드 지급에 동의한 회원에게 발송되는 안내 메시지입니다.
-* 할인코드는 주문/결제 페이지에서 자동으로 적용됩니다.
+※ 본 메시지는 발신 전용입니다.
 
 [무료수신거부]
 010-1234-5678`
@@ -711,26 +704,7 @@ export default function CrmLiveCreate() {
               <div className="rounded-xl bg-[#9ca3af] p-3">
                 <div className="rounded-lg bg-white p-4 space-y-2">
                   <p className="text-xs font-semibold text-gray-800">(광고) (광고)[#[상점명]]</p>
-                  <p className="text-xs font-medium text-[#22c55e] underline cursor-pointer">
-                    #[채널명] 비밀 할인코드 소멸 안내
-                  </p>
-                  <p className="text-xs leading-relaxed text-gray-800">
-                    #[회원명]님께 지급된 비밀 할인코드의 사용기한이 얼마 남지 않았습니다.
-                  </p>
-                  <div className="space-y-0.5 text-xs text-gray-800">
-                    <p>▷ 할인코드: #[할인코드]</p>
-                    <p>▷ 할인내용: #[할인금액]</p>
-                    <p>▷ 만료일: #[만료일]</p>
-                  </div>
-                  <div className="text-xs text-gray-800">
-                    <p>▶ 할인코드 사용하기</p>
-                    <p>#[CUSTOM]</p>
-                  </div>
-                  <div className="space-y-0.5 text-[11px] leading-tight text-gray-500">
-                    <p>* 만료일이 지나면 자동 소멸되어 사용이 불가능합니다.</p>
-                    <p>* 코드 지급에 동의한 회원에게 발송되는 안내 메시지입니다.</p>
-                    <p>* 할인코드는 주문/결제 페이지에서 자동으로 적용됩니다.</p>
-                  </div>
+                  <p className="text-xs leading-relaxed text-gray-800 whitespace-pre-line">{`안녕하세요!\n#[LIVE 방송명] 라이브가\n#[LIVE 시작일시]에 시작됩니다.\n\n지금 바로 참여하고 다양한 혜택을 받아보세요!\n\n※ 본 메시지는 발신 전용입니다.`}</p>
                   <div className="pt-1 text-xs text-gray-600">
                     <p>[무료수신거부]</p>
                     <p>010-1234-5678</p>
