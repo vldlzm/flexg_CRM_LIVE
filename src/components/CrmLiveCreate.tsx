@@ -487,8 +487,8 @@ export default function CrmLiveCreate() {
                             </div>
                           </div>
                           <div className="px-2.5 pb-1.5">
-                            <p className="text-[9px] leading-snug text-gray-700">
-                              🔴 LIVE 시작! 인기 상품 특가 할인 중. 지금 바로 참여하고 혜택 챙겨가세요.
+                            <p className="text-[9px] leading-snug text-gray-700 whitespace-pre-line">
+                              {'🔴 LIVE 시작! 인기 상품 특가 할인 중. 지금 바로 참여하고 혜택 챙겨가세요.\n📅 방송 시작 일시: #[LIVE 시작일시]'}
                             </p>
                           </div>
                           <div className="border-t border-gray-100 py-1.5 text-center bg-gray-200">
@@ -880,7 +880,7 @@ export default function CrmLiveCreate() {
                                   <p className="text-xs font-black text-white drop-shadow-md">시작!</p>
                                 </div>
                               </div>
-                              <div className="px-2.5 pb-1.5"><p className="text-[9px] leading-snug text-gray-700">{wideImageContent}</p></div>
+                              <div className="px-2.5 pb-1.5"><p className="text-[9px] leading-snug text-gray-700 whitespace-pre-line">{wideImageContent}</p></div>
                               <div className="flex border-t border-gray-100">
                                 {wideImageBtn1 && <div className="flex-1 py-1.5 text-center border-r border-gray-100"><span className="text-[10px] font-semibold text-gray-600">{wideImageBtn1}</span></div>}
                                 {wideImageBtn2 && <div className="flex-1 py-1.5 text-center"><span className="text-[10px] font-semibold text-gray-600">{wideImageBtn2}</span></div>}
