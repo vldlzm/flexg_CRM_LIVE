@@ -112,7 +112,7 @@ const PushThumb = () => (
   </div>
 );
 
-const PhoneNotificationAOS = ({ pushTitle, pushBody }: { pushTitle: string; pushBody: string }) => (
+const PhoneNotificationAOS = ({ pushTitle, pushBody, imageUrl }: { pushTitle: string; pushBody: string; imageUrl?: string }) => (
   <div className="relative flex h-[420px] w-64 flex-col rounded-3xl border-2 border-gray-300 bg-gray-100 overflow-hidden shadow-md">
     <div className="flex justify-between px-5 pt-3 pb-2 text-xs text-gray-400">
       <span>9:41</span>
@@ -127,7 +127,7 @@ const PhoneNotificationAOS = ({ pushTitle, pushBody }: { pushTitle: string; push
             <p className="text-sm font-semibold text-gray-900 leading-tight truncate">{pushTitle}</p>
             <p className="text-xs text-gray-500 leading-tight truncate">{pushBody.slice(0, 20)}...</p>
           </div>
-          <PushThumb />
+          {imageUrl ? <img src={imageUrl} alt="" className="h-12 w-12 shrink-0 rounded-lg object-cover" /> : <PushThumb />}
         </div>
       </div>
       {/* 확장 알림 */}
@@ -138,7 +138,7 @@ const PhoneNotificationAOS = ({ pushTitle, pushBody }: { pushTitle: string; push
             <p className="text-sm font-semibold text-gray-900 leading-tight">{pushTitle}</p>
             <p className="text-xs text-gray-500 leading-snug mt-1 whitespace-pre-line">{pushBody}</p>
           </div>
-          <PushThumb />
+          {imageUrl ? <img src={imageUrl} alt="" className="h-12 w-12 shrink-0 rounded-lg object-cover" /> : <PushThumb />}
         </div>
       </div>
     </div>
@@ -275,6 +275,8 @@ export default function CrmLiveCreate() {
   const [selectedLive, setSelectedLive] = useState<LiveItem | null>(null);
   const [targetType, setTargetType] = useState<'all' | 'specific'>('all');
   const [showGroupCreatePopup, setShowGroupCreatePopup] = useState(false);
+  const [pushEditPreviewTab, setPushEditPreviewTab] = useState<'aos' | 'ios'>('aos');
+  const [pushImageUrl, setPushImageUrl] = useState('');
   const [showLmsEditPopup, setShowLmsEditPopup] = useState(false);
   const [showPushEditPopup, setShowPushEditPopup] = useState(false);
   const [pushPreviewTab, setPushPreviewTab] = useState<'aos' | 'ios'>('aos');
@@ -406,7 +408,7 @@ export default function CrmLiveCreate() {
                 <input type="radio" name="target" checked={targetType === 'specific'} onChange={() => setTargetType('specific')} className="accent-[#4DB87A] h-4 w-4" />
                 특정 고객
               </label>
-              <DarkBtn>전체 회원 조회 &gt;</DarkBtn>
+              {targetType === 'all' && <DarkBtn>전체 회원 조회 &gt;</DarkBtn>}
               {targetType === 'specific' && (
                 <DarkBtn onClick={() => setShowGroupCreatePopup(true)}>고객 그룹 생성</DarkBtn>
               )}
@@ -782,7 +784,7 @@ export default function CrmLiveCreate() {
             <div className="flex-1 space-y-4 pt-1">
               <div>
                 <h3 className="mb-1 text-base font-bold text-gray-900">LMS 예시</h3>
-                <p className="text-sm text-gray-600">LMS를 통하여 할인코드를 전달하고 상품 구매를 유도합니다.</p>
+                <p className="text-sm text-gray-600">LMS를 통하여 라이브 시작을 알리고 상품 구매를 유도합니다.</p>
               </div>
               <div className="flex items-start gap-3">
                 <span className="inline-flex shrink-0 items-center rounded-full bg-[#111827] px-3 py-1.5 text-xs font-bold text-white">
@@ -889,9 +891,6 @@ export default function CrmLiveCreate() {
                   <span className="w-20 shrink-0 text-sm text-gray-600">유입 채널</span>
                   <select className="flex-1 rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none">
                     <option>사용 안함</option>
-                    <option>APP 푸시</option>
-                    <option>브랜드메시지</option>
-                    <option>LMS</option>
                   </select>
                 </div>
               </div>
@@ -1325,8 +1324,25 @@ export default function CrmLiveCreate() {
             {/* 본문 */}
             <div className="flex overflow-hidden">
               {/* 좌측: 폰 미리보기 */}
-              <div className="w-72 shrink-0 border-r border-gray-200 bg-gray-50 flex items-center justify-center p-5">
-                <PhoneNotification pushTitle={pushTitle} pushBody={pushBody} />
+              <div className="w-72 shrink-0 border-r border-gray-200 bg-gray-50 flex flex-col items-center justify-start gap-3 p-5 overflow-y-auto">
+                {pushEditPreviewTab === 'aos'
+                  ? <PhoneNotificationAOS pushTitle={pushTitle} pushBody={pushBody} imageUrl={pushImageUrl || undefined} />
+                  : <PhoneNotificationIOS pushTitle={pushTitle} pushBody={pushBody} />
+                }
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setPushEditPreviewTab('aos')}
+                    className={`rounded-full border px-5 py-1.5 text-sm font-semibold transition-colors ${pushEditPreviewTab === 'aos' ? 'border-[#4DB87A] text-[#4DB87A]' : 'border-gray-300 text-gray-500 hover:border-gray-400'}`}
+                  >
+                    AOS 예시
+                  </button>
+                  <button
+                    onClick={() => setPushEditPreviewTab('ios')}
+                    className={`text-sm font-semibold transition-colors ${pushEditPreviewTab === 'ios' ? 'text-[#4DB87A]' : 'text-gray-600 hover:text-gray-900'}`}
+                  >
+                    iOS 예시
+                  </button>
+                </div>
               </div>
               {/* 우측: 폼 */}
               <div className="flex-1 p-5 space-y-0">
@@ -1399,15 +1415,24 @@ export default function CrmLiveCreate() {
                     </div>
                     <div className="flex-1 px-4 py-3">
                       <div className="flex items-center gap-3 flex-wrap">
-                        <button className="rounded border border-gray-300 bg-white px-4 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors whitespace-nowrap">
+                        <label className="cursor-pointer rounded border border-gray-300 bg-white px-4 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors whitespace-nowrap">
                           파일 선택
-                        </button>
+                          <input
+                            type="file"
+                            accept=".jpg,.jpeg,.gif,.png,.bmp"
+                            className="hidden"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (file) setPushImageUrl(URL.createObjectURL(file));
+                            }}
+                          />
+                        </label>
                         <p className="flex items-center gap-1 text-xs text-gray-500">
                           <span className="inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border border-gray-400 text-[9px] font-bold">i</span>
                           10M 이하의 JPG, GIF, PNG, BMP 파일만 가능하며 892*303 크기를 권장합니다.
                         </p>
                       </div>
-                      <p className="mt-1.5 text-xs text-gray-400">이미지는 안드로이드만 표시됩니다.</p>
+                      <p className="mt-1.5 text-xs text-gray-400">이미지는 안드로이드만 표시됩니다. (iOS 미적용)</p>
                     </div>
                   </div>
                   {/* 치환 */}
