@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import CustomerGroupCreate from './CustomerGroupCreate';
 
 const BULLETS = [
   { text: '콘텐츠 팝업은 반복 노출을 줄이기 위해, 동일한 계정에는 캠페인별로 하루 한 번만 노출됩니다.', red: false },
@@ -272,6 +273,8 @@ const OffsiteIcon = () => (
 export default function CrmLiveCreate() {
   const [showLivePopup, setShowLivePopup] = useState(false);
   const [selectedLive, setSelectedLive] = useState<LiveItem | null>(null);
+  const [targetType, setTargetType] = useState<'all' | 'specific'>('all');
+  const [showGroupCreatePopup, setShowGroupCreatePopup] = useState(false);
   const [showLmsEditPopup, setShowLmsEditPopup] = useState(false);
   const [showPushEditPopup, setShowPushEditPopup] = useState(false);
   const [pushPreviewTab, setPushPreviewTab] = useState<'aos' | 'ios'>('aos');
@@ -394,10 +397,19 @@ export default function CrmLiveCreate() {
 
           {/* 대상자 */}
           <FormRow label="대상자">
-            <div className="flex items-center gap-3">
-              <RadioInput name="target" label="전체" defaultChecked />
-              <RadioInput name="target" label="특정 고객" />
+            <div className="flex items-center gap-3 flex-wrap">
+              <label className="flex cursor-pointer items-center gap-2 text-sm text-gray-700">
+                <input type="radio" name="target" checked={targetType === 'all'} onChange={() => setTargetType('all')} className="accent-[#4DB87A] h-4 w-4" />
+                전체
+              </label>
+              <label className="flex cursor-pointer items-center gap-2 text-sm text-gray-700">
+                <input type="radio" name="target" checked={targetType === 'specific'} onChange={() => setTargetType('specific')} className="accent-[#4DB87A] h-4 w-4" />
+                특정 고객
+              </label>
               <DarkBtn>전체 회원 조회 &gt;</DarkBtn>
+              {targetType === 'specific' && (
+                <DarkBtn onClick={() => setShowGroupCreatePopup(true)}>고객 그룹 생성</DarkBtn>
+              )}
               <span className="text-sm font-semibold text-[#4DB87A]">0명</span>
             </div>
           </FormRow>
@@ -1426,6 +1438,15 @@ export default function CrmLiveCreate() {
               <button onClick={() => setShowPushEditPopup(false)} className="rounded-lg bg-[#4b5563] px-10 py-2.5 text-sm font-bold text-white hover:bg-[#374151] transition-colors">취소</button>
               <button onClick={() => setShowPushEditPopup(false)} className="rounded-lg bg-[#4b5563] px-10 py-2.5 text-sm font-bold text-white hover:bg-[#374151] transition-colors">수정</button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── 고객 그룹 생성 팝업 ── */}
+      {showGroupCreatePopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={() => setShowGroupCreatePopup(false)}>
+          <div className="relative w-[95vw] max-w-[900px] max-h-[90vh] overflow-auto rounded-xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <CustomerGroupCreate onClose={() => setShowGroupCreatePopup(false)} />
           </div>
         </div>
       )}

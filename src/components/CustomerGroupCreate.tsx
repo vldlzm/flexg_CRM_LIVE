@@ -34,7 +34,7 @@ const SectionRow = ({ label, children }: { label: React.ReactNode; children: Rea
   </tr>
 );
 
-export default function CustomerGroupCreate() {
+export default function CustomerGroupCreate({ onClose }: { onClose?: () => void }) {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       {/* 헤더 */}
@@ -131,10 +131,10 @@ export default function CustomerGroupCreate() {
 
       {/* 취소 / 적용 */}
       <div className="border-t border-gray-200 bg-[#ebebeb] flex justify-center gap-3 py-4 shrink-0">
-        <button className="rounded-lg bg-[#6b7280] px-12 py-2.5 text-sm font-bold text-white hover:bg-[#4b5563] transition-colors">
+        <button onClick={onClose} className="rounded-lg bg-[#6b7280] px-12 py-2.5 text-sm font-bold text-white hover:bg-[#4b5563] transition-colors">
           취소
         </button>
-        <button className="rounded-lg bg-[#3a3f45] px-12 py-2.5 text-sm font-bold text-white hover:bg-[#2d3138] transition-colors">
+        <button onClick={onClose} className="rounded-lg bg-[#3a3f45] px-12 py-2.5 text-sm font-bold text-white hover:bg-[#2d3138] transition-colors">
           적용
         </button>
       </div>
