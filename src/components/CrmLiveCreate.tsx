@@ -9,7 +9,7 @@ const BULLETS = [
   { text: '상품명, 상품 이미지, 부연 설명을 변경하는 경우 다음 날 CRM 시스템에 반영됩니다.', red: false },
   { text: 'LMS는 관련 법령 및 개인정보 보호 정책에 따라 마케팅 정보 수신에 동의한 회원에게만 발송됩니다.', red: false },
   { text: '고객별 메시지 수 제한 및 발송 정책에 따라 실제 수신되는 메시지 수는 차이가 있을 수 있습니다.', red: true },
-  { text: '광고성 메시지의 발송 가능 시간은 08:00 ~ 20:50(한국 시간) 입니다.', red: true },
+  { text: '브랜드메시지(친구톡)의 경우 야간광고 전송 제한으로 인하여  08:00 ~ 20:50(한국 시간)에 발송 가능합니다.', red: true },
 ];
 
 const LabelCol = ({ children }: { children: React.ReactNode }) => (

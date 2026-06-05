@@ -1,6 +1,6 @@
 export default function Decisions() {
   const rows = [
-    { no: 1,  screen: '전화면', content: '문구 추가. 광고성 메시지의 발송 가능 시간은 08:00 ~ 20:50(한국 시간) 입니다.' },
+    { no: 1,  screen: '전화면', content: '문구 변경. 브랜드메시지(친구톡)의 경우 야간광고 전송 제한으로 인하여  08:00 ~ 20:50(한국 시간)에 발송 가능합니다.' },
     { no: 2,  screen: '전화면', content: '문구 교체. 클릭 액션 → 랜딩 URL' },
     { no: 3,  screen: '/CRM/CRMGuide', content: '(기존)브랜드메시지(친구톡)의 경우 야간광고 전송 제한으로 인하여 오후 9시부터 그 다음날 오전 8시까지의 시간에 광고성 메시지 발송이 제한됩니다. 를 08:00 ~ 20:50(한국 시간) 시간으로 변경' },
     { no: 4,  screen: '', content: '' },
