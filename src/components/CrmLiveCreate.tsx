@@ -304,10 +304,7 @@ export default function CrmLiveCreate() {
 
 지금 바로 참여하고 다양한 혜택을 받아보세요!
 
-※ 본 메시지는 발신 전용입니다.
-
-[무료수신거부]
-010-1234-5678`
+※ 본 메시지는 발신 전용입니다.`
   );
   const [pushTitle, setPushTitle] = useState('⏰ LIVE 시작!');
   const [pushBody, setPushBody] = useState('오늘 라이브에서만 만나는 특별가! 놓치기 전에 지금 확인하세요.\n📅 방송 시작 일시: #[LIVE 시작일시]');
