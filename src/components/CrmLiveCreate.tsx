@@ -1088,6 +1088,7 @@ export default function CrmLiveCreate() {
                           <input type="text" value={wideListItems[0].text} onChange={(e) => { if (e.target.value.length <= 25) { const n=[...wideListItems]; n[0]={...n[0],text:e.target.value}; setWideListItems(n); }}} placeholder="문구" className="w-full rounded border border-gray-300 px-3 py-2 pr-12 text-sm focus:border-[#4DB87A] focus:outline-none" />
                           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs"><span className="font-semibold text-[#4DB87A]">{wideListItems[0].text.length}</span><span className="text-gray-400">/25</span></span>
                         </div>
+                        <p className="text-xs text-gray-400">줄바꿈 최대 1회</p>
                         <div className="flex items-center gap-2">
                           <input type="text" placeholder="/Home/Index" className="flex-1 rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
                           <button onClick={() => setShowUrlGenPopup(true)} className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
@@ -1113,6 +1114,7 @@ export default function CrmLiveCreate() {
                             <input type="text" value={item.text} onChange={(e) => { if (e.target.value.length <= 30) { const n=[...wideListItems]; n[i+1]={...n[i+1],text:e.target.value}; setWideListItems(n); }}} placeholder="상품명 및 문구" className="w-full rounded border border-gray-300 px-3 py-2 pr-12 text-sm focus:border-[#4DB87A] focus:outline-none" />
                             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs"><span className="font-semibold text-[#4DB87A]">{item.text.length}</span><span className="text-gray-400">/30</span></span>
                           </div>
+                          <p className="text-xs text-gray-400">줄바꿈 최대 1회</p>
                           <div className="flex items-center gap-2">
                             <input type="text" placeholder="/Home/Index" className="flex-1 rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:border-[#4DB87A] focus:outline-none focus:ring-1 focus:ring-[#4DB87A]" />
                             <button onClick={() => setShowUrlGenPopup(true)} className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">불러오기</button>
