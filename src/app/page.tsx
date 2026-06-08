@@ -72,7 +72,9 @@ const SCREEN_GROUPS: ScreenGroup[] = [
         name: '결정사항',
         href: '/decisions',
         description: '',
-        notes: [],
+        notes: [
+          'LMS 메시지 수정 팝업에서 수신 거부 안내 문구인 (광고)[#{상점명}]은 전체가 고정 텍스트로 처리되어야 합니다. 현재는 (광고)만 고정되어 있으며, [#{상점명}] 부분도 함께 고정되도록 수정이 필요합니다.',
+        ],
       },
       {
         id: 'crm-home',
