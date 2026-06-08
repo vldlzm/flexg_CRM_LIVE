@@ -1022,7 +1022,7 @@ export default function CrmLiveCreate() {
                           <textarea value={wideImageContent} onChange={(e) => e.target.value.length <= 76 && setWideImageContent(e.target.value)} rows={4} className="w-full rounded border border-gray-300 px-3 py-2 text-sm focus:border-[#4DB87A] focus:outline-none resize-none" />
                           <span className="absolute right-3 bottom-3 text-xs"><span className="font-semibold text-[#4DB87A]">{wideImageContent.length}</span><span className="text-gray-400">/76</span></span>
                         </div>
-                        <p className="mt-1 text-xs text-gray-400">텍스트 76자 제한 / 줄바꿈 최대 5회</p>
+                        <p className="mt-1 text-xs text-gray-400">줄바꿈 최대 5회</p>
                       </div>
                     </div>
                     {/* 버튼 */}
@@ -1053,7 +1053,7 @@ export default function CrmLiveCreate() {
                             <button className="rounded-md bg-[#4b5563] px-3 py-2 text-sm font-semibold text-white hover:bg-[#374151] transition-colors whitespace-nowrap">초기화</button>
                           </div>
                         </div>
-                        <p className="text-xs text-gray-400">버튼명 8자 제한 / 최대 2개 (가로 배열)</p>
+                        <p className="text-xs text-gray-400">최대 2개 (가로 배열)</p>
                       </div>
                     </div>
                   </div>
