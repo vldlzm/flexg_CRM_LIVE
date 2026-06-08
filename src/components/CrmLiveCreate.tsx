@@ -1210,6 +1210,7 @@ export default function CrmLiveCreate() {
                   <div className="rounded-lg bg-white p-3 space-y-1.5">
                     <p className="text-[11px] font-semibold text-gray-800">{`${LMS_TITLE_PREFIX}${lmsTitle}`}</p>
                     <p className="text-[11px] leading-relaxed text-gray-800 whitespace-pre-line">{lmsContent}</p>
+                    <p className="text-[10px] text-gray-400 pt-1 border-t border-gray-100">[무료수신거부] 010-1234-5678</p>
                   </div>
                   <div className="mt-1 flex justify-end pr-1">
                     <span className="text-[10px] text-gray-200">LMS 오후 1:56</span>
