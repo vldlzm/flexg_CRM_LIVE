@@ -49,15 +49,6 @@ const SCREEN_GROUPS: ScreenGroup[] = [
         ],
       },
       {
-        id: 'brand-message-popup',
-        name: '브랜드메시지\n수정 팝업',
-        href: '/crm/live/brand-edit',
-        description: '브랜드메시지 수정 팝업 화면입니다.',
-        notes: [
-          '카카오비즈니스 가이드를 참조합니다. https://kakaobusiness.gitbook.io/main/ad/brandmessage#undefined-3',
-        ],
-      },
-      {
         id: 'customer-group',
         name: '고객 그룹 생성',
         href: '/customer-group',
