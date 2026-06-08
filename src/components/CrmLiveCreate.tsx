@@ -1233,13 +1233,19 @@ export default function CrmLiveCreate() {
                     <div className="flex-1 px-4 py-3">
                       <div className="flex items-center rounded border border-gray-300 overflow-hidden focus-within:border-[#4DB87A] focus-within:ring-1 focus-within:ring-[#4DB87A]">
                         <span className="shrink-0 bg-gray-100 px-3 py-2 text-sm text-gray-500 border-r border-gray-300 select-none whitespace-nowrap">(광고)[#{'{상점명}'}]</span>
-                        <input
-                          type="text"
-                          value={lmsTitle}
-                          onChange={(e) => e.target.value.length <= 40 && setLmsTitle(e.target.value)}
-                          className="flex-1 px-3 py-2 text-sm outline-none bg-white"
-                          placeholder="추가 문구 입력"
-                        />
+                        <div className="relative flex-1">
+                          <input
+                            type="text"
+                            value={lmsTitle}
+                            onChange={(e) => e.target.value.length <= 40 && setLmsTitle(e.target.value)}
+                            className="w-full px-3 py-2 pr-16 text-sm outline-none bg-white"
+                            placeholder="추가 문구 입력"
+                          />
+                          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs pointer-events-none">
+                            <span className="text-[#4DB87A] font-semibold">{lmsTitle.length}</span>
+                            <span className="text-gray-400">/40</span>
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
