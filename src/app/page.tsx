@@ -24,7 +24,9 @@ const SCREEN_GROUPS: ScreenGroup[] = [
         name: '목록',
         href: '/crm/live',
         description: '',
-        notes: [],
+        notes: [
+          '수동캠페인 ② LIVE 시작 알림 보내기',
+        ],
       },
       {
         id: 'crm-live-detail',
