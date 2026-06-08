@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { useState } from 'react';
 import CustomerGroupCreate from './CustomerGroupCreate';
 
+const STORE_NAME = 'flexg';
+const LMS_TITLE_PREFIX = `(광고)[${STORE_NAME}]`;
+
 const BULLETS = [
   { text: '콘텐츠 팝업은 반복 노출을 줄이기 위해, 동일한 계정에는 캠페인별로 하루 한 번만 노출됩니다.', red: false },
   { text: '자동 > 오프사이트 캠페인은 고객의 피로도를 줄이기 위하여 동일한 계정에 대해 2일에 한 번만 발송됩니다.', red: false },
@@ -1205,7 +1208,7 @@ export default function CrmLiveCreate() {
               <div className="w-72 shrink-0 border-r border-gray-200 bg-gray-50 p-5 overflow-y-auto">
                 <div className="rounded-xl bg-[#9ca3af] p-3">
                   <div className="rounded-lg bg-white p-3 space-y-1.5">
-                    <p className="text-[11px] font-semibold text-gray-800">{`(광고)[#{상점명}]${lmsTitle}`}</p>
+                    <p className="text-[11px] font-semibold text-gray-800">{`${LMS_TITLE_PREFIX}${lmsTitle}`}</p>
                     <p className="text-[11px] leading-relaxed text-gray-800 whitespace-pre-line">{lmsContent}</p>
                   </div>
                   <div className="mt-1 flex justify-end pr-1">
@@ -1232,17 +1235,17 @@ export default function CrmLiveCreate() {
                     </div>
                     <div className="flex-1 px-4 py-3">
                       <div className="flex items-center rounded border border-gray-300 overflow-hidden focus-within:border-[#4DB87A] focus-within:ring-1 focus-within:ring-[#4DB87A]">
-                        <span className="shrink-0 bg-gray-100 px-3 py-2 text-sm text-gray-500 border-r border-gray-300 select-none whitespace-nowrap">(광고)[#{'{상점명}'}]</span>
+                        <span className="shrink-0 bg-gray-100 px-3 py-2 text-sm text-gray-500 border-r border-gray-300 select-none whitespace-nowrap">{LMS_TITLE_PREFIX}</span>
                         <div className="relative flex-1">
                           <input
                             type="text"
                             value={lmsTitle}
-                            onChange={(e) => e.target.value.length <= 40 && setLmsTitle(e.target.value)}
+                            onChange={(e) => (LMS_TITLE_PREFIX.length + e.target.value.length) <= 40 && setLmsTitle(e.target.value)}
                             className="w-full px-3 py-2 pr-16 text-sm outline-none bg-white"
                             placeholder="추가 문구 입력"
                           />
                           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs pointer-events-none">
-                            <span className="text-[#4DB87A] font-semibold">{lmsTitle.length}</span>
+                            <span className="text-[#4DB87A] font-semibold">{LMS_TITLE_PREFIX.length + lmsTitle.length}</span>
                             <span className="text-gray-400">/40</span>
                           </span>
                         </div>
