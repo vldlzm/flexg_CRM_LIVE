@@ -25,7 +25,7 @@ const SCREEN_GROUPS: ScreenGroup[] = [
         href: '/crm/live',
         description: '',
         notes: [
-          '수동캠페인 ② LIVE 시작 알림 보내기',
+          '수동캠페인에 신규 시나리오가 추가됩니다.',
         ],
       },
       {
