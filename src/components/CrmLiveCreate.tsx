@@ -296,7 +296,7 @@ export default function CrmLiveCreate() {
   ]);
   const [wideListBtn1, setWideListBtn1] = useState('LIVE 보기');
   const [wideListBtn2, setWideListBtn2] = useState('');
-  const [lmsTitle, setLmsTitle] = useState('(광고)[#{상점명}]');
+  const [lmsTitle, setLmsTitle] = useState('');
   const [lmsContent, setLmsContent] = useState(
 `안녕하세요!
 #[LIVE 방송명] 라이브가
@@ -1205,7 +1205,7 @@ export default function CrmLiveCreate() {
               <div className="w-72 shrink-0 border-r border-gray-200 bg-gray-50 p-5 overflow-y-auto">
                 <div className="rounded-xl bg-[#9ca3af] p-3">
                   <div className="rounded-lg bg-white p-3 space-y-1.5">
-                    <p className="text-[11px] font-semibold text-gray-800">{'(광고)[#{상점명}]'}</p>
+                    <p className="text-[11px] font-semibold text-gray-800">{`(광고)[#{상점명}]${lmsTitle}`}</p>
                     <p className="text-[11px] leading-relaxed text-gray-800 whitespace-pre-line">{lmsContent}</p>
                   </div>
                   <div className="mt-1 flex justify-end pr-1">
@@ -1231,10 +1231,16 @@ export default function CrmLiveCreate() {
                       <span className="text-sm font-medium text-gray-700">제목</span>
                     </div>
                     <div className="flex-1 px-4 py-3">
-                      <div className="rounded border border-gray-200 bg-gray-100 px-3 py-2 text-sm text-gray-500 select-none cursor-not-allowed">
-                        (광고)[#{'{상점명}'}]
+                      <div className="flex items-center rounded border border-gray-300 overflow-hidden focus-within:border-[#4DB87A] focus-within:ring-1 focus-within:ring-[#4DB87A]">
+                        <span className="shrink-0 bg-gray-100 px-3 py-2 text-sm text-gray-500 border-r border-gray-300 select-none whitespace-nowrap">(광고)[#{'{상점명}'}]</span>
+                        <input
+                          type="text"
+                          value={lmsTitle}
+                          onChange={(e) => e.target.value.length <= 40 && setLmsTitle(e.target.value)}
+                          className="flex-1 px-3 py-2 text-sm outline-none bg-white"
+                          placeholder="추가 문구 입력"
+                        />
                       </div>
-                      <p className="mt-1 text-xs text-gray-400">고정 문구 (수정 불가)</p>
                     </div>
                   </div>
                   {/* 메시지 내용 */}
