@@ -1487,7 +1487,7 @@ export default function CrmLiveCreate() {
           >
             {/* 팝업 헤더 */}
             <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
-              <h3 className="text-base font-bold text-gray-900">LIVE 목록</h3>
+              <h3 className="text-base font-bold text-gray-900">진행중인 라이브 방송</h3>
               <button
                 onClick={() => setShowLivePopup(false)}
                 className="flex h-7 w-7 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors"
@@ -1524,13 +1524,7 @@ export default function CrmLiveCreate() {
                         <td className="px-4 py-4 text-center text-sm text-gray-600">{item.no}</td>
                         <td className="px-4 py-4">
                           <p className="text-sm font-semibold text-gray-900 mb-0.5">{item.title}</p>
-                          <p className="text-xs text-gray-400 mb-1.5">{item.url}</p>
-                          <button
-                            onClick={() => handleCopy(item.url)}
-                            className="rounded border border-gray-300 px-2.5 py-1 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
-                          >
-                            LIVE 링크 복사
-                          </button>
+                          <p className="text-xs text-gray-400">{item.url}</p>
                         </td>
                         <td className="px-4 py-4 text-center text-sm text-gray-700">{item.productCount}</td>
                         <td className="px-4 py-4 text-center text-sm font-semibold text-[#4DB87A]">{item.fee}</td>
