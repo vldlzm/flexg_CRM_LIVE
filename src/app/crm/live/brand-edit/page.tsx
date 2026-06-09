@@ -87,8 +87,15 @@ export default function BrandEditPage() {
                     ) : (
                       <>
                         <p className="text-center text-[10px] font-bold text-gray-800 py-1">{wideListHeader}</p>
-                        <div className="mx-2 my-1 h-16 rounded-lg bg-gradient-to-br from-rose-400 via-fuchsia-400 to-orange-300 overflow-hidden relative">
-                          <div className="absolute inset-0 flex items-center justify-center"><span className="text-xs font-black text-white drop-shadow-md">LIVE 시작!</span></div>
+                        <div className="mx-2 my-1 h-16 rounded-lg overflow-hidden relative">
+                          <div className="absolute inset-0 bg-gradient-to-br from-rose-400 via-fuchsia-400 to-orange-300" />
+                          <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
+                            <div className="flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5">
+                              <span className="h-1.5 w-1.5 rounded-full bg-red-500" /><span className="text-[9px] font-black tracking-widest text-red-500">LIVE</span>
+                            </div>
+                            <p className="text-[10px] font-black text-white drop-shadow-md">시작!</p>
+                            <p className="text-[7px] font-semibold text-white/90 drop-shadow">12월 15일 오후 4시 30분</p>
+                          </div>
                         </div>
                         {wideListItems[0].text && (
                           <p className="px-2.5 pb-1 text-[8px] leading-snug text-gray-700">{wideListItems[0].text}</p>
