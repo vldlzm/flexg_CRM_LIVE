@@ -629,13 +629,58 @@ export default function CrmLiveCreate() {
                           <p className="text-center text-[10px] font-bold text-gray-800 py-1">LIVE 시작!</p>
                           {/* 상품 이미지 배너 */}
                           <div className="mx-2 my-1 h-20 rounded-lg overflow-hidden relative">
-                            <div className="absolute inset-0 bg-gradient-to-br from-rose-400 via-fuchsia-400 to-orange-300" />
-                            <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
-                              <div className="flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5">
-                                <span className="h-1.5 w-1.5 rounded-full bg-red-500" /><span className="text-[9px] font-black tracking-widest text-red-500">LIVE</span>
-                              </div>
-                              <p className="text-[10px] font-black text-white drop-shadow-md">시작!</p>
-                              <p className="text-[7px] font-semibold text-white/90 drop-shadow">12월 15일 오후 4시 30분</p>
+                            {/* 배경 */}
+                            <div className="absolute inset-0 bg-[#f5efe8]" />
+                            {/* 인형 피규어 SVG */}
+                            <svg viewBox="0 0 160 80" className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                              {/* 피규어 1 - 크림 곰 */}
+                              <ellipse cx="28" cy="62" rx="11" ry="14" fill="#f5deb3"/>
+                              <circle cx="28" cy="42" r="10" fill="#f5deb3"/>
+                              <ellipse cx="23" cy="38" rx="4" ry="5" fill="#c8a882"/>
+                              <ellipse cx="33" cy="38" rx="4" ry="5" fill="#c8a882"/>
+                              <circle cx="25" cy="43" r="1.5" fill="#5a3825"/>
+                              <circle cx="31" cy="43" r="1.5" fill="#5a3825"/>
+                              <ellipse cx="28" cy="47" rx="3" ry="2" fill="#c8a882"/>
+                              {/* 피규어 2 - 갈색 곰 */}
+                              <ellipse cx="55" cy="62" rx="11" ry="14" fill="#a0522d"/>
+                              <circle cx="55" cy="42" r="10" fill="#a0522d"/>
+                              <ellipse cx="50" cy="38" rx="4" ry="5" fill="#8b4513"/>
+                              <ellipse cx="60" cy="38" rx="4" ry="5" fill="#8b4513"/>
+                              <circle cx="52" cy="43" r="1.5" fill="#3a1a0a"/>
+                              <circle cx="58" cy="43" r="1.5" fill="#3a1a0a"/>
+                              <ellipse cx="55" cy="47" rx="3" ry="2" fill="#cd853f"/>
+                              {/* 피규어 3 - 흰 고양이 */}
+                              <ellipse cx="82" cy="62" rx="11" ry="14" fill="#fff5e6"/>
+                              <circle cx="82" cy="42" r="10" fill="#fff5e6"/>
+                              <polygon points="76,34 79,40 73,40" fill="#fff5e6" stroke="#e0c9a6" strokeWidth="0.5"/>
+                              <polygon points="88,34 91,40 85,40" fill="#fff5e6" stroke="#e0c9a6" strokeWidth="0.5"/>
+                              <circle cx="79" cy="44" r="1.5" fill="#5a3825"/>
+                              <circle cx="85" cy="44" r="1.5" fill="#5a3825"/>
+                              <ellipse cx="82" cy="47" rx="2.5" ry="1.5" fill="#f4a4b0"/>
+                              {/* 피규어 4 - 오렌지 호랑이 */}
+                              <ellipse cx="109" cy="62" rx="11" ry="14" fill="#e8892a"/>
+                              <circle cx="109" cy="42" r="10" fill="#e8892a"/>
+                              <ellipse cx="104" cy="38" rx="4" ry="5" fill="#c8681a"/>
+                              <ellipse cx="114" cy="38" rx="4" ry="5" fill="#c8681a"/>
+                              <circle cx="106" cy="43" r="1.5" fill="#3a1a0a"/>
+                              <circle cx="112" cy="43" r="1.5" fill="#3a1a0a"/>
+                              <ellipse cx="109" cy="47" rx="3" ry="2" fill="#f5c5a3"/>
+                              <line x1="103" y1="46" x2="98" y2="45" stroke="#a05010" strokeWidth="0.8"/>
+                              <line x1="103" y1="48" x2="98" y2="48" stroke="#a05010" strokeWidth="0.8"/>
+                              <line x1="115" y1="46" x2="120" y2="45" stroke="#a05010" strokeWidth="0.8"/>
+                              <line x1="115" y1="48" x2="120" y2="48" stroke="#a05010" strokeWidth="0.8"/>
+                              {/* 피규어 5 - 회색 곰 */}
+                              <ellipse cx="136" cy="62" rx="11" ry="14" fill="#b0b0b0"/>
+                              <circle cx="136" cy="42" r="10" fill="#b0b0b0"/>
+                              <ellipse cx="131" cy="38" rx="4" ry="5" fill="#909090"/>
+                              <ellipse cx="141" cy="38" rx="4" ry="5" fill="#909090"/>
+                              <circle cx="133" cy="43" r="1.5" fill="#3a3a3a"/>
+                              <circle cx="139" cy="43" r="1.5" fill="#3a3a3a"/>
+                              <ellipse cx="136" cy="47" rx="3" ry="2" fill="#d0d0d0"/>
+                            </svg>
+                            {/* 하단 텍스트 오버레이 */}
+                            <div className="absolute bottom-0 left-0 right-0 bg-black/55 px-2 py-1">
+                              <p className="text-[8px] font-bold text-white leading-tight">반짝반짝 라이브 방송</p>
                             </div>
                           </div>
                           {/* 상품 리스트 */}
@@ -924,15 +969,8 @@ export default function CrmLiveCreate() {
                           ) : (
                             <>
                               <p className="text-center text-[10px] font-bold text-gray-800 py-1">{wideListHeader}</p>
-                              <div className="mx-2 my-1 h-16 rounded-lg overflow-hidden relative">
-                                <div className="absolute inset-0 bg-gradient-to-br from-rose-400 via-fuchsia-400 to-orange-300" />
-                                <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
-                                  <div className="flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5">
-                                    <span className="h-1.5 w-1.5 rounded-full bg-red-500" /><span className="text-[9px] font-black tracking-widest text-red-500">LIVE</span>
-                                  </div>
-                                  <p className="text-[10px] font-black text-white drop-shadow-md">시작!</p>
-                                  <p className="text-[7px] font-semibold text-white/90 drop-shadow">12월 15일 오후 4시 30분</p>
-                                </div>
+                              <div className="mx-2 my-1 h-16 rounded-lg bg-gradient-to-br from-rose-400 via-fuchsia-400 to-orange-300 overflow-hidden relative">
+                                <div className="absolute inset-0 flex items-center justify-center"><span className="text-xs font-black text-white drop-shadow-md">LIVE 시작!</span></div>
                               </div>
                               {wideListItems[0].text && (
                                 <p className="px-2.5 pb-1 text-[8px] leading-snug text-gray-700">{wideListItems[0].text}</p>
