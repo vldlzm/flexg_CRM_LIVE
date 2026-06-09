@@ -680,8 +680,7 @@ export default function CrmLiveCreate() {
                             </svg>
                             {/* 하단 텍스트 오버레이 */}
                             <div className="absolute bottom-0 left-0 right-0 bg-black/55 px-2 py-1">
-                              <p className="text-[8px] font-bold text-white leading-tight">LIVE 시작!</p>
-                              <p className="text-[7px] text-white/90 leading-tight">12월 15일 오후 4시 30분</p>
+                              <p className="text-[8px] font-bold text-white leading-tight">12월 15일 오후 4시 30분</p>
                             </div>
                           </div>
                           {/* 상품 리스트 */}
